@@ -8,8 +8,12 @@ CFLAGS := -Wall -Wextra -Werror -Wshadow
 LIBFT_DIR := $(LIB_DIR)/libft
 LIBFT_A := $(LIBFT_DIR)/libft.a
 
-LIBS := $(LIBFT_A)
-IFLAGS := -Iinclude -I$(LIBFT_DIR)/include
+# MLX42
+MLX42_DIR := $(LIB_DIR)/MLX42
+MLX42_A := $(MLX42_DIR)/build/libmlx42.a
+
+LIBS := $(LIBFT_A) $(MLX42_A) -ldl -lglfw -lpthread -lm
+IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 
 # Executable setup
 NAME := cub3D
@@ -24,7 +28,11 @@ all: $(NAME)
 $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ_FILES) $(LIBFT_A)
+$(MLX42_A):
+	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build
+	@cmake --build $(MLX42_DIR)/build -j4
+
+$(NAME): $(OBJ_FILES) $(LIBFT_A) $(MLX42_A)
 	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -34,6 +42,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 # Other rules
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(MLX42_DIR)/build
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
