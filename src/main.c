@@ -3,8 +3,11 @@
 #include "libft.h"
 #include "MLX42.h"
 
-int main()
+int main(int argc, char **argv)
 {
+	if(argc != 2)
+		return(1);
+		(void)argv;
 	ft_printf("Hello, World!\n");
 
 	mlx_t *mlx = mlx_init(1000, 600, "cub3D", true);
