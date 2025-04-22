@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 20:46:04 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/22 16:09:00 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/22 17:10:06 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/22 18:27:21 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!del)
-		return ;
-	if (lst)
-	{
-		if (lst->content)
-			del(lst->content);
-		free(lst);
-	}
-}
+#endif

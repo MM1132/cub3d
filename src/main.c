@@ -1,16 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 17:10:00 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/22 18:24:03 by rreimann         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
+#include "garbage_collector.h"
 
-#include "libft.h"
-#include "MLX42.h"
-
-int main()
+int	main(void)
 {
-	ft_printf("Hello, World!\n");
-
-	mlx_t *mlx = mlx_init(1000, 600, "cub3D", true);
-	mlx_loop(mlx);
-
-	mlx_terminate(mlx);
-
-	return (0);
+	return (gc_free_all(), 0);
 }

@@ -65,15 +65,16 @@ BONUS_FILES=\
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	ft_lstremoveone.c
 
 # We create the list of .o files based on the list of .c files
 MAIN_OBJ_FILES=$(MAIN_FILES:%.c=$(OBJ_DIR)/%.o)
 BONUS_OBJ_FILES=$(BONUS_FILES:%.c=$(OBJ_DIR)/%.o)
 
 # The compiled program depends on all the .o files
-$(NAME): $(MAIN_OBJ_FILES)
-	ar rcs $(NAME) $(MAIN_OBJ_FILES)
+$(NAME): $(MAIN_OBJ_FILES) $(BONUS_OBJ_FILES)
+	ar rcs $(NAME) $(MAIN_OBJ_FILES) $(BONUS_OBJ_FILES)
 
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(@D)
@@ -88,8 +89,8 @@ $(OBJ_DIR)/ft_printf/print_functions/%.o: ft_printf/print_functions/%.c
 	$(CC) $(CFLAGS) -c -I./ft_printf $< -o $@
 
 # Compile the BONUS part of the library
-bonus: $(BONUS_OBJ_FILES)
-	ar rcs $(NAME) $(BONUS_OBJ_FILES)
+# bonus: $(BONUS_OBJ_FILES)
+# 	ar rcs $(NAME) $(BONUS_OBJ_FILES)
 
 all: $(NAME)
 

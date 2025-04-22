@@ -18,7 +18,13 @@ IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 # Executable setup
 NAME := cub3D
 SRC_FILES := \
-	$(SRC_DIR)/main.c
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/garbage_collector/gc_exit.c \
+	$(SRC_DIR)/garbage_collector/gc_add.c \
+	$(SRC_DIR)/garbage_collector/gc_free.c \
+	$(SRC_DIR)/garbage_collector/gc_init.c \
+	$(SRC_DIR)/garbage_collector/gc_malloc.c \
+	$(SRC_DIR)/garbage_collector/gc_utils.c
 
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
