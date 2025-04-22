@@ -5,8 +5,9 @@
 
 int main(int argc, char **argv)
 {
-	if(argc != 2)
-		return(write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
+	// if(argc != 2)
+	// 	return(write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
+	(void)argc;
 	(void)argv;
 	ft_printf("Hello, World!\n");
 
