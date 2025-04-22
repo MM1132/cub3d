@@ -18,7 +18,8 @@ IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 # Executable setup
 NAME := cub3D
 SRC_FILES := \
-	$(SRC_DIR)/main.c
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/map_validation.c
 
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
