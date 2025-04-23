@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:26:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/22 18:16:58 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/23 10:54:58 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,7 @@ int	map_invalid(char **argv, t_data *data)
 	line = get_next_line(fd);
 	while (line)
 	{
-		text[0] = '\0';
-		text[1] = '\0';
-		text[2] = '\0';
+		ft_memset(text, '\0', 3);
 		i = 0;
 		u = 0;
 		i = white_space_skip(line, i);
@@ -129,6 +127,5 @@ int	map_invalid(char **argv, t_data *data)
 		free(line);
 		line = get_next_line(fd);
 	}
-	(void)argv;
 	return (0);
 }
