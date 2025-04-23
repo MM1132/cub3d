@@ -34,7 +34,7 @@ typedef struct s_data
 	// int			y;
 	// int			end;
 }			t_data;
-
+// returns 1 when the map is invalid, and 0 when it is valid
 int			map_invalid(char **argv, t_data *data);
 
 #endif
