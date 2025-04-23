@@ -3,7 +3,7 @@ CFLAGS= -Wall -Wextra -Werror -Iinclude
 NAME=libft.a
 OBJ_DIR=obj
 
-MAIN_FILES=\
+SRC_FILES=\
 	ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
@@ -54,9 +54,7 @@ MAIN_FILES=\
 	ft_isspace.c \
 	ft_list_atoi.c \
 	ft_sqrt.c \
-	ft_isdigit_str.c
-
-BONUS_FILES=\
+	ft_isdigit_str.c \
 	ft_lstnew.c \
 	ft_lstadd_front.c \
 	ft_lstsize.c \
@@ -68,36 +66,28 @@ BONUS_FILES=\
 	ft_lstmap.c \
 	ft_lstremoveone.c
 
+TOTAL_SRC_FILES := $(words $(SRC_FILES))
+COMPILED_FILES_COUNT = 0
+
 # We create the list of .o files based on the list of .c files
-MAIN_OBJ_FILES=$(MAIN_FILES:%.c=$(OBJ_DIR)/%.o)
-BONUS_OBJ_FILES=$(BONUS_FILES:%.c=$(OBJ_DIR)/%.o)
-
-# The compiled program depends on all the .o files
-$(NAME): $(MAIN_OBJ_FILES) $(BONUS_OBJ_FILES)
-	ar rcs $(NAME) $(MAIN_OBJ_FILES) $(BONUS_OBJ_FILES)
-
-$(OBJ_DIR)/%.o: %.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/ft_printf/%.o: ft_printf/%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c -I. $< -o $@
-
-$(OBJ_DIR)/ft_printf/print_functions/%.o: ft_printf/print_functions/%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c -I./ft_printf $< -o $@
-
-# Compile the BONUS part of the library
-# bonus: $(BONUS_OBJ_FILES)
-# 	ar rcs $(NAME) $(BONUS_OBJ_FILES)
+OBJ_FILES=$(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
+# The compiled program depends on all the .o files
+$(NAME): $(OBJ_FILES)
+	@ar rcs $(NAME) $(OBJ_FILES)
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
+	@bash ./loading_bar.sh "Libft " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
+
 clean:
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
