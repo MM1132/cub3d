@@ -1,25 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   gc_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 20:46:04 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/22 16:09:00 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/22 17:09:51 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/22 18:26:07 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "garbage_collector.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!del)
-		return ;
-	if (lst)
-	{
-		if (lst->content)
-			del(lst->content);
-		free(lst);
-	}
-}
+t_list	*g_allocs_list = NULL;

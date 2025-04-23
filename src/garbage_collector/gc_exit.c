@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   gc_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 20:46:04 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/22 16:09:00 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/22 17:29:05 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/22 18:24:21 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "garbage_collector.h"
+#include "colors.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	unplanned_exit(void)
 {
-	if (!del)
-		return ;
-	if (lst)
-	{
-		if (lst->content)
-			del(lst->content);
-		free(lst);
-	}
+	printf(COLOR_RED "WARNING: Malloc failed, clearing up!\n" COLOR_RESET);
+	gc_free_all();
+	exit(EXIT_FAILURE);
 }
