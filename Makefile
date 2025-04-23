@@ -24,7 +24,8 @@ SRC_FILES := \
 	$(SRC_DIR)/garbage_collector/gc_free.c \
 	$(SRC_DIR)/garbage_collector/gc_init.c \
 	$(SRC_DIR)/garbage_collector/gc_malloc.c \
-	$(SRC_DIR)/garbage_collector/gc_utils.c
+	$(SRC_DIR)/garbage_collector/gc_utils.c \
+	$(SRC_DIR)/map_validation.c
 
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
