@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:05:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/01/21 14:39:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:20:40 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+// Remove one element from the list
+// and connect the rest of the list back together
+void	ft_lstremoveone(t_list **head, t_list *to_delete, void (*del)(void *));
 
 // MY FUNCTIONS
 // If the character is one of those: '\t', '\n', '\v', '\f', '\r', ' '

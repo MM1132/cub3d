@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   creat_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 20:46:04 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/22 16:09:00 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
+/*   Updated: 2025/04/23 17:05:41 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	creat_map(int fd, char *line, t_data *data)
 {
-	if (!del)
-		return ;
-	if (lst)
-	{
-		if (lst->content)
-			del(lst->content);
-		free(lst);
-	}
+    (void)fd;
+    (void)line;
+    (void)data;
+    return(0);
 }
