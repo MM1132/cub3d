@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/23 17:17:55 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:43:17 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,24 @@
 mlx_t		*mlx = NULL;
 int			map_value = 0;
 
+void	gc_free_map(t_data *data)
+{
+	int	i;
+	
+	i = 0;
+	if(!data->map)
+		return;
+	while (data->map[i])
+	{
+		gc_free(data->map[i]);
+		i++;
+	}
+	gc_free(data->map);
+}
+
 static void	free_data(t_data *data)
 {
+	gc_free_map(data);
 	gc_free(data->no_texture);
 	gc_free(data->we_texture);
 	gc_free(data->so_texture);
@@ -39,6 +55,7 @@ void	init_data(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
+	char *file;
 
 	data = gc_malloc(sizeof(t_data));
 	init_data(data);

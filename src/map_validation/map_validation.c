@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:26:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/23 18:02:09 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:45:49 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,15 @@ static void	fill_text(char text[3], char *line, int *i)
 
 int	map_validation(char **argv, t_data *data)
 {
-	int		fd;
 	char	*line;
 	int		i;
 	char	text[3];
+	char	*file;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (write(2, "Error: Open failed\n", 20), 1);
-	line = get_next_line(fd);
+	file = read_file(argv);
+	if (!file)
+		return (1);
+	line = safe_gnl(file);
 	while (line)
 	{
 		ft_memset(text, '\0', 3);
@@ -135,13 +135,13 @@ int	map_validation(char **argv, t_data *data)
 		i = white_space_skip(line, i);
 		fill_text(text, line, &i);
 		if (map_value == 6 && text[0] == '1')
-			return (creat_map(fd, line, data));
+			return (create_map(file, line, data));
 		if (text[2] != '\0')
 			return (err_mssg());
 		if (text[0] != '\n' && check_texture(i, text, line, data) == 1)
 			return (1);
-		free(line);
-		line = get_next_line(fd);
+		gc_free(line);
+		line = safe_gnl(file);
 	}
 	return (err_mssg());
 }

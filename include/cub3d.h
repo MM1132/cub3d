@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/23 16:59:04 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:20:40 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,29 @@ typedef struct s_data
 	char		*ea_texture;
 	uint32_t	floor_color;
 	uint32_t	ceiling_color;
-	char		***map;
+	char		**map;
 	// size_t		x;
 	// int			y;
 	// int			end;
 }				t_data;
 
 // returns 1 when the map is invalid, and 0 when it is valid
-int				map_validation(char **argv, t_data *data);
+int				map_validation(char *file, t_data *data);
 // returns 1 when the character is a whitespace
 int				white_space(char *str, int i);
 // Returns the index of the first non-whitespace character in the string,
 // starting from the given index i. Skips whitespace.
 int				white_space_skip(char *str, int i);
 // Create the map and return 0 if the map is valide
-int				creat_map(int fd, char *line, t_data *data);
+int				create_map(char *file, char *line, t_data *data);
 // free split
 void			free_split(char **split);
 // write error massage, return 1
 int err_mssg();
+// frees the map
+void	gc_free_map(t_data *data);
+// read the map and create a file
+char	*read_file(char **argv);
+// get_next_line from file with gc
+char *safe_gnl(char *file);
 #endif
