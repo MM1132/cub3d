@@ -19,6 +19,11 @@ IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 NAME := cub3D
 SRC_FILES := \
 	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/init_data.c \
+	$(SRC_DIR)/render/minimap.c \
+	$(SRC_DIR)/render/utils/put_rect.c \
+	$(SRC_DIR)/vector/vector_new.c \
+	$(SRC_DIR)/hooks/loop_key_hook.c \
 	$(SRC_DIR)/garbage_collector/gc_exit.c \
 	$(SRC_DIR)/garbage_collector/gc_add.c \
 	$(SRC_DIR)/garbage_collector/gc_free.c \
