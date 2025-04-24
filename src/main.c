@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/24 16:19:45 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:51:53 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	data.map = create_temp_map();
 	mlx_image_to_window(mlx, data.img, 0, 0);
-	render_minimap(&data);
 
 	// mlx_image_to_window(mlx, data->img, 0, 0);
 	// if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],'.'), ".cub", 5))
 	// 	return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
 	// if (map_invalid(argv, data))
 	// 	return (1);
+
+	mlx_loop_hook(mlx, &loop_key_hook, &data);
 	
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

@@ -6,13 +6,21 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 16:26:02 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:41:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void init_player(t_player *player)
+static void	init_down_keys(t_down_keys *down_keys)
+{
+	down_keys->key_w = false;
+	down_keys->key_a = false;
+	down_keys->key_s = false;
+	down_keys->key_d = false;
+}
+
+static void	init_player(t_player *player)
 {
 	player->pos_x = 3;
 	player->pos_y = 3;
@@ -30,6 +38,7 @@ void init_data(t_data *data)
 	data->floor_color = 0;
 	data->ceiling_color = 0;
 	init_player(&data->player);
+	init_down_keys(&data->down_keys);
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 }

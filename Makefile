@@ -23,6 +23,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/minimap.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
 	$(SRC_DIR)/vector/vector_new.c \
+	$(SRC_DIR)/hooks/loop_key_hook.c \
 	$(SRC_DIR)/garbage_collector/gc_exit.c \
 	$(SRC_DIR)/garbage_collector/gc_add.c \
 	$(SRC_DIR)/garbage_collector/gc_free.c \

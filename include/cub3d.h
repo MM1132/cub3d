@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/24 16:17:10 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:45:38 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ typedef struct s_map
 	size_t	height;
 }	t_map;
 
+typedef struct s_down_keys
+{
+	bool	key_w;
+	bool	key_a;
+	bool	key_s;
+	bool	key_d;
+}	t_down_keys;
+
 typedef struct s_data
 {
 	char		*no_texture;
@@ -73,6 +81,7 @@ typedef struct s_data
 	t_map		map;
 	t_player	player; // TODO: Initialize the player data
 	mlx_image_t	*img;
+	t_down_keys	down_keys;
 	// int			end; // TODO: Ask Jona what this is
 }			t_data;
 
@@ -82,5 +91,8 @@ int			map_invalid(char **argv, t_data *data);
 void		init_data(t_data *data);
 void		render_minimap(t_data *data);
 void		put_rect(mlx_image_t *img, t_rect *rect, uint32_t color);
+
+// Hooks
+void		loop_key_hook(void *param);
 
 #endif
