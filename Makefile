@@ -30,34 +30,46 @@ SRC_FILES := \
 	$(SRC_DIR)/map_validation/validation_utils.c \
 	$(SRC_DIR)/map_validation/creat_map.c
 
+TOTAL_SRC_FILES := $(words $(SRC_FILES))
+COMPILED_FILES_COUNT = 0
+
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Rules
 all: $(NAME)
+	@echo "Cub3D Compilation Finished!"
 
 $(LIBFT_A):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX42_A):
-	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build
-	@cmake --build $(MLX42_DIR)/build -j4
+	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build > /dev/null 2>&1
+	@cmake --build $(MLX42_DIR)/build -j4 2>&1 | \
+	while IFS= read -r line; do \
+		percentage=$$(echo "$$line" | perl -ne 'if (m/(?<=\[)\s*(\d+)(?!.*Linking C static)/) {print "$$1"}'); \
+		if [ -n "$$percentage" ]; then \
+			bash ./lib/libft/loading_bar.sh "MLX42 " 100 $$percentage; \
+		fi \
+	done
 
 $(NAME): $(OBJ_FILES) $(LIBFT_A) $(MLX42_A)
-	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
+	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
 
 # Other rules
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -rf $(MLX42_DIR)/build
-	rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -rf $(MLX42_DIR)/build
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
 
 re: fclean all
 
