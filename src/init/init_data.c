@@ -6,28 +6,12 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 16:41:00 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:31:28 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	init_down_keys(t_down_keys *down_keys)
-{
-	down_keys->key_w = false;
-	down_keys->key_a = false;
-	down_keys->key_s = false;
-	down_keys->key_d = false;
-}
-
-static void	init_player(t_player *player)
-{
-	player->pos_x = 3;
-	player->pos_y = 3;
-	player->speed_x = 0;
-	player->speed_y = 0;
-	player->dir = vector_new(1, 0);
-}
+#include "settings.h"
 
 void init_data(t_data *data)
 {

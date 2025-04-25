@@ -6,11 +6,12 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 16:25:41 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:31:33 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "settings.h"
 
 void	render_minimap(t_data *data)
 {
@@ -37,8 +38,8 @@ void	render_minimap(t_data *data)
 		y++;
 	}
 	// Render the player
-	rect.x = (data->player.pos_x * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
-	rect.y = (data->player.pos_y * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
+	rect.x = (data->player.pos.x * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
+	rect.y = (data->player.pos.y * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
 	rect.height = MINIMAP_PLAYER_SIZE;
 	rect.width = MINIMAP_PLAYER_SIZE;
 	put_rect(data->img, &rect, 0xFFFFFFFF);

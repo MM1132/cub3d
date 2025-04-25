@@ -1,49 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_key_hook.c                                    :+:      :+:    :+:   */
+/*   main_loop_hook.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 17:04:32 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:31:55 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
+#include "settings.h"
 
-// TODO: Separate keyboard input, updating variables, and rendering
-void	loop_key_hook(void *param)
+void	get_keyboard_input(t_data *data)
 {
-	t_data	*data;
-
-	data = (t_data *)param;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	data->down_keys.key_w = mlx_is_key_down(mlx, MLX_KEY_W);
 	data->down_keys.key_a = mlx_is_key_down(mlx, MLX_KEY_A);
 	data->down_keys.key_s = mlx_is_key_down(mlx, MLX_KEY_S);
 	data->down_keys.key_d = mlx_is_key_down(mlx, MLX_KEY_D);
+}
 
-	// TODO: Change this later
-	// Change player speed
+// TODO: Change this to the Vector system later
+void update_player(t_data *data)
+{
 	if (data->down_keys.key_w)
-		data->player.speed_y -= 0.01;
+		data->player.speed.y -= PLAYER_ACCELERATION;
 	if (data->down_keys.key_s)
-		data->player.speed_y += 0.01;
+		data->player.speed.y += PLAYER_ACCELERATION;
 	if (data->down_keys.key_a)
-		data->player.speed_x -= 0.01;
+		data->player.speed.x -= PLAYER_ACCELERATION;
 	if (data->down_keys.key_d)
-		data->player.speed_x += 0.01;
+		data->player.speed.x += PLAYER_ACCELERATION;
 	
-	data->player.speed_x *= 0.95;
-	data->player.speed_y *= 0.95;
+	data->player.speed.x *= 0.8;
+	data->player.speed.y *= 0.8;
 
-	// Move the player
-	// Adding speed to position
-	data->player.pos_x += data->player.speed_x;
-	data->player.pos_y += data->player.speed_y;
+	data->player.pos.x += data->player.speed.x;
+	data->player.pos.y += data->player.speed.y;
+}
 
+void	main_game_loop(t_data *data)
+{
+	get_keyboard_input(data);
+	update_player(data);
+}
+
+void	main_loop_hook(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	main_game_loop(data);
 	render_minimap(data);
 }

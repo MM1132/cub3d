@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/24 16:51:53 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:03:40 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv)
 	// if (map_invalid(argv, data))
 	// 	return (1);
 
-	mlx_loop_hook(mlx, &loop_key_hook, &data);
+	mlx_loop_hook(mlx, &main_loop_hook, &data);
 	
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
