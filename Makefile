@@ -23,7 +23,11 @@ SRC_FILES := \
 	$(SRC_DIR)/init/init_player.c \
 	$(SRC_DIR)/render/minimap.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
-	$(SRC_DIR)/vector/vector_new.c \
+	$(SRC_DIR)/vector/vec_add.c \
+	$(SRC_DIR)/vector/vec_length.c \
+	$(SRC_DIR)/vector/vec_multiply_n.c \
+	$(SRC_DIR)/vector/vec_new.c \
+	$(SRC_DIR)/vector/vec_normalize.c \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/garbage_collector/gc_exit.c \
 	$(SRC_DIR)/garbage_collector/gc_add.c \

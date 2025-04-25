@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   vector_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 10:26:39 by rreimann          #+#    #+#             */
+/*   Created: 2025/04/24 16:17:53 by rreimann          #+#    #+#             */
 /*   Updated: 2025/04/25 12:45:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "vector.h"
 
-void	init_down_keys(t_down_keys *down_keys)
+t_vec2	vec_new(double x, double y)
 {
-	down_keys->key_w = false;
-	down_keys->key_a = false;
-	down_keys->key_s = false;
-	down_keys->key_d = false;
-}
+	t_vec2	vector;
 
-void	init_player(t_player *player)
-{
-	player->pos = vec_new(3, 3);
-	player->speed = vec_new(0, 0);
-	player->dir = vec_new(1, 0);
+	vector.x = x;
+	vector.y = y;
+	return (vector);
 }
