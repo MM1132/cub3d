@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/24 16:45:38 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:23:45 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 
 extern mlx_t	*mlx;
+extern int		map_value;
 
 typedef struct s_rect
 {
@@ -43,9 +44,9 @@ typedef struct s_player
 
 typedef enum s_tile_type
 {
-	TILE_SPACE,
 	TILE_FLOOR,
 	TILE_WALL,
+	TILE_SPACE,
 	TILE_DOOR,
 }	t_tile_type;
 
@@ -82,12 +83,27 @@ typedef struct s_data
 	t_player	player; // TODO: Initialize the player data
 	mlx_image_t	*img;
 	t_down_keys	down_keys;
-	// int			end; // TODO: Ask Jona what this is
 }			t_data;
 
 // returns 1 when the map is invalid, and 0 when it is valid
-int			map_invalid(char **argv, t_data *data);
-
+int				map_validation(char **argv, t_data *data);
+// returns 1 when the character is a whitespace
+int				white_space(char *str, int i);
+// Returns the index of the first non-whitespace character in the string,
+// starting from the given index i. Skips whitespace.
+int				white_space_skip(char *str, int i);
+// Create the map and return 0 if the map is valide
+int				create_map(char *file, char *line, t_data *data);
+// free split
+void			free_split(char **split);
+// write error massage, return 1
+int err_mssg();
+// frees the map
+void	gc_free_map(t_data *data);
+// read the map and create a file
+char	*read_file(char **argv);
+// get_next_line from file with gc
+char *safe_gnl(char *file);
 void		init_data(t_data *data);
 void		render_minimap(t_data *data);
 void		put_rect(mlx_image_t *img, t_rect *rect, uint32_t color);

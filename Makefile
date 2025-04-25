@@ -12,7 +12,7 @@ LIBFT_A := $(LIBFT_DIR)/libft.a
 MLX42_DIR := $(LIB_DIR)/MLX42
 MLX42_A := $(MLX42_DIR)/build/libmlx42.a
 
-LIBS := $(LIBFT_A) $(MLX42_A) -ldl -lglfw -lpthread -lm
+LIBS := $(LIBFT_A) $(MLX42_A) -ldl -lglfw -lpthread -lm 
 IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 
 # Executable setup
@@ -30,7 +30,11 @@ SRC_FILES := \
 	$(SRC_DIR)/garbage_collector/gc_init.c \
 	$(SRC_DIR)/garbage_collector/gc_malloc.c \
 	$(SRC_DIR)/garbage_collector/gc_utils.c \
-	$(SRC_DIR)/map_validation.c
+	$(SRC_DIR)/garbage_collector/safe_functions/safe_split.c \
+	$(SRC_DIR)/garbage_collector/safe_functions/safe_gnl.c \
+	$(SRC_DIR)/map_validation/map_validation.c \
+	$(SRC_DIR)/map_validation/validation_utils.c \
+	$(SRC_DIR)/map_validation/create_map.c 
 
 TOTAL_SRC_FILES := $(words $(SRC_FILES))
 COMPILED_FILES_COUNT = 0
@@ -54,14 +58,18 @@ $(MLX42_A):
 		fi \
 	done
 
-$(NAME): $(OBJ_FILES) $(LIBFT_A) $(MLX42_A)
+
+$(NAME): $(OBJ_FILES) finish_loading $(LIBFT_A) $(MLX42_A)
 	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
 	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
+	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
+
+finish_loading:
+	@bash ./lib/libft/loading_bar.sh "Cub3D " 100 100
 
 # Other rules
 clean:
