@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 17:00:06 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:06:30 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 				'.'), ".cub", 5))
 		return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
 	if (map_validation(argv, &data))
-	 	return (1);
+		return (1);
 	mlx_loop_hook(mlx, &loop_key_hook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
