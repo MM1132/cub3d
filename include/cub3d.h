@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/24 18:23:45 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 14:57:56 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ typedef struct s_player
 	t_vector2	dir;
 }	t_player;
 
+#define NUMBER_OF_TILES 3
 typedef enum s_tile_type
 {
 	TILE_FLOOR,
 	TILE_WALL,
 	TILE_SPACE,
-	TILE_DOOR,
+	//TILE_DOOR,
 }	t_tile_type;
 
 typedef struct s_tile
@@ -92,7 +93,7 @@ int				white_space(char *str, int i);
 // Returns the index of the first non-whitespace character in the string,
 // starting from the given index i. Skips whitespace.
 int				white_space_skip(char *str, int i);
-// Create the map and return 0 if the map is valide
+// Create the map and return 0 if the map is valid
 int				create_map(char *file, char *line, t_data *data);
 // free split
 void			free_split(char **split);
@@ -110,5 +111,7 @@ void		put_rect(mlx_image_t *img, t_rect *rect, uint32_t color);
 
 // Hooks
 void		loop_key_hook(void *param);
+// set width and height of the map
+void	set_width_height(char *file, t_data *data);
 
 #endif
