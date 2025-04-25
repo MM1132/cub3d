@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 10:31:28 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/23 12:18:31 by joklein           #+#    #+#             */
+/*   Updated: 2025/04/24 14:05:45 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "settings.h"
+#include "garbage_collector.h"
 
-void init_data(t_data *data)
+int	white_space_skip(char *str, int i)
 {
-	data->no_texture = NULL;
-	data->so_texture = NULL;
-	data->we_texture = NULL;
-	data->ea_texture = NULL;
-	data->floor_color = 0;
-	data->ceiling_color = 0;
-	init_player(&data->player);
-	init_down_keys(&data->down_keys);
-	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
+}
+
+int	white_space(char *str, int i)
+{
+	if (str[i] == ' ' || str[i] == '\t')
+		return (1);
+	return (0);
+}
+int err_mssg()
+{
+	write(2, "Error: invalid map\n", 20);
+	return(1);
 }

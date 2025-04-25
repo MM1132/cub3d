@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:10:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/22 18:28:33 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:53:12 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ t_alloc_report	gc_get_allocs_report(void);
 
 // Print out the repot of allocs in our program
 void			gc_print_alloc_report(t_alloc_report *report);
+
+// SAFE FUNCTIONS
+char    **safe_split(char *str, char c);
+void	free_split(char **split);
 
 #endif
