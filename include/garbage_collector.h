@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:10:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/23 17:53:12 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 12:42:47 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ void			gc_add(void *pointer, size_t size);
 // Clear everything and exit out of the program
 void			unplanned_exit(void);
 
-// Return the allocations report numbers for the garbage collector
-t_alloc_report	gc_get_allocs_report(void);
-
 // Print out the repot of allocs in our program
-void			gc_print_alloc_report(t_alloc_report *report);
+void			gc_print_alloc_report();
 
 // SAFE FUNCTIONS
 char    **safe_split(char *str, char c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:09:48 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 17:16:25 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 12:27:17 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,6 @@ void	gc_free(void *pointer)
 
 void	gc_free_all(void)
 {
-	t_alloc_report	alloc_report;
-
-	alloc_report = gc_get_allocs_report();
+	gc_print_alloc_report();
 	ft_lstclear(&g_allocs_list, free_alloc);
-	if (alloc_report.tracked_count != 0 || \
-		alloc_report.untracked_count != 0 || alloc_report.tracked_size != 0)
-		gc_print_alloc_report(&alloc_report);
-	else
-		printf(COLOR_GREEN "SUCCESS: Garbage collector had nothing to \
-clean up!\n" COLOR_RESET);
 }

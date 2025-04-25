@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 10:31:55 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:39:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void update_player(t_data *data)
 	if (data->down_keys.key_d)
 		data->player.speed.x += PLAYER_ACCELERATION;
 	
-	data->player.speed.x *= 0.8;
-	data->player.speed.y *= 0.8;
+	data->player.speed.x *= PLAYER_SPEED_DECREASE_MULTIPLIER;
+	data->player.speed.y *= PLAYER_SPEED_DECREASE_MULTIPLIER;
 
 	data->player.pos.x += data->player.speed.x;
 	data->player.pos.y += data->player.speed.y;
