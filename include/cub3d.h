@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 14:57:56 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:35:33 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "MLX42.h"
 # include "libft.h"
-# include "settings.h"
 # include "vector.h"
 
 # include <fcntl.h>
@@ -35,11 +34,9 @@ typedef struct s_rect
 
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
-	double		speed_x;
-	double		speed_y;
-	t_vector2	dir;
+	t_vec2	pos;
+	t_vec2	speed;
+	t_vec2	dir;
 }	t_player;
 
 #define NUMBER_OF_TILES 3
@@ -64,13 +61,14 @@ typedef struct s_map
 	size_t	height;
 }	t_map;
 
-typedef struct s_down_keys
+typedef struct s_inputs
 {
 	bool	key_w;
 	bool	key_a;
 	bool	key_s;
 	bool	key_d;
-}	t_down_keys;
+	t_vec2	mouse_pos;
+}	t_inputs;
 
 typedef struct s_data
 {
@@ -81,37 +79,41 @@ typedef struct s_data
 	uint32_t	floor_color;
 	uint32_t	ceiling_color;
 	t_map		map;
-	t_player	player; // TODO: Initialize the player data
+	t_player	player;
 	mlx_image_t	*img;
-	t_down_keys	down_keys;
+	t_inputs	inputs;
 }			t_data;
 
+// INITIALIZATION
+void		init_inputs(t_inputs *down_keys);
+void		init_player(t_player *player);
+void		init_data(t_data *data);
+
+// MAP VALIDATAION
+// set width and height of the map
+void	    set_width_height(char *file, t_data *data);
 // returns 1 when the map is invalid, and 0 when it is valid
-int				map_validation(char **argv, t_data *data);
+int			map_validation(char **argv, t_data *data);
 // returns 1 when the character is a whitespace
-int				white_space(char *str, int i);
+int			white_space(char *str, int i);
 // Returns the index of the first non-whitespace character in the string,
 // starting from the given index i. Skips whitespace.
-int				white_space_skip(char *str, int i);
+int			white_space_skip(char *str, int i);
 // Create the map and return 0 if the map is valid
-int				create_map(char *file, char *line, t_data *data);
+int			create_map(char *file, char *line, t_data *data);
 // free split
-void			free_split(char **split);
+void		free_split(char **split);
 // write error massage, return 1
-int err_mssg();
+int			err_mssg();
 // frees the map
-void	gc_free_map(t_data *data);
+void		gc_free_map(t_data *data);
 // read the map and create a file
-char	*read_file(char **argv);
+char		*read_file(char **argv);
 // get_next_line from file with gc
-char *safe_gnl(char *file);
-void		init_data(t_data *data);
-void		render_minimap(t_data *data);
-void		put_rect(mlx_image_t *img, t_rect *rect, uint32_t color);
+char 		*safe_gnl(char *file);
 
-// Hooks
-void		loop_key_hook(void *param);
-// set width and height of the map
-void	set_width_height(char *file, t_data *data);
+// HOOKS
+void		main_loop_hook(void *param);
+void		cursor_hook(double xpos, double ypos, void* param);
 
 #endif

@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   cursor_hook.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:35 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/25 14:57:02 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/25 15:14:11 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "render.h"
+#include "MLX42.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+// void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param)
+void	cursor_hook(double xpos, double ypos, void *param)
 {
-	size_t	x;
-	size_t	y;
+	t_data	*data;
 
-	x = 0;
-	while (x < rect->width)
-	{
-		y = 0;
-		while (y < rect->height)
-		{
-			mlx_put_pixel(img, rect->x + x, rect->y + y, color);
-			y++;
-		}
-		x++;
-	}
+	data = (t_data *)param;
+	data->inputs.mouse_pos.x = xpos;
+	data->inputs.mouse_pos.y = ypos;
 }

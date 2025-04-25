@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 17:06:30 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:36:41 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
+#include "render.h"
 
 mlx_t		*mlx = NULL;
 int			map_value = 0;
@@ -51,8 +52,10 @@ int	main(int argc, char **argv)
 		return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
 	if (map_validation(argv, &data))
 		return (1);
-	mlx_loop_hook(mlx, &loop_key_hook, &data);
+	mlx_cursor_hook(mlx, &cursor_hook, &data);
+	mlx_loop_hook(mlx, &main_loop_hook, &data);
 	mlx_loop(mlx);
+
 	mlx_terminate(mlx);
 	free_data(&data);
 	gc_free_all();

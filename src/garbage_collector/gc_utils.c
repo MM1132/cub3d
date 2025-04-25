@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:09:56 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 17:29:19 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 12:26:58 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	init_alloc_report(t_alloc_report *report)
 	(*report).untracked_count = 0;
 }
 
-t_alloc_report	gc_get_allocs_report(void)
+// Return the allocations report numbers for the garbage collector
+static t_alloc_report	gc_get_allocs_report(void)
 {
 	t_alloc_report	report;
 	t_list			*current_element;
@@ -58,10 +59,22 @@ t_alloc_report	gc_get_allocs_report(void)
 	return (report);
 }
 
-void	gc_print_alloc_report(t_alloc_report *report)
+void	gc_print_alloc_report()
 {
-	printf(COLOR_YELLOW "### Garbage Collector Report ###\n");
-	printf("Tracked allocs: %ld (%ld bytes)\n", \
-		report->tracked_count, report->tracked_size);
-	printf("Untracked allocs: %ld\n" COLOR_RESET, report->untracked_count);
+	t_alloc_report report;
+
+	report = gc_get_allocs_report();
+	if (report.tracked_count != 0 || \
+		report.untracked_count != 0 || report.tracked_size != 0)
+	{
+		printf(COLOR_YELLOW "### Garbage Collector Report ###\n");
+		printf("Tracked allocs: %ld (%ld bytes)\n", \
+			report.tracked_count, report.tracked_size);
+		printf("Untracked allocs: %ld\n" COLOR_RESET, report.untracked_count);
+	}
+	else
+	{
+		printf(COLOR_GREEN "SUCCESS: Garbage collector had nothing to \
+			clean up!\n" COLOR_RESET);
+	}
 }

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:35 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/25 10:26:39 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/25 15:10:10 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "render.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+void	init_inputs(t_inputs *inputs)
 {
-	size_t	x;
-	size_t	y;
+	inputs->key_w = false;
+	inputs->key_a = false;
+	inputs->key_s = false;
+	inputs->key_d = false;
+	inputs->mouse_pos = vec_new(0, 0);
 
-	x = 0;
-	while (x < rect->width)
-	{
-		y = 0;
-		while (y < rect->height)
-		{
-			mlx_put_pixel(img, rect->x + x, rect->y + y, color);
-			y++;
-		}
-		x++;
-	}
+}
+
+void	init_player(t_player *player)
+{
+	player->pos = vec_new(3, 3);
+	player->speed = vec_new(0, 0);
+	player->dir = vec_new(1, 0);
 }

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   put_fill.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:35 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/25 15:16:24 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/25 15:17:31 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "render.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+void	put_fill(mlx_image_t *img, uint32_t color)
 {
 	size_t	x;
 	size_t	y;
 
 	x = 0;
-	while (x < rect->width)
+	while (x < img->width)
 	{
 		y = 0;
-		while (y < rect->height)
+		while (y < img->height)
 		{
-			mlx_put_pixel(img, rect->x + x, rect->y + y, color);
+			mlx_put_pixel(img, x, y, color);
 			y++;
 		}
 		x++;

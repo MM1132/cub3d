@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 17:17:12 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:34:02 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	add_one_line(char *line, t_data *data, size_t num_line)
 		else
 		{
 			data->map.tiles[i][u].tile_type = ft_ctott('0');
-			data->player.pos_x = (double)u;
-			data->player.pos_y = (double)num_line;
+			data->player.pos.x = (double)u;
+			data->player.pos.y = (double)num_line;
 		}
 		u++;
 	}

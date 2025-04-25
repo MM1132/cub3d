@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   vec_multiply_n.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:35 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/25 12:52:03 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/25 12:53:54 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "render.h"
+#include "vector.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+t_vec2	vec_multiply_n(t_vec2 vec, double n)
 {
-	size_t	x;
-	size_t	y;
+	t_vec2	new_vec;
 
-	x = 0;
-	while (x < rect->width)
-	{
-		y = 0;
-		while (y < rect->height)
-		{
-			mlx_put_pixel(img, rect->x + x, rect->y + y, color);
-			y++;
-		}
-		x++;
-	}
+	new_vec.x = vec.x * n;
+	new_vec.y = vec.y * n;
+	return (new_vec);
 }
