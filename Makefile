@@ -3,6 +3,7 @@ SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -Wshadow
+#-fsanitize=address -g
 
 # Libft
 LIBFT_DIR := $(LIB_DIR)/libft
@@ -43,7 +44,8 @@ SRC_FILES := \
 	$(SRC_DIR)/garbage_collector/safe_functions/safe_gnl.c \
 	$(SRC_DIR)/map_validation/map_validation.c \
 	$(SRC_DIR)/map_validation/validation_utils.c \
-	$(SRC_DIR)/map_validation/create_map.c 
+	$(SRC_DIR)/map_validation/create_map.c \
+	$(SRC_DIR)/map_validation/create_map_utils.c
 
 TOTAL_SRC_FILES := $(words $(SRC_FILES))
 COMPILED_FILES_COUNT = 0

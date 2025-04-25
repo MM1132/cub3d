@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 15:08:53 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:36:41 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,81 +32,32 @@ void	gc_free_map(t_data *data)
 	gc_free(data->map.tiles);
 }
 
-// static void	free_data(t_data *data)
-// {
-// 	// gc_free_map(data);
-// 	gc_free(data->no_texture);
-// 	gc_free(data->we_texture);
-// 	gc_free(data->so_texture);
-// 	gc_free(data->ea_texture);
-// 	gc_free(data);
-// }
-
-static t_map	create_temp_map(void)
+static void	free_data(t_data *data)
 {
-	size_t	map_width;
-	size_t	map_height;
-	t_map	new_map;
-
-	map_width = 10;
-	map_height = 10;
-	new_map.width = map_width;
-	new_map.height = map_height;
-	// First, allocate memory for the map
-	new_map.tiles = gc_malloc(map_height * sizeof(t_tile *));
-	for (size_t y = 0; y < map_height; y++)
-	{
-		new_map.tiles[y] = gc_malloc(sizeof(t_tile) * map_width);
-	}
-	// Then, set values for the map tiles
-	for (size_t x = 0; x < map_width; x++)
-	{
-		for (size_t y = 0; y < map_height; y++)
-		{
-			if (x == 0 || y == 0 || x == map_width - 1 || y == map_height - 1)
-			{
-				// Create a wall
-				new_map.tiles[y][x].tile_type = TILE_WALL;
-			}
-			else
-			{
-				// Create a floor
-				new_map.tiles[y][x].tile_type = TILE_FLOOR;
-			}
-			new_map.tiles[y][x].state = 0;
-		}
-	}
-	// Also, create one random block in the middle
-	new_map.tiles[4][4].tile_type = TILE_WALL;
-	return (new_map);
+	gc_free_map(data);
+	gc_free(data->no_texture);
+	gc_free(data->we_texture);
+	gc_free(data->so_texture);
+	gc_free(data->ea_texture);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	(void)argc;
-	(void)argv;
-
-	data.map = create_temp_map();
 	init_data(&data);
 	mlx_image_to_window(mlx, data.img, 0, 0);
-	
-	// if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],
-	// 			'.'), ".cub", 5))
-	// 	return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
-	// if (map_validation(argv, &data))
-	// 	return (1);
-	
+	if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],
+				'.'), ".cub", 5))
+		return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
+	if (map_validation(argv, &data))
+		return (1);
 	mlx_cursor_hook(mlx, &cursor_hook, &data);
 	mlx_loop_hook(mlx, &main_loop_hook, &data);
-	
 	mlx_loop(mlx);
 
 	mlx_terminate(mlx);
-
-	// free_data(&data);
-	
+	free_data(&data);
 	gc_free_all();
 	return (0);
 }

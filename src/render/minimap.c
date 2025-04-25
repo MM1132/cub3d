@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 15:23:56 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:37:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,18 @@ void	render_minimap(t_data *data)
 		}
 		y++;
 	}
+
 	// Render the player
-	rect.x = (data->player.pos.x * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
-	rect.y = (data->player.pos.y * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
+	rect.x = (data->player.pos.x * MINIMAP_TILE_SIZE) + MINIMAP_TILE_SIZE/2 - MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
+	rect.y = (data->player.pos.y * MINIMAP_TILE_SIZE) + MINIMAP_TILE_SIZE/2 - MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
 	rect.height = MINIMAP_PLAYER_SIZE;
 	rect.width = MINIMAP_PLAYER_SIZE;
 	put_rect(data->img, &rect, 0xFFFFFFFF);
 
+    // Draw a line from player to mouse. For fun
+	rect.x += MINIMAP_PLAYER_SIZE / 2;
+	rect.y += MINIMAP_PLAYER_SIZE / 2;
 	printf("Player position: %f; %f\n", data->player.pos.x, data->player.pos.y);
-
 	t_vec2	player_pos_screen = vec_new(rect.x, rect.y);
-
-	// Draw a line from player to mouse. For fun
 	put_line(data->img, player_pos_screen, data->inputs.mouse_pos, 0xAFFFFFFF);
 }

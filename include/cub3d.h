@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 15:11:19 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:35:33 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ typedef struct s_player
 	t_vec2	dir;
 }	t_player;
 
+#define NUMBER_OF_TILES 3
 typedef enum s_tile_type
 {
 	TILE_FLOOR,
 	TILE_WALL,
 	TILE_SPACE,
-	TILE_DOOR,
+	//TILE_DOOR,
 }	t_tile_type;
 
 typedef struct s_tile
@@ -83,11 +84,14 @@ typedef struct s_data
 	t_inputs	inputs;
 }			t_data;
 
-// Initialization
+// INITIALIZATION
 void		init_inputs(t_inputs *down_keys);
 void		init_player(t_player *player);
 void		init_data(t_data *data);
 
+// MAP VALIDATAION
+// set width and height of the map
+void	    set_width_height(char *file, t_data *data);
 // returns 1 when the map is invalid, and 0 when it is valid
 int			map_validation(char **argv, t_data *data);
 // returns 1 when the character is a whitespace
@@ -95,7 +99,7 @@ int			white_space(char *str, int i);
 // Returns the index of the first non-whitespace character in the string,
 // starting from the given index i. Skips whitespace.
 int			white_space_skip(char *str, int i);
-// Create the map and return 0 if the map is valide
+// Create the map and return 0 if the map is valid
 int			create_map(char *file, char *line, t_data *data);
 // free split
 void		free_split(char **split);
@@ -108,7 +112,7 @@ char		*read_file(char **argv);
 // get_next_line from file with gc
 char 		*safe_gnl(char *file);
 
-// Hooks
+// HOOKS
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
 
