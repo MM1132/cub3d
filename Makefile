@@ -12,7 +12,7 @@ LIBFT_A := $(LIBFT_DIR)/libft.a
 MLX42_DIR := $(LIB_DIR)/MLX42
 MLX42_A := $(MLX42_DIR)/build/libmlx42.a
 
-LIBS := $(LIBFT_A) $(MLX42_A) -ldl -lglfw -lpthread -lm
+LIBS := $(LIBFT_A) $(MLX42_A) -ldl -lglfw -lpthread -lm 
 IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 
 # Executable setup
