@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 16:56:48 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:37:46 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 // Minimap
 # define MINIMAP_TILE_SIZE 30
-# define MINIMAP_PLAYER_SIZE 50
+# define MINIMAP_PLAYER_SIZE 10
 # define MINIMAP_MARGIN 5
 
 #endif

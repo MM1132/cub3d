@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 16:25:41 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:38:47 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	render_minimap(t_data *data)
 		y++;
 	}
 	// Render the player
-	rect.x = (data->player.pos_x * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
-	rect.y = (data->player.pos_y * MINIMAP_TILE_SIZE) + MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
+	rect.x = (data->player.pos_x * MINIMAP_TILE_SIZE) + MINIMAP_TILE_SIZE/2 - MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
+	rect.y = (data->player.pos_y * MINIMAP_TILE_SIZE) + MINIMAP_TILE_SIZE/2 - MINIMAP_PLAYER_SIZE / 2 + MINIMAP_MARGIN;
 	rect.height = MINIMAP_PLAYER_SIZE;
 	rect.width = MINIMAP_PLAYER_SIZE;
 	put_rect(data->img, &rect, 0xFFFFFFFF);
