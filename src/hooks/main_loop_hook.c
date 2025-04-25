@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 15:18:29 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 19:37:05 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "garbage_collector.h"
 #include "settings.h"
 #include "render.h"
+#include <math.h>
 
 void	get_keyboard_input(t_data *data)
 {
@@ -23,6 +24,8 @@ void	get_keyboard_input(t_data *data)
 	data->inputs.key_a = mlx_is_key_down(mlx, MLX_KEY_A);
 	data->inputs.key_s = mlx_is_key_down(mlx, MLX_KEY_S);
 	data->inputs.key_d = mlx_is_key_down(mlx, MLX_KEY_D);
+	data->inputs.key_right = mlx_is_key_down(mlx, MLX_KEY_RIGHT);
+	data->inputs.key_left = mlx_is_key_down(mlx, MLX_KEY_LEFT);
 }
 
 // TODO: Change this to the Vector system later
@@ -42,6 +45,14 @@ void update_player(t_data *data)
 
 	data->player.pos.x += data->player.speed.x;
 	data->player.pos.y += data->player.speed.y;
+
+	// Rotation
+	if (data->inputs.key_right)
+		data->player.dir = vec_rotate(data->player.dir, \
+			PI * PLAYER_ROTATION_SPEED);
+	if (data->inputs.key_left)
+		data->player.dir = vec_rotate(data->player.dir, \
+			PI * -PLAYER_ROTATION_SPEED);
 }
 
 void	main_game_loop(t_data *data)
