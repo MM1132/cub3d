@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 13:00:49 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:26:30 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_vec2	vec_new(double x, double y);
 
 // Add two vectors together
 t_vec2	vec_add(t_vec2 first, t_vec2 second);
+
+// Subtract one vector from another
+t_vec2	vec_subtract(t_vec2 first, t_vec2 second);
 
 // Normalize a vector, so that the distance from the center is 1
 t_vec2	vec_normalize(t_vec2 vec);

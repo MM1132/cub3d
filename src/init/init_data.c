@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 10:31:28 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:11:18 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void init_data(t_data *data)
 	data->floor_color = 0;
 	data->ceiling_color = 0;
 	init_player(&data->player);
-	init_down_keys(&data->down_keys);
+	init_inputs(&data->inputs);
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 }

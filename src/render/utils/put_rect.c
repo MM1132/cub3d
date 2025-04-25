@@ -6,11 +6,12 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/24 17:03:51 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:22:35 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "render.h"
 
 void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
 {

@@ -6,12 +6,13 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 12:29:52 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:23:56 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "settings.h"
+#include "render.h"
 
 void	render_minimap(t_data *data)
 {
@@ -43,4 +44,11 @@ void	render_minimap(t_data *data)
 	rect.height = MINIMAP_PLAYER_SIZE;
 	rect.width = MINIMAP_PLAYER_SIZE;
 	put_rect(data->img, &rect, 0xFFFFFFFF);
+
+	printf("Player position: %f; %f\n", data->player.pos.x, data->player.pos.y);
+
+	t_vec2	player_pos_screen = vec_new(rect.x, rect.y);
+
+	// Draw a line from player to mouse. For fun
+	put_line(data->img, player_pos_screen, data->inputs.mouse_pos, 0xAFFFFFFF);
 }

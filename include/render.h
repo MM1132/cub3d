@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 10:26:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 15:10:10 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/25 15:17:40 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RENDER_H
+# define RENDER_H
+
 #include "cub3d.h"
+#include "vector.h"
 
-void	init_inputs(t_inputs *inputs)
-{
-	inputs->key_w = false;
-	inputs->key_a = false;
-	inputs->key_s = false;
-	inputs->key_d = false;
-	inputs->mouse_pos = vec_new(0, 0);
+void	render_minimap(t_data *data);
 
-}
+// Utility draw functions
+void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color);
+void	put_line(mlx_image_t *img, t_vec2 start, t_vec2 end, uint32_t color);
+void	put_fill(mlx_image_t *img, uint32_t color);
 
-void	init_player(t_player *player)
-{
-	player->pos = vec_new(3, 3);
-	player->speed = vec_new(0, 0);
-	player->dir = vec_new(1, 0);
-}
+#endif
