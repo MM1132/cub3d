@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:24:40 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 15:15:47 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:49:22 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	put_line(mlx_image_t *img, t_vec2 start, t_vec2 end, uint32_t color)
 	current_step = 0;
 	while (current_step < steps)
 	{
-		mlx_put_pixel(img, start.x, start.y, color);
+		if (start.x >= 0 && start.y >= 0 && start.x < img->width && start.y < img->height)
+		{
+			mlx_put_pixel(img, start.x, start.y, color);
+		}
 
 		start.x += increment_x;
 		start.y += increment_y;
