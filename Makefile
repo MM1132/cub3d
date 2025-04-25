@@ -58,14 +58,18 @@ $(MLX42_A):
 		fi \
 	done
 
-$(NAME): $(OBJ_FILES) $(LIBFT_A) $(MLX42_A)
+
+$(NAME): $(OBJ_FILES) finish_loading $(LIBFT_A) $(MLX42_A)
 	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
 	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
+	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
+
+finish_loading:
+	@bash ./lib/libft/loading_bar.sh "Cub3D " 100 100
 
 # Other rules
 clean:
