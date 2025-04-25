@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 16:55:41 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:17:12 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	create_map(char *file, char *line, t_data *data)
 	size_t	num_line;
 
 	set_width_height(file, data);
-	data->map.tiles = gc_malloc(sizeof(t_tile *));
+	data->map.tiles = gc_malloc(sizeof(t_tile **));
 	data->map.tiles[0] = NULL;
 	num_line = 0;
 	while (num_line < data->map.height)
