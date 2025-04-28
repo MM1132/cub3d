@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 17:34:02 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 13:07:20 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,73 @@ void	add_one_line(char *line, t_data *data, size_t num_line)
 	data->map.tiles[i][u].tile_type = '\0';
 }
 
+bool	valid_map_char(char cha)
+{
+	int			i;
+	int			cha_int;
+	static int	hero_pos = 0;
+
+	if ((cha == 'N' || cha == 'E' || cha == 'S' || cha == 'W') && hero_pos == 0)
+	{
+		hero_pos = 1;
+		return (true);
+	}
+	if (cha == ' ' || cha == '\n')
+		return (true);
+	i = 0;
+	if (ft_isdigit(cha))
+	{
+		cha_int = ft_atoi(&cha);
+		while (i < NUMBER_OF_TILES)
+		{
+			if (i == cha_int)
+				return (true);
+			i++;
+		}
+	}
+	return (false);
+}
+
+bool	check_map_char(char *file, int i)
+{
+	int	u;
+
+	while (file[i])
+	{
+		if (!valid_map_char(file[i]))
+			return (false);
+		if (file[i] == '\n')
+		{
+			u = i - 1;
+			while (file[u])
+			{
+				if (!white_space(file, u))
+					break ;
+				u--;
+			}
+			if (file[u] == '\n')
+				break ;
+		}
+		i++;
+	}
+	while (file[i])
+	{
+		if (file[i] != '\n' && !white_space(file, i))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 int	create_map(char *file, char *line, t_data *data)
 {
 	size_t	num_line;
+	int		i;
 
-	set_width_height(file, data);
+	i = find_map_start(file);
+	if (!check_map_char(file, i))
+		return (err_mssg());
+	set_width_height(file, data, i);
 	data->map.tiles = gc_malloc(sizeof(t_tile **));
 	data->map.tiles[0] = NULL;
 	num_line = 0;
