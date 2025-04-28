@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_rotate.c                                       :+:      :+:    :+:   */
+/*   put_circle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 18:50:50 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 17:05:42 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/28 15:32:05 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/28 16:06:01 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "render.h"
 #include <math.h>
 
-t_vec2	vec_rotate(t_vec2 vec, double rad)
+void	put_circle(mlx_image_t *img, t_vec2 pos, int radius, uint32_t color)
 {
-	t_vec2	new_vec;
+	t_vec2	current;
 
-	new_vec.x = vec.x * cos(rad) - vec.y * sin(rad);
-	new_vec.y = vec.x * sin(rad) + vec.y * cos(rad);
-	return (new_vec);
-}
-
-void	vec_rotate_to(t_vec2 *vec, double rad)
-{
-	double	old_x;
-
-	old_x = vec->x;
-	vec->x = old_x * cos(rad) - vec->y * sin(rad);
-	vec->y = old_x * sin(rad) + vec->y * cos(rad);
+	current.y = -radius;
+	while (current.y < radius)
+	{
+		current.x = -radius;
+		while (current.x < radius)
+		{
+			if (pow(current.x, 2) + pow(current.y, 2) <= pow(radius, 2))
+				mlx_put_pixel(img, current.x + pos.x, current.y + pos.y, color);
+			current.x++;
+		}
+		current.y++;
+	}
 }

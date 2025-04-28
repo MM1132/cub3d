@@ -22,7 +22,11 @@ SRC_FILES := \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/init/init_data.c \
 	$(SRC_DIR)/init/init_player.c \
-	$(SRC_DIR)/render/minimap.c \
+	$(SRC_DIR)/update/update_player.c \
+	$(SRC_DIR)/render/minimap/minimap_grid.c \
+	$(SRC_DIR)/render/minimap/minimap_player.c \
+	$(SRC_DIR)/render/minimap/minimap.c \
+	$(SRC_DIR)/render/utils/put_circle.c \
 	$(SRC_DIR)/render/utils/put_fill.c \
 	$(SRC_DIR)/render/utils/put_line.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
