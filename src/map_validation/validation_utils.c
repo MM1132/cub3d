@@ -6,12 +6,11 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:18:31 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/24 14:05:45 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:45:57 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "garbage_collector.h"
 
 int	white_space_skip(char *str, int i)
 {
