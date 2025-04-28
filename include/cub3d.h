@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 16:50:28 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:54:05 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int zeros_enclosed(t_data *data);
 // HOOKS
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
+void		scroll_hook(double xdelta, double ydelta, void* param);
 
 // UPDATING STUFF
 void		update_player(t_data *data);

@@ -38,6 +38,7 @@ SRC_FILES := \
 	$(SRC_DIR)/vector/vec_rotate.c \
 	$(SRC_DIR)/vector/vec_subtract.c \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
+	$(SRC_DIR)/hooks/scroll_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \
 	$(SRC_DIR)/garbage_collector/gc_exit.c \
 	$(SRC_DIR)/garbage_collector/gc_add.c \
