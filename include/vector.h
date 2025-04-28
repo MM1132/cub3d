@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 16:34:33 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:19:42 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vec2	vec_new(double x, double y);
 
 // Add two vectors together
 t_vec2	vec_add(t_vec2 first, t_vec2 second);
+void	vec_add_to(t_vec2 *vec, t_vec2 *addition);
 
 // Subtract one vector from another
 t_vec2	vec_subtract(t_vec2 first, t_vec2 second);
@@ -35,14 +36,13 @@ t_vec2	vec_normalize(t_vec2 vec);
 
 // Multiply a vector by a given number
 t_vec2	vec_multiply_n(t_vec2 vec, double n);
+void	vec_multiply_n_to(t_vec2 *vec, double n);
 
 // Return the length of the given vector
 double	vec_length(t_vec2 vec);
 
 // Rotate the vector by the number of radians
 t_vec2	vec_rotate(t_vec2 vec, double rad);
-
-// IN PLACE FUNCTIONS (using vector pointers)
-void	vec_add_to(t_vec2 *vec, double n);
+void	vec_rotate_to(t_vec2 *vec, double rad);
 
 #endif
