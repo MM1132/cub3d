@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 17:36:41 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:58:11 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv)
 	if (map_validation(argv, &data))
 		return (1);
 	mlx_cursor_hook(mlx, &cursor_hook, &data);
+	mlx_scroll_hook(mlx, scroll_hook, &data);
 	mlx_loop_hook(mlx, &main_loop_hook, &data);
 	mlx_loop(mlx);
 

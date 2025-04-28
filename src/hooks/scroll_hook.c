@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   scroll_hook.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:10:03 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/28 18:53:27 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/28 18:59:57 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "settings.h"
 
-void init_data(t_data *data)
+void	scroll_hook(double xdelta, double ydelta, void* param)
 {
-	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	data->no_texture = NULL;
-	data->so_texture = NULL;
-	data->we_texture = NULL;
-	data->ea_texture = NULL;
-	data->floor_color = 0;
-	data->ceiling_color = 0;
-	init_player(&data->player);
-	init_inputs(&data->inputs);
-	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	t_data	*data;
+
+	printf("You scrolled\n");
+	(void)xdelta;
+	(void)ydelta;
+	data = (t_data *)param;
 }
