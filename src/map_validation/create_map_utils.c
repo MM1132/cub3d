@@ -6,13 +6,13 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:43:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 14:36:28 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:31:32 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	find_map_start(char *file)
+int	find_map_start(char *file)
 {
 	int	i;
 	int	count_args;
@@ -40,13 +40,11 @@ static int	find_map_start(char *file)
 	return (i);
 }
 
-void	set_width_height(char *file, t_data *data)
+void	set_width_height(char *file, t_data *data, int i)
 {
-	int	i;
 	int	width;
 	int	height;
 
-	i = find_map_start(file);
 	width = 0;
 	height = 0;
 	while (file[i])

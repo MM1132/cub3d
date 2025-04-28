@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 19:32:44 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 14:12:08 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		init_data(t_data *data);
 
 // MAP VALIDATAION
 // set width and height of the map
-void	    set_width_height(char *file, t_data *data);
+void	    set_width_height(char *file, t_data *data, int i);
 // returns 1 when the map is invalid, and 0 when it is valid
 int			map_validation(char **argv, t_data *data);
 // returns 1 when the character is a whitespace
@@ -113,7 +113,8 @@ void		gc_free_map(t_data *data);
 char		*read_file(char **argv);
 // get_next_line from file with gc
 char 		*safe_gnl(char *file);
-
+// find the start of the map
+int	find_map_start(char *file);
 // HOOKS
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
