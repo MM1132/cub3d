@@ -6,129 +6,109 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 13:07:20 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/28 16:56:49 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
 
-t_tile_type	ft_ctott(char c)
+static void	fill_one_line(t_data *data, char *line, size_t x, size_t y)
 {
-	t_tile_type	i;
-	char		num;
-
-	i = 0;
-	num = '0';
-	while (1)
+	x = 0;
+	while (x < data->map.width)
 	{
-		if (c == num)
-			break ;
-		num++;
-		i++;
-	}
-	return (i);
-}
-
-void	add_one_line(char *line, t_data *data, size_t num_line)
-{
-	int		i;
-	size_t	u;
-	t_tile	**temp_map;
-
-	i = 0;
-	while (data->map.tiles[i])
-		i++;
-	temp_map = gc_malloc(sizeof(t_tile *) * (i + 2));
-	temp_map[i + 1] = NULL;
-	i = 0;
-	while (data->map.tiles[i])
-	{
-		temp_map[i] = data->map.tiles[i];
-		i++;
-	}
-	gc_free(data->map.tiles);
-	data->map.tiles = temp_map;
-	u = 0;
-	while (line[u] && line[u] != '\n')
-		u++;
-	data->map.tiles[i] = gc_malloc(sizeof(t_tile) * data->map.width + 1);
-	u = 0;
-	while (u < data->map.width)
-	{
-		if (line[u] == '\0' || line[u] == '\n')
+		if (line[x] == '\0' || line[x] == '\n')
 		{
-			while (u < data->map.width)
+			while (x < data->map.width)
 			{
-				data->map.tiles[i][u].tile_type = TILE_SPACE;
-				u++;
+				data->map.tiles[y][x].tile_type = TILE_SPACE;
+				x++;
 			}
 			break ;
 		}
-		if (line[u] == ' ')
-			data->map.tiles[i][u].tile_type = TILE_SPACE;
-		else if (line[u] == '1' || line[u] == '0')
-			data->map.tiles[i][u].tile_type = ft_ctott(line[u]);
+		if (line[x] == ' ')
+			data->map.tiles[y][x].tile_type = TILE_SPACE;
+		else if (ft_isdigit(line[x]))
+			data->map.tiles[y][x].tile_type = ft_atott(line[x]);
 		else
 		{
-			data->map.tiles[i][u].tile_type = ft_ctott('0');
-			data->player.pos.x = (double)u;
-			data->player.pos.y = (double)num_line;
+			data->map.tiles[y][x].tile_type = ft_atott('0');
+			data->player.pos.x = (double)x;
+			data->player.pos.y = (double)y;
 		}
-		u++;
+		x++;
 	}
-	data->map.tiles[i][u].tile_type = '\0';
+	data->map.tiles[y][x].tile_type = '\0';
 }
 
-bool	valid_map_char(char cha)
+static void	add_one_line(char *line, t_data *data)
+{
+	int		y;
+	size_t	x;
+	t_tile	**temp_map;
+
+	y = 0;
+	while (data->map.tiles[y])
+		y++;
+	temp_map = gc_malloc(sizeof(t_tile *) * (y + 2));
+	temp_map[y + 1] = NULL;
+	x = 0;
+	while (x < (size_t)y)
+	{
+		temp_map[x] = data->map.tiles[x];
+		x++;
+	}
+	gc_free(data->map.tiles);
+	data->map.tiles = temp_map;
+	data->map.tiles[y] = gc_malloc(sizeof(t_tile) * data->map.width + 1);
+	fill_one_line(data, line, x, y);
+}
+
+static int	valid_map_char(char cha, bool check)
 {
 	int			i;
 	int			cha_int;
-	static int	hero_pos = 0;
+	static int	start_pos = 0;
 
-	if ((cha == 'N' || cha == 'E' || cha == 'S' || cha == 'W') && hero_pos == 0)
-	{
-		hero_pos = 1;
-		return (true);
-	}
+	if (check == true)
+		return (start_pos);
+	if ((cha == 'N' || cha == 'E' || cha == 'S' || cha == 'W')
+		&& start_pos == 0)
+		return (start_pos++, 1);
 	if (cha == ' ' || cha == '\n')
-		return (true);
+		return (1);
 	i = 0;
 	if (ft_isdigit(cha))
 	{
 		cha_int = ft_atoi(&cha);
 		while (i < NUMBER_OF_TILES)
-		{
-			if (i == cha_int)
-				return (true);
-			i++;
-		}
+			if (i++ == cha_int)
+				return (1);
 	}
-	return (false);
+	return (0);
 }
 
-bool	check_map_char(char *file, int i)
+static bool	check_map_char(char *file, int i)
 {
 	int	u;
 
 	while (file[i])
 	{
-		if (!valid_map_char(file[i]))
+		if (!valid_map_char(file[i], false))
 			return (false);
 		if (file[i] == '\n')
 		{
 			u = i - 1;
-			while (file[u])
-			{
-				if (!white_space(file, u))
-					break ;
+			while (white_space(file, u))
 				u--;
-			}
 			if (file[u] == '\n')
 				break ;
 		}
 		i++;
 	}
+	if (!valid_map_char(file[i], true))
+		return (false);
 	while (file[i])
 	{
 		if (file[i] != '\n' && !white_space(file, i))
@@ -140,7 +120,7 @@ bool	check_map_char(char *file, int i)
 
 int	create_map(char *file, char *line, t_data *data)
 {
-	size_t	num_line;
+	size_t	y;
 	int		i;
 
 	i = find_map_start(file);
@@ -149,15 +129,15 @@ int	create_map(char *file, char *line, t_data *data)
 	set_width_height(file, data, i);
 	data->map.tiles = gc_malloc(sizeof(t_tile **));
 	data->map.tiles[0] = NULL;
-	num_line = 0;
-	while (num_line < data->map.height)
+	y = 0;
+	while (y < data->map.height)
 	{
-		add_one_line(line, data, num_line);
+		add_one_line(line, data);
 		gc_free(line);
 		line = safe_gnl(file);
-		num_line++;
+		y++;
 	}
 	gc_free(line);
 	gc_free(file);
-	return (0);
+	return (zeros_enclosed(data));
 }

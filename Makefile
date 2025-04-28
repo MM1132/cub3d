@@ -46,7 +46,8 @@ SRC_FILES := \
 	$(SRC_DIR)/map_validation/map_validation.c \
 	$(SRC_DIR)/map_validation/validation_utils.c \
 	$(SRC_DIR)/map_validation/create_map.c \
-	$(SRC_DIR)/map_validation/create_map_utils.c
+	$(SRC_DIR)/map_validation/create_map_utils.c \
+	$(SRC_DIR)/map_validation/zeros_enclosed.c
 
 TOTAL_SRC_FILES := $(words $(SRC_FILES))
 COMPILED_FILES_COUNT = 0
