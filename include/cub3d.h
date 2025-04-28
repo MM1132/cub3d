@@ -115,6 +115,10 @@ char		*read_file(char **argv);
 char 		*safe_gnl(char *file);
 // find the start of the map
 int	find_map_start(char *file);
+// like atoi: it changes 'a' to tile_type
+t_tile_type	ft_atott(char c);
+//checks if the zeros in the map are enclosed by ones
+int zeros_enclosed(t_data *data);
 // HOOKS
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
