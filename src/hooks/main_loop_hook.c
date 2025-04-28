@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 19:37:05 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:41:46 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void update_player(t_data *data)
 	// Rotation
 	if (data->inputs.key_right)
 		data->player.dir = vec_rotate(data->player.dir, \
-			PI * PLAYER_ROTATION_SPEED);
+			PI * PLAYER_ROTATION_SPEED * mlx->delta_time);
 	if (data->inputs.key_left)
 		data->player.dir = vec_rotate(data->player.dir, \
-			PI * -PLAYER_ROTATION_SPEED);
+			PI * -PLAYER_ROTATION_SPEED * mlx->delta_time);
 }
 
 void	main_game_loop(t_data *data)
