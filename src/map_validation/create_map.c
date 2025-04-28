@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 13:07:20 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:45:14 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
+#include "settings.h"
 
 t_tile_type	ft_ctott(char c)
 {
@@ -72,8 +73,8 @@ void	add_one_line(char *line, t_data *data, size_t num_line)
 		else
 		{
 			data->map.tiles[i][u].tile_type = ft_ctott('0');
-			data->player.pos.x = (double)u;
-			data->player.pos.y = (double)num_line;
+			data->player.pos.x = (double)u + PLAYER_SIZE / 2;
+			data->player.pos.y = (double)num_line + PLAYER_SIZE / 2;
 		}
 		u++;
 	}

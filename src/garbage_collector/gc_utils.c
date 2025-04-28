@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:09:56 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 12:26:58 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:44:13 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	gc_print_alloc_report()
 	else
 	{
 		printf(COLOR_GREEN "SUCCESS: Garbage collector had nothing to \
-			clean up!\n" COLOR_RESET);
+clean up!\n" COLOR_RESET);
 	}
 }
