@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 15:45:14 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:08:35 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	add_one_line(char *line, t_data *data, size_t num_line)
 		else
 		{
 			data->map.tiles[i][u].tile_type = ft_ctott('0');
-			data->player.pos.x = (double)u + PLAYER_SIZE / 2;
-			data->player.pos.y = (double)num_line + PLAYER_SIZE / 2;
+			data->player.pos.x = (double)u + 0.5 - PLAYER_SIZE / 2;
+			data->player.pos.y = (double)num_line + 0.5 - PLAYER_SIZE / 2;
 		}
 		u++;
 	}

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 17:49:32 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:07:43 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define SETTINGS_H
 
 // Window
-# define WIDTH 1600
+# define WIDTH 1800
 # define HEIGHT 1000
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
-# define MINIMAP_SCALE 30
+# define MINIMAP_SCALE 40
 # define MINIMAP_MARGIN 15
 
 // Player
@@ -29,7 +29,7 @@
 // Defines the speed at which the speed will be decreasing over time
 # define PLAYER_SPEED_DECREASE_MULTIPLIER 0.74
 # define PLAYER_ROTATION_SPEED 3
-# define PLAYER_SIZE 0.5
+# define PLAYER_SIZE 0.4
 
 # define PI 3.141592653589793
 
