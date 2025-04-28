@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:29:35 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 16:49:48 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/28 17:50:29 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_function(size_t x, size_t y, t_data *data)
 	type = data->map.tiles[y][x].tile_type;
 	if (type == TILE_FLOOR || type == TILE_WALL)
 		return (0);
-	return (err_mssg());
+	return (1);
 }
 
 static int	check_surround_pos(size_t x, size_t y, t_data *data)
@@ -56,7 +56,7 @@ int	zeros_enclosed(t_data *data)
 		{
 			if (data->map.tiles[y][x].tile_type == TILE_FLOOR
 				&& check_surround_pos(x, y, data))
-				return (1);
+				return (err_mssg());
 			x++;
 		}
 		y++;
