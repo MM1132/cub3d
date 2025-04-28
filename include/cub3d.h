@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 12:31:54 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:12:08 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_inputs
 	bool	key_a;
 	bool	key_s;
 	bool	key_d;
+	bool	key_right;
+	bool	key_left;
 	t_vec2	mouse_pos;
 }	t_inputs;
 

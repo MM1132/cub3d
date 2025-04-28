@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 14:26:30 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:50:27 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,8 @@ t_vec2	vec_multiply_n(t_vec2 vec, double n);
 
 // Return the length of the given vector
 double	vec_length(t_vec2 vec);
+
+// Rotate the vector by the number of radians
+t_vec2	vec_rotate(t_vec2 vec, double rad);
 
 #endif

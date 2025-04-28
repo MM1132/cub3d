@@ -31,6 +31,7 @@ SRC_FILES := \
 	$(SRC_DIR)/vector/vec_multiply_n.c \
 	$(SRC_DIR)/vector/vec_new.c \
 	$(SRC_DIR)/vector/vec_normalize.c \
+	$(SRC_DIR)/vector/vec_rotate.c \
 	$(SRC_DIR)/vector/vec_subtract.c \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \
