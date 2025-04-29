@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_exit.c                                          :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 17:29:05 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:52:10 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/29 12:00:48 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/29 12:03:35 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "garbage_collector.h"
-#include "colors.h"
+#include "render.h"
 #include "MLX42.h"
-#include "cub3d.h"
 
-void	unplanned_exit(void)
+void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
 {
-	printf(COLOR_RED "WARNING: Malloc failed, clearing up!\n" COLOR_RESET);
-	mlx_terminate(mlx);
-	gc_free_all();
-	exit(EXIT_FAILURE);
+	if (x < 0 || x > img->width - 1 || y < 0 || y > img->height - 1)
+		return ;
+	mlx_put_pixel(img, x, y, color);
 }

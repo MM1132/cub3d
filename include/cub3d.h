@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 18:54:05 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:05:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef struct s_tile
 
 typedef struct s_map
 {
-	t_tile	**tiles;
-	size_t	width;
-	size_t	height;
+	t_tile		**tiles;
+	size_t		width;
+	size_t		height;
 }	t_map;
 
 typedef struct s_inputs
@@ -83,6 +83,7 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 	mlx_image_t	*img;
+	mlx_image_t	*minimap_img;
 	t_inputs	inputs;
 }			t_data;
 

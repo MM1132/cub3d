@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:12:42 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:57:30 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
-# define MINIMAP_SCALE 40
+# define MINIMAP_SCALE 20
 # define MINIMAP_MARGIN 15
+# define MINIMAP_RANGE 10
 
 // Player
 // This does not define the speed itself directly

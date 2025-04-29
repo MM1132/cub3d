@@ -6,13 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 18:58:11 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:08:34 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
 #include "render.h"
+#include "settings.h"
 
 mlx_t		*mlx = NULL;
 int			map_value = 0;
@@ -47,6 +48,7 @@ int	main(int argc, char **argv)
 
 	init_data(&data);
 	mlx_image_to_window(mlx, data.img, 0, 0);
+	mlx_image_to_window(mlx, data.minimap_img, MINIMAP_MARGIN, MINIMAP_MARGIN);
 	if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],
 				'.'), ".cub", 5))
 		return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
