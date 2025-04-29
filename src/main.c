@@ -6,13 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 18:58:11 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:15:59 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
 #include "render.h"
+#include "settings.h"
 
 mlx_t		*mlx = NULL;
 int			map_value = 0;
@@ -47,14 +48,16 @@ int	main(int argc, char **argv)
 
 	init_data(&data);
 	mlx_image_to_window(mlx, data.img, 0, 0);
+	mlx_image_to_window(mlx, data.minimap_img, MINIMAP_MARGIN, MINIMAP_MARGIN);
 	if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],
 				'.'), ".cub", 5))
 		return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);
 	if (map_validation(argv, &data))
 		return (1);
-	mlx_cursor_hook(mlx, &cursor_hook, &data);
+	mlx_cursor_hook(mlx, cursor_hook, &data);
 	mlx_scroll_hook(mlx, scroll_hook, &data);
-	mlx_loop_hook(mlx, &main_loop_hook, &data);
+	mlx_key_hook(mlx, key_hook, &data);
+	mlx_loop_hook(mlx, main_loop_hook, &data);
 	mlx_loop(mlx);
 
 	mlx_terminate(mlx);

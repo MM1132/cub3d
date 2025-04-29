@@ -5,28 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:35 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/28 19:34:07 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/29 14:42:19 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "render.h"
 
+//! Currently broken when start positino is negative coordinates
 void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
 {
-	size_t	x;
-	size_t	y;
-
-	x = 0;
-	while (x < rect->width)
-	{
-		y = 0;
-		while (y < rect->height)
-		{
-			mlx_put_pixel(img, rect->x + x, rect->y + y, color);
-			y++;
-		}
-		x++;
-	}
+	put_line(img, vec_new(rect->x, rect->y), \
+		vec_new(rect->x + rect->width - 1, rect->y), color);
+	put_line(img, vec_new(rect->x, rect->y), \
+		vec_new(rect->x, rect->y + rect->height - 1), color);
+	put_line(img, vec_new(rect->x, rect->y + rect->height - 1), \
+		vec_new(rect->x + rect->width - 1, rect->y + rect->height - 1), color);
+	put_line(img, vec_new(rect->x + rect->width - 1, rect->y), \
+		vec_new(rect->x + rect->width - 1, rect->y + rect->height - 1), color);
 }
