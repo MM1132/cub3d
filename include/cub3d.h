@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/29 14:36:30 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:17:19 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_inputs
 	bool	key_right;
 	bool	key_left;
 	t_vec2	mouse_pos;
+	bool	toggle_grid;
 }	t_inputs;
 
 typedef struct s_data
@@ -124,6 +125,7 @@ int zeros_enclosed(t_data *data);
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
 void		scroll_hook(double xdelta, double ydelta, void* param);
+void		key_hook(mlx_key_data_t keydata, void* param);
 
 // UPDATING STUFF
 void		update_player(t_data *data);

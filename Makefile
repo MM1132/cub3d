@@ -42,6 +42,7 @@ SRC_FILES := \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/hooks/scroll_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \
+	$(SRC_DIR)/hooks/key_hook.c \
 	$(SRC_DIR)/garbage_collector/gc_exit.c \
 	$(SRC_DIR)/garbage_collector/gc_add.c \
 	$(SRC_DIR)/garbage_collector/gc_free.c \

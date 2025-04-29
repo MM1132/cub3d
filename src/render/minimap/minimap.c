@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 14:48:11 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:17:50 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	render_minimap_tiles(t_data *data)
 			render_tile_with_offset(data, x, y, start);
 		}
 	}
-	// TODO: Only do this when grid is turned on
-	minimap_render_grid(data, start);
+	if (data->inputs.toggle_grid)
+		minimap_render_grid(data, start);
 }
 
 void	render_minimap_border(t_data *data)
