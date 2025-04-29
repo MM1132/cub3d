@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 14:19:38 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:48:11 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,67 +14,25 @@
 #include "settings.h"
 #include "render.h"
 
-//? Renders the full map
-// void	render_minimap_tiles(t_data *data)
-// {
-// 	size_t	x;
-// 	size_t	y;
-// 	t_rect	rect;
-
-// 	rect.width = MINIMAP_SCALE;
-// 	rect.height = MINIMAP_SCALE;
-// 	y = 0;
-// 	while (y < data->map.height)
-// 	{
-// 		x = 0;
-// 		while (x < data->map.width)
-// 		{
-// 			rect.x = x * MINIMAP_SCALE + MINIMAP_MARGIN;
-// 			rect.y = y * MINIMAP_SCALE + MINIMAP_MARGIN;
-// 			if (data->map.tiles[y][x].tile_type == TILE_WALL)
-// 				put_fill_rect(data->img, &rect, 0xFF0000FF);
-// 			if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
-// 				put_fill_rect(data->img, &rect, 0x00FF00FF);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
-// void	render_minimap_tiles(t_data *data)
-// {
-// 	int		x;
-// 	int		y;
-// 	t_rect	rect;
-
-// 	rect.width = MINIMAP_SCALE;
-// 	rect.height = MINIMAP_SCALE;
-// 	y = data->player.pos.y - MINIMAP_RANGE;
-// 	while (y < data->player.pos.y + MINIMAP_RANGE)
-// 	{
-// 		x = data->player.pos.x - MINIMAP_RANGE;
-// 		while (x < data->player.pos.x + MINIMAP_RANGE)
-// 		{
-// 			if (!coordinate_within_map(&data->map, x, y))
-// 			{
-// 				x++;
-// 				continue ;
-// 			}
-// 			rect.x = x * MINIMAP_SCALE + MINIMAP_MARGIN;
-// 			rect.y = y * MINIMAP_SCALE + MINIMAP_MARGIN;
-// 			if (data->map.tiles[y][x].tile_type == TILE_WALL)
-// 				put_fill_rect(data->img, &rect, 0xFF0000FF);
-// 			if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
-// 				put_fill_rect(data->img, &rect, 0x00FF00FF);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
 static int	within_bounds(t_map *map, size_t x, size_t y)
 {
 	return (x >= 0 && x < map->width && y >= 0 && y < map->height);
+}
+
+static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
+{
+	t_rect	tile_rect;
+
+	tile_rect.x = ((double)x - (offset.x)) * MINIMAP_SCALE;
+	tile_rect.y = ((double)y - (offset.y)) * MINIMAP_SCALE;
+	tile_rect.width = MINIMAP_SCALE;
+	tile_rect.height = tile_rect.width;
+	if (!within_bounds(&data->map, x, y))
+		return ;
+	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
+		put_fill_rect(data->minimap_img, &tile_rect, 0x00FF00FF);
+	if (data->map.tiles[y][x].tile_type == TILE_WALL)
+		put_fill_rect(data->minimap_img, &tile_rect, 0x555555FF);
 }
 
 void	render_minimap_tiles(t_data *data)
@@ -82,7 +40,6 @@ void	render_minimap_tiles(t_data *data)
 	int		x;
 	int		y;
 	t_vec2	start;
-	t_rect	tile_rect;
 
 	start.x = data->player.pos.x + PLAYER_SIZE / 2 - (double)MINIMAP_RANGE;
 	start.y = data->player.pos.y + PLAYER_SIZE / 2 - (double)MINIMAP_RANGE;
@@ -92,18 +49,11 @@ void	render_minimap_tiles(t_data *data)
 		x = (int)start.x - 1;
 		while (x++ < data->player.pos.x + PLAYER_SIZE / 2 + MINIMAP_RANGE)
 		{
-			tile_rect.x = ((double)x - (start.x)) * MINIMAP_SCALE;
-			tile_rect.y = ((double)y - (start.y)) * MINIMAP_SCALE;
-			tile_rect.width = MINIMAP_SCALE;
-			tile_rect.height = tile_rect.width;
-			if (!within_bounds(&data->map, x, y))
-				continue ;
-			if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
-				put_fill_rect(data->minimap_img, &tile_rect, 0x00FF00FF);
-			if (data->map.tiles[y][x].tile_type == TILE_WALL)
-				put_fill_rect(data->minimap_img, &tile_rect, 0x555555FF);
+			render_tile_with_offset(data, x, y, start);
 		}
 	}
+	// TODO: Only do this when grid is turned on
+	minimap_render_grid(data, start);
 }
 
 void	render_minimap_border(t_data *data)

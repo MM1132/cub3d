@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 12:00:32 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:48:31 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 // Minimap rendering
 void	render_minimap(t_data *data);
-void	render_minimap_grid(t_data *data);
+void	minimap_render_grid(t_data *data, t_vec2 offset);
 void	render_minimap_player(t_data *data);
 
 // UTILITY DRAW FUNCTIONS
