@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_exit.c                                          :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 17:29:05 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:52:10 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/29 15:47:47 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 11:54:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "garbage_collector.h"
-#include "colors.h"
-#include "MLX42.h"
 #include "cub3d.h"
+#include "MLX42.h"
 
-void	unplanned_exit(void)
+void	key_hook(mlx_key_data_t keydata, void* param)
 {
-	printf(COLOR_RED "WARNING: Malloc failed, clearing up!\n" COLOR_RESET);
-	mlx_terminate(mlx);
-	gc_free_all();
-	exit(EXIT_FAILURE);
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (keydata.key == MLX_KEY_G && keydata.action == MLX_PRESS)
+		data->inputs.toggle_minimap_grid = !data->inputs.toggle_minimap_grid;
+	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+		data->inputs.toggle_minimap_rotation = \
+			!data->inputs.toggle_minimap_rotation;
 }

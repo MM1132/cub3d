@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_exit.c                                          :+:      :+:    :+:   */
+/*   vec_subtract_to.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 17:29:05 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:52:10 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 14:23:27 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 14:24:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "garbage_collector.h"
-#include "colors.h"
-#include "MLX42.h"
-#include "cub3d.h"
+#include "vector.h"
 
-void	unplanned_exit(void)
+void	vec_subtract_to(t_vec2 *first, t_vec2 *second)
 {
-	printf(COLOR_RED "WARNING: Malloc failed, clearing up!\n" COLOR_RESET);
-	mlx_terminate(mlx);
-	gc_free_all();
-	exit(EXIT_FAILURE);
+	first->x -= second->x;
+	first->y -= second->y;
 }

@@ -15,6 +15,8 @@
 
 void init_data(t_data *data)
 {
+	uint32_t	minimap_img_size;
+
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->no_texture = NULL;
 	data->so_texture = NULL;
@@ -28,4 +30,6 @@ void init_data(t_data *data)
 	init_player(&data->player);
 	init_inputs(&data->inputs);
 	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	minimap_img_size = 2 * MINIMAP_RANGE * MINIMAP_SCALE;
+	data->minimap_img = mlx_new_image(mlx, minimap_img_size, minimap_img_size);
 }

@@ -26,8 +26,8 @@ extern int		map_value;
 
 typedef struct s_rect
 {
-	size_t	x;
-	size_t	y;
+	ssize_t	x;
+	ssize_t	y;
 	size_t	width;
 	size_t	height;
 }	t_rect;
@@ -66,9 +66,9 @@ typedef struct s_tile
 
 typedef struct s_map
 {
-	t_tile	**tiles;
-	size_t	width;
-	size_t	height;
+	t_tile		**tiles;
+	size_t		width;
+	size_t		height;
 }	t_map;
 
 typedef struct s_inputs
@@ -80,6 +80,8 @@ typedef struct s_inputs
 	bool	key_right;
 	bool	key_left;
 	t_vec2	mouse_pos;
+	bool	toggle_minimap_grid;
+	bool	toggle_minimap_rotation;
 }	t_inputs;
 
 typedef struct s_data
@@ -94,6 +96,7 @@ typedef struct s_data
 	t_ray		*ray;
 	t_player	player;
 	mlx_image_t	*img;
+	mlx_image_t	*minimap_img;
 	t_inputs	inputs;
 }			t_data;
 
@@ -130,7 +133,6 @@ int	find_map_start(char *file);
 t_tile_type	ft_atott(char c);
 //checks if the zeros in the map are enclosed by ones
 int zeros_enclosed(t_data *data);
-int	round_double(double numtoround);
 t_vec2	vec_add_value(t_vec2 vec, double value);
 void	first_dis_calc(t_data *data, int32_t	rn);
 void	render_world(t_data *data);
@@ -138,6 +140,7 @@ void	render_world(t_data *data);
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
 void		scroll_hook(double xdelta, double ydelta, void* param);
+void		key_hook(mlx_key_data_t keydata, void* param);
 void 		resize_hook(int32_t width, int32_t height, void* param);
 
 // UPDATING STUFF

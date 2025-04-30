@@ -19,13 +19,14 @@
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
-# define MINIMAP_SCALE 40
+# define MINIMAP_SCALE 20
 # define MINIMAP_MARGIN 15
+# define MINIMAP_RANGE 10
 
 // Player
 // This does not define the speed itself directly
 // But it defines the increase amount of the palyer's speed
-# define PLAYER_ACCELERATION 0.7
+# define PLAYER_ACCELERATION 0.8
 // Defines the speed at which the speed will be decreasing over time
 # define PLAYER_SPEED_DECREASE_MULTIPLIER 0.74
 # define PLAYER_ROTATION_SPEED 3
@@ -35,7 +36,5 @@
 
 // Defines the viewing angle and the number of rays
 # define PLAYER_VIEW_ANGLE PI/2
-// Display 5120 x 2880
-//# define NUMBER_OF_RAY 5120
 
 #endif
