@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   put_rect_rotation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 19:34:07 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:27:59 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 22:20:01 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 22:21:20 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+void	put_rect_rotation( \
+	mlx_image_t *img, \
+	t_rect *rect, \
+	t_transform transform, \
+	uint32_t color \
+)
 {
-	put_line(img, rect->a, rect->b, color);
-	put_line(img, rect->b, rect->c, color);
-	put_line(img, rect->d, rect->c, color);
-	put_line(img, rect->a, rect->d, color);
-
-	put_line(img, rect->a, rect->c, color);
-	put_line(img, rect->d, rect->b, color);
+	rect_rotate_to(rect, transform);
+	put_rect(img, rect, color);
 }

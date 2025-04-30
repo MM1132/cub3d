@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop_hook.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 16:04:42 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/30 22:15:07 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	main_game_loop(t_data *data)
 	if(data->ray[0].length != -1)
 		render_world(data);
 	render_minimap(data);
-	ray_cast(data);
+	// ray_cast(data);
 }
 
 void	main_loop_hook(void *param)

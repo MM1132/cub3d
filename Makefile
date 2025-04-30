@@ -2,7 +2,7 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Wshadow
+CFLAGS := -Wall -Wextra -Wshadow
 #-fsanitize=address -g
 
 # Libft
@@ -38,6 +38,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_fill_rect.c \
 	$(SRC_DIR)/render/utils/put_fill_rect_rotation.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
+	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast_utils.c \
 	$(SRC_DIR)/render/ray_cast/first_ray.c \
