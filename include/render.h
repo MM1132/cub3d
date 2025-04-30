@@ -6,15 +6,15 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 14:48:31 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:15:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-#include "cub3d.h"
-#include "vector.h"
+# include "cub3d.h"
+# include "vector.h"
 
 // Minimap rendering
 void	render_minimap(t_data *data);
@@ -23,6 +23,7 @@ void	render_minimap_player(t_data *data);
 
 // UTILITY DRAW FUNCTIONS
 void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+
 void	put_fill_rect(mlx_image_t *img, t_rect *rect, uint32_t color);
 // Draws only the lie borders of the rectangle
 void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color);

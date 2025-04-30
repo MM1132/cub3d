@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/29 17:17:19 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:54:03 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef struct s_inputs
 	bool	key_right;
 	bool	key_left;
 	t_vec2	mouse_pos;
-	bool	toggle_grid;
+	bool	toggle_minimap_grid;
+	bool	toggle_minimap_rotation;
 }	t_inputs;
 
 typedef struct s_data
