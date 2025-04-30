@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 10:26:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 08:39:53 by joklein          ###   ########.fr       */
+/*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
+/*   Updated: 2025/04/30 16:44:33 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "render.h"
+#include "settings.h"
+#include <math.h>
 
-void	init_inputs(t_inputs *inputs)
+void	render_world(t_data *data)
 {
-	int32_t	mouse_x;
-	int32_t	mouse_y;
+    // int32_t i;
+    // uint32_t u;
+    // uint32_t height;
 
-	inputs->key_w = false;
-	inputs->key_a = false;
-	inputs->key_s = false;
-	inputs->key_d = false;
-	mlx_get_mouse_pos(mlx, &mouse_x, &mouse_y);
-	inputs->mouse_pos.x = mouse_x;
-	inputs->mouse_pos.y = mouse_y;
-}
-
-void	init_player(t_player *player)
-{
-	player->pos = vec_new(3, 3);
-	player->speed = vec_new(0, 0);
-	player->dir = vec_new(1, 0);
+    // while(i < mlx->width)
+    // {
+    //     u = 0;
+    //     data->ray[i].length;
+    //     data->ray[i].angle.x;
+    //     height = 
+    //     while()
+    //     mlx_put_pixel(data->img, start.x, start.y, color);
+    //     i++;
+    // }
+    (void)data;
 }

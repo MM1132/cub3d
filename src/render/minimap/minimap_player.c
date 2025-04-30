@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:36:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 16:03:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:08:47 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "render.h"
 #include "settings.h"
+
+t_vec2	pos_to_minimap(t_vec2 pos)
+{
+	pos.x = pos.x * MINIMAP_SCALE + MINIMAP_MARGIN;
+	pos.y = pos.y * MINIMAP_SCALE + MINIMAP_MARGIN;
+	return (pos);
+}
 
 void	render_minimap_player(t_data *data)
 {

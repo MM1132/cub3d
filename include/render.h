@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 16:00:48 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:28:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ void	put_fill(mlx_image_t *img, uint32_t color);
 
 // Draw a circle given the center point of the circle
 void	put_circle(mlx_image_t *img, t_vec2 pos, int radius, uint32_t color);
+
+//
+void	ray_cast(t_data *data);
 
 #endif
