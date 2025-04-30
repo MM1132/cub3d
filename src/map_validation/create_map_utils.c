@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:43:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 17:06:56 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:08:26 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	set_width_height(char *file, t_data *data, int i)
 
 	width = 0;
 	height = 0;
+	data->map.width = 0;
+	data->map.height = 0;
 	while (file[i])
 	{
 		if (file[i] == '\n')

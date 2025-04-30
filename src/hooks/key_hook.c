@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:47:47 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 17:17:45 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:54:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,8 @@ void	key_hook(mlx_key_data_t keydata, void* param)
 
 	data = (t_data *)param;
 	if (keydata.key == MLX_KEY_G && keydata.action == MLX_PRESS)
-		data->inputs.toggle_grid = !data->inputs.toggle_grid;
+		data->inputs.toggle_minimap_grid = !data->inputs.toggle_minimap_grid;
+	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+		data->inputs.toggle_minimap_rotation = \
+			!data->inputs.toggle_minimap_rotation;
 }
