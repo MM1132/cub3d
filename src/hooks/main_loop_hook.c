@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:15:07 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:24:57 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ static void	main_game_loop(t_data *data)
 {
 	// Update
 	get_keyboard_input(data);
-	update_player(data);
+	player_update(data);
+	minimap_update(data);
 
 	// Render
 	put_fill(data->img, 0x000000FF);
-	if(data->ray[0].length != -1)
-		render_world(data);
-	render_minimap(data);
+	minimap_render(data);
+	// if(data->ray[0].length != -1)
+	// 	render_world(data);
 	// ray_cast(data);
 }
 

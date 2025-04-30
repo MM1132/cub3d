@@ -2,7 +2,7 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Wshadow
+CFLAGS := -Wall -Wextra -Werror -Wshadow
 #-fsanitize=address -g
 
 # Libft
@@ -25,7 +25,10 @@ SRC_FILES := \
 	$(SRC_DIR)/rect/rect_get_bounds.c \
 	$(SRC_DIR)/init/init_data.c \
 	$(SRC_DIR)/init/init_player.c \
-	$(SRC_DIR)/update/update_player.c \
+	$(SRC_DIR)/init/init_minimap.c \
+	$(SRC_DIR)/init/init_inputs.c \
+	$(SRC_DIR)/update/player_update.c \
+	$(SRC_DIR)/update/minimap_update.c \
 	$(SRC_DIR)/render/minimap/minimap_grid.c \
 	$(SRC_DIR)/render/minimap/minimap_player.c \
 	$(SRC_DIR)/render/minimap/minimap.c \

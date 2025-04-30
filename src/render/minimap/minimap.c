@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:24:12 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 00:49:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +37,40 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		return ;
 	color = 0;
 	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
-		color = 0x00FF00FF;
+		color = 0xdbdbdbFF;
 	else if (data->map.tiles[y][x].tile_type == TILE_WALL)
 		color = 0x555555FF;
 	if (color == 0)
 		return ;
 	if (data->inputs.toggle_minimap_rotation)
 		put_rect_rotation( \
-			data->minimap_img, \
+			data->minimap.img, \
 			&tile_rect, \
-			(t_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+			(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->height / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 			color \
 		);
 	else
-		put_fill_rect(data->minimap_img, &tile_rect, color);
+		put_fill_rect(data->minimap.img, &tile_rect, color);
 }
 
 void	render_minimap_tiles(t_data *data)
 {
 	int		x;
 	int		y;
-	t_vec2	start;
 
-	// The coordinates of the top-most tile we can see
-	start.x = data->player.pos.x + PLAYER_SIZE / 2 - (double)MINIMAP_RANGE;
-	start.y = data->player.pos.y + PLAYER_SIZE / 2 - (double)MINIMAP_RANGE;
-	y = (int)start.y - 1;
-	while (y++ < data->player.pos.y + PLAYER_SIZE / 2 + MINIMAP_RANGE)
+	// printf("Camera pos: %f; %f\n", data->minimap.camera_pos.x,data->minimap.camera_pos.y);
+	y = (int)data->minimap.camera_pos.y / MINIMAP_SCALE - 1;
+	while (y++ < data->minimap.camera_pos.y + MINIMAP_RANGE * 2 - 2)
 	{
-		x = (int)start.x - 1;
-		while (x++ < data->player.pos.x + PLAYER_SIZE / 2 + MINIMAP_RANGE)
+		x = (int)data->minimap.camera_pos.x / MINIMAP_SCALE - 1;
+		while (x++ < data->minimap.camera_pos.x + MINIMAP_RANGE * 2 - 2)
 		{
-			render_tile_with_offset(data, x, y, start);
+			// printf("rendering tile at: %d; %d\n", x, y);
+			render_tile_with_offset(data, x, y, data->minimap.camera_pos);
 		}
 	}
 	if (data->inputs.toggle_minimap_grid)
-		minimap_render_grid(data, start);
+		minimap_render_grid(data, data->minimap.camera_pos);
 }
 
 void	render_minimap_border(t_data *data)
@@ -84,12 +82,12 @@ void	render_minimap_border(t_data *data)
 		2 * MINIMAP_RANGE * MINIMAP_SCALE, \
 		2 * MINIMAP_RANGE * MINIMAP_SCALE
 	);
-	put_rect(data->minimap_img, &border_rect, 0xFFFFFFFF);
+	put_rect(data->minimap.img, &border_rect, 0xFFFFFFFF);
 }
 
-void	render_minimap(t_data *data)
+void	minimap_render(t_data *data)
 {
-	put_fill(data->minimap_img, 0x222222AA);
+	put_fill(data->minimap.img, 0x222222AA);
 	render_minimap_tiles(data);
 	render_minimap_border(data);
 	render_minimap_player(data);

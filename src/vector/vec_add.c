@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:44:48 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 20:21:02 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:49:37 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ void	vec_add_to(t_vec2 *vec, t_vec2 *addition)
 {
 	vec->x += addition->x;
 	vec->y += addition->y;
+}
+
+void	vec_add_n_to(t_vec2 *vec, double n)
+{
+	vec->x += n;
+	vec->y += n;
 }

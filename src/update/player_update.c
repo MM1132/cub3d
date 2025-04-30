@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:37 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:42 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 22:57:48 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	one_key(t_data *data, t_vec2 *speed)
 	return (0);
 }
 
-void	update_player(t_data *data)
+void	player_update(t_data *data)
 {
 	t_vec2	speed;
 

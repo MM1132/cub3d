@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:20:07 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:05:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "shape_types.h"
 
 // Minimap rendering
-void	render_minimap(t_data *data);
+void	minimap_render(t_data *data);
 void	minimap_render_grid(t_data *data, t_vec2 offset);
 void	render_minimap_player(t_data *data);
 

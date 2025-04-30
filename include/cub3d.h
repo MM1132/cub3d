@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/30 19:43:50 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:15:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,15 @@ typedef struct s_inputs
 	bool	toggle_minimap_rotation;
 }	t_inputs;
 
+typedef struct s_minimap
+{
+	mlx_image_t	*img;
+	t_vec2		camera_pos;
+}	t_minimap;
+
 typedef struct s_data
 {
+	mlx_image_t	*img;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
@@ -87,14 +94,14 @@ typedef struct s_data
 	t_map		map;
 	t_ray		*ray;
 	t_player	player;
-	mlx_image_t	*img;
-	mlx_image_t	*minimap_img;
 	t_inputs	inputs;
+	t_minimap	minimap;
 }			t_data;
 
 // INITIALIZATION
 void		init_inputs(t_inputs *down_keys);
 void		init_player(t_player *player);
+void		init_minimap(t_data *data);
 void		init_data(t_data *data);
 
 // MAP VALIDATAION
@@ -139,6 +146,7 @@ void		key_hook(mlx_key_data_t keydata, void* param);
 void 		resize_hook(int32_t width, int32_t height, void* param);
 
 // UPDATING STUFF
-void		update_player(t_data *data);
+void		player_update(t_data *data);
+void		minimap_update(t_data *data);
 
 #endif

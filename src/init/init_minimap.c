@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_subtract.c                                     :+:      :+:    :+:   */
+/*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 14:26:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:38:28 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 22:38:50 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 23:39:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "cub3d.h"
+#include "settings.h"
 
-t_vec2	vec_subtract(t_vec2 first, t_vec2 second)
+void	init_minimap(t_data *data)
 {
-	t_vec2	new_vec;
+	uint32_t	minimap_img_size;
 
-	new_vec.x = first.x - second.x;
-	new_vec.y = first.y - second.y;
-	return (new_vec);
-}
-
-t_vec2	vec_subtract_n(t_vec2 first, double n)
-{
-	t_vec2	new_vec;
-
-	new_vec.x = first.x - n;
-	new_vec.y = first.y - n;
-	return (new_vec);
+	data->minimap.camera_pos = vec_add_n( \
+		data->player.pos, \
+		PLAYER_SIZE / 2 - MINIMAP_RANGE \
+	);
+	minimap_img_size = 2 * MINIMAP_RANGE * MINIMAP_SCALE;
+	data->minimap.img = mlx_new_image(mlx, minimap_img_size, minimap_img_size);
 }
