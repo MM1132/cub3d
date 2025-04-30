@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/30 15:59:37 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:28:46 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,17 @@ char		*read_file(char **argv);
 // get_next_line from file with gc
 char 		*safe_gnl(char *file);
 // find the start of the map
-int	find_map_start(char *file);
+int			find_map_start(char *file);
 // like atoi: it changes 'a' to tile_type
 t_tile_type	ft_atott(char c);
 //checks if the zeros in the map are enclosed by ones
-int zeros_enclosed(t_data *data);
-t_vec2	vec_add_value(t_vec2 vec, double value);
-void	first_dis_calc(t_data *data, int32_t	rn);
-void	render_world(t_data *data);
+int			zeros_enclosed(t_data *data);
+t_vec2		vec_add_value(t_vec2 vec, double value);
+void		first_dis_calc(t_data *data, int32_t	rn);
+void		render_world(t_data *data);
+
+t_vec2		pos_to_minimap(t_vec2 pos);
+
 // HOOKS
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);

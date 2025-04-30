@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 19:41:56 by joklein          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:28:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_pixel_transform
 void	render_minimap(t_data *data);
 void	minimap_render_grid(t_data *data, t_vec2 offset);
 void	render_minimap_player(t_data *data);
-t_vec2	pos_to_minimap(t_vec2 pos);
 
 // UTILITY DRAW FUNCTIONS
 void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
