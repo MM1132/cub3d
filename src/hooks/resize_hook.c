@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   resize_hook.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 10:26:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 08:39:53 by joklein          ###   ########.fr       */
+/*   Created: 2025/04/30 14:03:53 by joklein           #+#    #+#             */
+/*   Updated: 2025/04/30 15:54:26 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "MLX42.h"
 #include "cub3d.h"
+#include "garbage_collector.h"
+#include "settings.h"
 
-void	init_inputs(t_inputs *inputs)
+void	ray_malloc(t_data *data)
 {
-	int32_t	mouse_x;
-	int32_t	mouse_y;
-
-	inputs->key_w = false;
-	inputs->key_a = false;
-	inputs->key_s = false;
-	inputs->key_d = false;
-	mlx_get_mouse_pos(mlx, &mouse_x, &mouse_y);
-	inputs->mouse_pos.x = mouse_x;
-	inputs->mouse_pos.y = mouse_y;
+	if (data->ray)
+		gc_free(data->ray);
+	data->ray = gc_malloc(mlx->width * sizeof(t_ray));
 }
 
-void	init_player(t_player *player)
+void	resize_hook(int32_t width, int32_t height, void *param)
 {
-	player->pos = vec_new(3, 3);
-	player->speed = vec_new(0, 0);
-	player->dir = vec_new(1, 0);
+	t_data	*data;
+
+	data = (t_data *)param;
+	mlx->height = height;
+	mlx->width = width;
+	ray_malloc(data);
 }

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 18:38:28 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:39:39 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@
 # define PLAYER_SIZE 0.4
 
 # define PI 3.141592653589793
+
+// Defines the viewing angle and the number of rays
+# define PLAYER_VIEW_ANGLE PI/2
 
 #endif

@@ -35,6 +35,10 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_fill_rect.c \
 	$(SRC_DIR)/render/utils/put_fill_rect_rotation.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
+	$(SRC_DIR)/render/ray_cast/ray_cast.c \
+	$(SRC_DIR)/render/ray_cast/ray_cast_utils.c \
+	$(SRC_DIR)/render/ray_cast/first_ray.c \
+	$(SRC_DIR)/render/world/world.c \
 	$(SRC_DIR)/vector/vec_add.c \
 	$(SRC_DIR)/vector/vec_length.c \
 	$(SRC_DIR)/vector/vec_multiply_n.c \
@@ -46,6 +50,7 @@ SRC_FILES := \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/hooks/scroll_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \
+	$(SRC_DIR)/hooks/resize_hook.c \
 	$(SRC_DIR)/hooks/key_hook.c \
 	$(SRC_DIR)/garbage_collector/gc_exit.c \
 	$(SRC_DIR)/garbage_collector/gc_add.c \
