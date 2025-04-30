@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:57:20 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 16:05:55 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:27:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	put_line_rotation( \
 	mlx_image_t *img, \
 	t_line *line, \
-	t_pixel_transform transform, \
+	t_transform transform, \
 	uint32_t color \
 )
 {

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 14:24:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 21:05:11 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vec2	vec_new(double x, double y);
 
 // Add two vectors together
 t_vec2	vec_add(t_vec2 first, t_vec2 second);
+t_vec2	vec_add_n(t_vec2 vec, double n);
 void	vec_add_to(t_vec2 *vec, t_vec2 *addition);
 
 // Subtract one vector from another
@@ -45,5 +46,7 @@ double	vec_length(t_vec2 vec);
 // Rotate the vector by the number of radians
 t_vec2	vec_rotate(t_vec2 vec, double rad);
 void	vec_rotate_to(t_vec2 *vec, double rad);
+
+double	vec_cross_product(t_vec2 *vec1, t_vec2 *vec2);
 
 #endif

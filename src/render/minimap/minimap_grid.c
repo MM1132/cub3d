@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 16:06:13 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:27:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 			put_line_rotation( \
 				data->minimap_img, \
 				&(t_line){ start, end }, \
-				(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				(t_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 				0xFF2BEEFF \
 			);
 		else
@@ -62,7 +62,7 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 			put_line_rotation( \
 				data->minimap_img, \
 				&(t_line){ start, end }, \
-				(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				(t_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 				0xFF2BEEFF \
 			);
 		else

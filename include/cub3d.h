@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/30 17:28:46 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:43:50 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@
 
 extern mlx_t	*mlx;
 extern int		map_value;
-
-typedef struct s_rect
-{
-	ssize_t	x;
-	ssize_t	y;
-	size_t	width;
-	size_t	height;
-}	t_rect;
 
 typedef struct s_ray
 {

@@ -20,6 +20,9 @@ IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 NAME := cub3D
 SRC_FILES := \
 	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/rect/rect_new.c \
+	$(SRC_DIR)/rect/rect_rotate.c \
+	$(SRC_DIR)/rect/rect_get_bounds.c \
 	$(SRC_DIR)/init/init_data.c \
 	$(SRC_DIR)/init/init_player.c \
 	$(SRC_DIR)/update/update_player.c \
@@ -39,6 +42,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/ray_cast/ray_cast_utils.c \
 	$(SRC_DIR)/render/ray_cast/first_ray.c \
 	$(SRC_DIR)/render/world/world.c \
+	$(SRC_DIR)/vector/vec_product.c \
 	$(SRC_DIR)/vector/vec_add.c \
 	$(SRC_DIR)/vector/vec_length.c \
 	$(SRC_DIR)/vector/vec_multiply_n.c \

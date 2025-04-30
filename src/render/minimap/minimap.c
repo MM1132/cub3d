@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 15:51:39 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 22:06:43 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "settings.h"
 #include "render.h"
 #include <math.h>
+#include "rect.h"
 
 static int	within_bounds(t_map *map, size_t x, size_t y)
 {
@@ -25,10 +26,14 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 	t_rect		tile_rect;
 	uint32_t	color;
 
-	tile_rect.x = ((double)x - (offset.x)) * MINIMAP_SCALE;
-	tile_rect.y = ((double)y - (offset.y)) * MINIMAP_SCALE;
-	tile_rect.width = MINIMAP_SCALE;
-	tile_rect.height = tile_rect.width;
+	tile_rect = rect_from_point( \
+		vec_new( \
+			((double)x - (offset.x)) * MINIMAP_SCALE, \
+			((double)y - (offset.y)) * MINIMAP_SCALE), \
+		MINIMAP_SCALE,
+		MINIMAP_SCALE
+	);
+	// printf("x and y... %f; %f\n", data->player.pos.x, data->player.pos.y);
 	if (!within_bounds(&data->map, x, y))
 		return ;
 	color = 0;
@@ -42,7 +47,7 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		put_fill_rect_rotation( \
 			data->minimap_img, \
 			&tile_rect, \
-			(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+			(t_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 			color \
 		);
 	else
@@ -55,6 +60,7 @@ void	render_minimap_tiles(t_data *data)
 	int		y;
 	t_vec2	start;
 
+	// The coordinates of the top-most tile we can see
 	start.x = data->player.pos.x + PLAYER_SIZE / 2 - (double)MINIMAP_RANGE;
 	start.y = data->player.pos.y + PLAYER_SIZE / 2 - (double)MINIMAP_RANGE;
 	y = (int)start.y - 1;
@@ -74,10 +80,11 @@ void	render_minimap_border(t_data *data)
 {
 	t_rect	border_rect;
 
-	border_rect.height = 2 * MINIMAP_RANGE * MINIMAP_SCALE;
-	border_rect.width = border_rect.height;
-	border_rect.x = 0;
-	border_rect.y = 0;
+	border_rect.a = vec_new(0, 0);
+	border_rect.b = vec_new(2 * MINIMAP_RANGE * MINIMAP_SCALE, 0);
+	border_rect.c = vec_new(2 * MINIMAP_RANGE * MINIMAP_SCALE, \
+		2 * MINIMAP_RANGE * MINIMAP_SCALE);
+	border_rect.d = vec_new(0, 2 * MINIMAP_RANGE * MINIMAP_SCALE);
 	put_rect(data->minimap_img, &border_rect, 0xFFFFFFFF);
 }
 
