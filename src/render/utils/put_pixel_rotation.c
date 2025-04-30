@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   put_pixel_rotation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 12:00:48 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 14:39:55 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 14:20:53 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 15:20:20 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
+#include "vector.h"
 #include "MLX42.h"
 
-void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
+void	put_pixel_rotation( \
+	mlx_image_t *img, \
+	t_vec2 pos, \
+	t_pixel_transform transform, \
+	uint32_t color \
+)
 {
-	if (x >= 0 && x < img->width && y >= 0 && y < img->height)
-		mlx_put_pixel(img, x, y, color);
+	vec_subtract_to(&pos, &transform.origin);
+	vec_rotate_to(&pos, transform.rotation);
+	vec_add_to(&pos, &transform.origin);
+	
+	put_pixel(img, pos.x, pos.y, color);
 }

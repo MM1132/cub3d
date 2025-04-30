@@ -26,11 +26,14 @@ SRC_FILES := \
 	$(SRC_DIR)/render/minimap/minimap_grid.c \
 	$(SRC_DIR)/render/minimap/minimap_player.c \
 	$(SRC_DIR)/render/minimap/minimap.c \
+	$(SRC_DIR)/render/utils/put_pixel_rotation.c \
 	$(SRC_DIR)/render/utils/put_pixel.c \
 	$(SRC_DIR)/render/utils/put_circle.c \
 	$(SRC_DIR)/render/utils/put_fill.c \
 	$(SRC_DIR)/render/utils/put_line.c \
+	$(SRC_DIR)/render/utils/put_line_rotation.c \
 	$(SRC_DIR)/render/utils/put_fill_rect.c \
+	$(SRC_DIR)/render/utils/put_fill_rect_rotation.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
 	$(SRC_DIR)/vector/vec_add.c \
 	$(SRC_DIR)/vector/vec_length.c \
@@ -39,6 +42,7 @@ SRC_FILES := \
 	$(SRC_DIR)/vector/vec_normalize.c \
 	$(SRC_DIR)/vector/vec_rotate.c \
 	$(SRC_DIR)/vector/vec_subtract.c \
+	$(SRC_DIR)/vector/vec_subtract_to.c \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/hooks/scroll_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \

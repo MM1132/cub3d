@@ -6,13 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 11:54:03 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:51:39 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "settings.h"
 #include "render.h"
+#include <math.h>
 
 static int	within_bounds(t_map *map, size_t x, size_t y)
 {
@@ -21,7 +22,8 @@ static int	within_bounds(t_map *map, size_t x, size_t y)
 
 static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 {
-	t_rect	tile_rect;
+	t_rect		tile_rect;
+	uint32_t	color;
 
 	tile_rect.x = ((double)x - (offset.x)) * MINIMAP_SCALE;
 	tile_rect.y = ((double)y - (offset.y)) * MINIMAP_SCALE;
@@ -29,10 +31,22 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 	tile_rect.height = tile_rect.width;
 	if (!within_bounds(&data->map, x, y))
 		return ;
+	color = 0;
 	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
-		put_fill_rect(data->minimap_img, &tile_rect, 0x00FF00FF);
-	if (data->map.tiles[y][x].tile_type == TILE_WALL)
-		put_fill_rect(data->minimap_img, &tile_rect, 0x555555FF);
+		color = 0x00FF00FF;
+	else if (data->map.tiles[y][x].tile_type == TILE_WALL)
+		color = 0x555555FF;
+	if (color == 0)
+		return ;
+	if (data->inputs.toggle_minimap_rotation)
+		put_fill_rect_rotation( \
+			data->minimap_img, \
+			&tile_rect, \
+			(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+			color \
+		);
+	else
+		put_fill_rect(data->minimap_img, &tile_rect, color);
 }
 
 void	render_minimap_tiles(t_data *data)

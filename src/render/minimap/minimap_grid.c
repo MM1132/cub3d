@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/29 19:08:05 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:06:13 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 	end.y = (data->map.height - offset.y) * MINIMAP_SCALE;
 	while (start.x < last_x)
 	{
-		put_line(data->minimap_img, start, end, 0xFF2BEEFF);
+		if (data->inputs.toggle_minimap_rotation)
+			put_line_rotation( \
+				data->minimap_img, \
+				&(t_line){ start, end }, \
+				(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				0xFF2BEEFF \
+			);
+		else
+			put_line(data->minimap_img, start, end, 0xFF2BEEFF);
 		start.x += MINIMAP_SCALE;
 		end.x = start.x;
 	}
@@ -50,7 +58,15 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 	end.x = (data->map.width - offset.x) * MINIMAP_SCALE;
 	while (start.y < last_y)
 	{
-		put_line(data->minimap_img, start, end, 0xFF2BEEFF);
+		if (data->inputs.toggle_minimap_rotation)
+			put_line_rotation( \
+				data->minimap_img, \
+				&(t_line){ start, end }, \
+				(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				0xFF2BEEFF \
+			);
+		else
+			put_line(data->minimap_img, start, end, 0xFF2BEEFF);
 		start.y += MINIMAP_SCALE;
 		end.y = start.y;
 	}
