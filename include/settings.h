@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:12:42 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:21:46 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@
 # define PLAYER_SIZE 0.4
 
 # define PI 3.141592653589793
+
+// Defines the viewing angle and the number of rays
+# define PLAYER_VIEW_ANGLE PI/2
+// Display 5120 x 2880
+//# define NUMBER_OF_RAY 5120
 
 #endif

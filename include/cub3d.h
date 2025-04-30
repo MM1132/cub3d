@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 18:54:05 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:59:37 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ typedef struct s_rect
 	size_t	width;
 	size_t	height;
 }	t_rect;
+
+typedef struct s_ray
+{
+	t_vec2	start_pos;
+	t_vec2	angle;
+	t_vec2  next_dis;
+	t_vec2	last_dis_pos;
+	t_vec2	next_tile;
+	double	length;
+}	t_ray;
 
 typedef struct s_player
 {
@@ -81,6 +91,7 @@ typedef struct s_data
 	uint32_t	floor_color;
 	uint32_t	ceiling_color;
 	t_map		map;
+	t_ray		*ray;
 	t_player	player;
 	mlx_image_t	*img;
 	t_inputs	inputs;
@@ -119,10 +130,15 @@ int	find_map_start(char *file);
 t_tile_type	ft_atott(char c);
 //checks if the zeros in the map are enclosed by ones
 int zeros_enclosed(t_data *data);
+int	round_double(double numtoround);
+t_vec2	vec_add_value(t_vec2 vec, double value);
+void	first_dis_calc(t_data *data, int32_t	rn);
+void	render_world(t_data *data);
 // HOOKS
 void		main_loop_hook(void *param);
 void		cursor_hook(double xpos, double ypos, void* param);
 void		scroll_hook(double xdelta, double ydelta, void* param);
+void 		resize_hook(int32_t width, int32_t height, void* param);
 
 // UPDATING STUFF
 void		update_player(t_data *data);

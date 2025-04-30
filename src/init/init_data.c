@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 19:10:03 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:15:06 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void init_data(t_data *data)
 	data->so_texture = NULL;
 	data->we_texture = NULL;
 	data->ea_texture = NULL;
+	data->ray = NULL;
+	data->map.height = 0;
+	data->map.width = 0;
 	data->floor_color = 0;
 	data->ceiling_color = 0;
 	init_player(&data->player);
