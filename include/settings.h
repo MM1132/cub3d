@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 23:53:47 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 02:29:26 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // Defines the speed at which the speed will be decreasing over time
 # define PLAYER_SPEED_DECREASE_MULTIPLIER 0.82
 # define PLAYER_ROTATION_SPEED 0.005
-# define PLAYER_SIZE 0.8
+# define PLAYER_SIZE 0.5
 
 # define PI 3.141592653589793
 
