@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_player.c                                    :+:      :+:    :+:   */
+/*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:37 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:57:48 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:52:19 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,7 @@ void	player_update(t_data *data)
 
 	// Rotate the view direction
 	if (data->inputs.key_left)
-		vec_rotate_to(&data->player.dir, PLAYER_ROTATION_SPEED * \
-			mlx->delta_time * -1);
+		vec_rotate_to(&data->player.dir, -PLAYER_ROTATION_SPEED * 10);
 	else if (data->inputs.key_right)
-		vec_rotate_to(&data->player.dir, PLAYER_ROTATION_SPEED * \
-			mlx->delta_time);
+		vec_rotate_to(&data->player.dir, PLAYER_ROTATION_SPEED * 10);
 }
