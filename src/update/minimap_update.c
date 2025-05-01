@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:56:33 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 23:56:58 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 21:15:45 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	minimap_update(t_data *data)
 	wanted_position.y = data->player.pos.y + offset_constant;
 
 	move_amount = vec_subtract(wanted_position, data->minimap.camera_pos);
-	vec_multiply_n_to(&move_amount, MINIMAP_CAMERA_FOLLOW_SPEED);
+	vec_multiply_n_to(&move_amount, 5 * mlx->delta_time);
 
 	vec_add_to(&data->minimap.camera_pos, &move_amount);
 }

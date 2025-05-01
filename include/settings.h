@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 20:55:30 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 21:14:39 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define MINIMAP_SCALE 30
 # define MINIMAP_MARGIN 15
 # define MINIMAP_RANGE 12
-# define MINIMAP_CAMERA_FOLLOW_SPEED 0.1
+# define MINIMAP_CAMERA_FOLLOW_SPEED 1
 
 // Player
 // This does not define the speed itself directly
