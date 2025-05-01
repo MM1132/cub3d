@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_types.h                                      :+:      :+:    :+:   */
+/*   collision_detection.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 20:27:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 21:40:32 by rreimann         ###   ########.fr       */
+/*   Created: 2025/05/01 23:35:23 by rreimann          #+#    #+#             */
+/*   Updated: 2025/05/02 00:53:45 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHAPE_TYPES_H
-#define SHAPE_TYPES_H
+#ifndef COLLISION_DETECTION_H
+#define COLLISION_DETECTION_H
 
-#include "vector.h"
+#include "rect.h"
+#include <stdbool.h>
 
-typedef struct s_rect
+typedef struct s_collision
 {
-	t_vec2	vertices[4];
-}	t_rect;
+	bool	colliding;
+	t_vec2	dir;
+	double	amount;
+}	t_collision;
 
-typedef struct s_bounds
-{
-	double	top;
-	double	left;
-	double	right;
-	double	bottom;
-}	t_bounds;
-
-typedef struct s_line
-{
-	t_vec2	start;
-	t_vec2	end;
-}	t_line;
-
-typedef struct s_transform
-{
-	t_vec2	origin;
-	double	rotation;
-}	t_transform;
+t_collision	rect_collides_rect(t_rect *rect_1, t_rect *rect_2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 21:23:47 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:08:17 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "render.h"
 #include <math.h>
 #include "rect.h"
+#include "collision_detection.h"
 
 static int	within_bounds(t_map *map, size_t x, size_t y)
 {
@@ -42,6 +43,7 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		color = 0x555555FF;
 	if (color == 0)
 		return ;
+
 	if (data->inputs.toggle_minimap_rotation)
 		put_fill_rect_rotation( \
 			data->minimap.img, \
@@ -92,4 +94,19 @@ void	minimap_render(t_data *data)
 	render_minimap_tiles(data);
 	render_minimap_border(data);
 	render_minimap_player(data);
+
+	//! TEST the collision detection here
+	t_rect static_rect = rect_new2(vec_new(20, 20), vec_new(120, 120));
+	t_rect mouse_rect = rect_new2(vec_new(120, 120), vec_new(200, 200));
+	mouse_rect.vertices[0] = vec_subtract_n(data->inputs.mouse_pos, MINIMAP_MARGIN);
+
+	// Change the color of the second rect based on collision
+	uint32_t second_rect_color = 0x005500FF;
+	t_collision collision = rect_collides_rect(&static_rect, &mouse_rect);
+	if (collision.colliding)
+		second_rect_color = 0xFF0000FF;
+	
+	// And now we just render out both the rects
+	put_fill_rect_rotation(data->minimap.img, &static_rect, (t_transform) {(t_vec2){0,0}, 0}, 0x005500FF);
+	put_fill_rect_rotation(data->minimap.img, &mouse_rect, (t_transform) {(t_vec2){0,0}, 0}, second_rect_color);
 }

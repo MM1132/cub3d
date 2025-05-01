@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:29:06 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 21:17:19 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:45:38 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ static bool	is_inside_rect(t_rect *rotated_rect, uint32_t x, uint32_t y)
 
 	point = vec_new(x, y);
 	// One
-	first = vec_subtract(rotated_rect->b, rotated_rect->a);
-	second = vec_subtract(point, rotated_rect->a);
+	first = vec_subtract(rotated_rect->vertices[1], rotated_rect->vertices[0]);
+	second = vec_subtract(point, rotated_rect->vertices[0]);
 	cross_products[0] = vec_cross_product(&first, &second);
 	// Two
-	first = vec_subtract(rotated_rect->c, rotated_rect->b);
-	second = vec_subtract(point, rotated_rect->b);
+	first = vec_subtract(rotated_rect->vertices[2], rotated_rect->vertices[1]);
+	second = vec_subtract(point, rotated_rect->vertices[1]);
 	cross_products[1] = vec_cross_product(&first, &second);
 	// Three
-	first = vec_subtract(rotated_rect->d, rotated_rect->c);
-	second = vec_subtract(point, rotated_rect->c);
+	first = vec_subtract(rotated_rect->vertices[3], rotated_rect->vertices[2]);
+	second = vec_subtract(point, rotated_rect->vertices[2]);
 	cross_products[2] = vec_cross_product(&first, &second);
 	// Four
-	first = vec_subtract(rotated_rect->a, rotated_rect->d);
-	second = vec_subtract(point, rotated_rect->d);
+	first = vec_subtract(rotated_rect->vertices[0], rotated_rect->vertices[3]);
+	second = vec_subtract(point, rotated_rect->vertices[3]);
 	cross_products[3] = vec_cross_product(&first, &second);
 	return (same_signs(cross_products));
 }

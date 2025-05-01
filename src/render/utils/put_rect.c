@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:34:07 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:27:59 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:46:10 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
 {
-	put_line(img, rect->a, rect->b, color);
-	put_line(img, rect->b, rect->c, color);
-	put_line(img, rect->d, rect->c, color);
-	put_line(img, rect->a, rect->d, color);
+	put_line(img, rect->vertices[0], rect->vertices[1], color);
+	put_line(img, rect->vertices[1], rect->vertices[2], color);
+	put_line(img, rect->vertices[3], rect->vertices[2], color);
+	put_line(img, rect->vertices[0], rect->vertices[3], color);
 
-	put_line(img, rect->a, rect->c, color);
-	put_line(img, rect->d, rect->b, color);
+	put_line(img, rect->vertices[0], rect->vertices[2], color);
+	put_line(img, rect->vertices[3], rect->vertices[1], color);
 }

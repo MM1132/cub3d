@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 23:49:54 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 00:55:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ double	vec_length(t_vec2 vec);
 t_vec2	vec_rotate(t_vec2 vec, double rad);
 void	vec_rotate_to(t_vec2 *vec, double rad);
 
+// Products
 double	vec_cross_product(t_vec2 *vec1, t_vec2 *vec2);
+double	vec_dot_product(t_vec2 *vec, t_vec2 *point);
+
+void	vec_swap_xy(t_vec2	*vec);
 
 #endif

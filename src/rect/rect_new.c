@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:55:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 21:23:46 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/01 21:46:39 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ t_rect	rect_new2(t_vec2 a, t_vec2 c)
 {
 	t_rect	new_rect;
 
-	new_rect.a = a;
-	new_rect.b.x = c.x;
-	new_rect.b.y = a.y;
-	new_rect.c = c;
-	new_rect.d.x = a.x;
-	new_rect.d.y = c.x;
+	new_rect.vertices[0] = a;
+	new_rect.vertices[1].x = c.x;
+	new_rect.vertices[1].y = a.y;
+	new_rect.vertices[2] = c;
+	new_rect.vertices[3].x = a.x;
+	new_rect.vertices[3].y = c.x;
 	return (new_rect);
 }
 
@@ -30,17 +30,17 @@ t_rect	rect_from_point(t_vec2 point, double width, double height)
 {
 	t_rect	new_rect;
 
-	new_rect.a.x = point.x;
-	new_rect.a.y = point.y;
+	new_rect.vertices[0].x = point.x;
+	new_rect.vertices[0].y = point.y;
 
-	new_rect.b.x = point.x + width;
-	new_rect.b.y = point.y;
+	new_rect.vertices[1].x = point.x + width - 1;
+	new_rect.vertices[1].y = point.y;
 
-	new_rect.c.x = point.x + width;
-	new_rect.c.y = point.y + height;
+	new_rect.vertices[2].x = point.x + width - 1;
+	new_rect.vertices[2].y = point.y + height - 1;
 
-	new_rect.d.x = point.x;
-	new_rect.d.y = point.y + height;
+	new_rect.vertices[3].x = point.x;
+	new_rect.vertices[3].y = point.y + height - 1;
 
 	return (new_rect);
 }
