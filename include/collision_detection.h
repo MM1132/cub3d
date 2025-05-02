@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 23:35:23 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 00:53:45 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:48:30 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ typedef struct s_collision
 }	t_collision;
 
 t_collision	rect_collides_rect(t_rect *rect_1, t_rect *rect_2);
+t_collision	circle_collides_rect(t_circle *circle, t_rect *rect);
 
 #endif

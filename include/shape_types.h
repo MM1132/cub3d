@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:27:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 21:40:32 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:20:56 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #define SHAPE_TYPES_H
 
 #include "vector.h"
+
+typedef struct s_circle
+{
+	t_vec2	pos;
+	double	radius;
+}	t_circle;
 
 typedef struct s_rect
 {

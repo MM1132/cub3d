@@ -2,7 +2,7 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Wshadow
+CFLAGS := -Wall -Wextra -Wshadow
 #-fsanitize=address -g
 
 # Libft
@@ -21,6 +21,7 @@ NAME := cub3D
 SRC_FILES := \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/collision_detection/rect_to_rect.c \
+	$(SRC_DIR)/collision_detection/circle_to_rect.c \
 	$(SRC_DIR)/rect/rect_new.c \
 	$(SRC_DIR)/rect/rect_rotate.c \
 	$(SRC_DIR)/rect/rect_get_bounds.c \
