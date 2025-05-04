@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 01:19:13 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 02:23:20 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 02:32:32 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ static t_collision	circle_collision(t_circle *circle, t_rect *rect)
 	t_vec2	normal;
 	double	amount;
 
-	normal = vec_subtract(closest_vertex(circle->pos, rect->vertices), circle->pos);
-	// vec_swap_xy(&normal);
-	// normal.y *= -1;
-	normal = vec_normalize(normal);
+	normal = vec_normalize( \
+		vec_subtract(closest_vertex(circle->pos, rect->vertices), circle->pos));
 
 	index = 0;
 	while (index < 4)
@@ -71,10 +69,8 @@ static t_collision	circle_collision(t_circle *circle, t_rect *rect)
 		rect_projections[index] = vec_dot_product(&normal, &rect->vertices[index]);
 		index++;
 	}
-	// One side
 	t_vec2 circle_start = vec_add(circle->pos, vec_multiply_n(normal, circle->radius));
 	circle_projection[0] = vec_dot_product(&normal, &circle_start);
-	// The other side
 	t_vec2 circle_end = vec_subtract(circle->pos, vec_multiply_n(normal, circle->radius));
 	circle_projection[1] = vec_dot_product(&normal, &circle_end);
 
@@ -124,7 +120,7 @@ t_collision	circle_collides_rect(t_circle *circle, t_rect *rect)
 	// There are 4 sides on a rect
 	while (side_index < 4)
 	{
-		collision = rect_collision(side_index, rect, circle);
+		collision = circle_collision(circle, rect);
 		if (collision.colliding)
 		{
 			if (smallest_collision.colliding == false)
@@ -138,7 +134,7 @@ t_collision	circle_collides_rect(t_circle *circle, t_rect *rect)
 			break ;
 		};
 
-		collision = circle_collision(circle, rect);
+		collision = rect_collision(side_index, rect, circle);
 		if (collision.colliding)
 		{
 			if (smallest_collision.colliding == false)

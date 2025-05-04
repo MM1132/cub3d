@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 02:25:44 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:34:18 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		return ;
 
 	if (data->inputs.toggle_minimap_rotation)
-		put_fill_rect_rotation( \
+		put_fill_rect_transform_fast( \
 			data->minimap.img, \
 			&tile_rect, \
 			(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->height / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
@@ -94,21 +94,4 @@ void	minimap_render(t_data *data)
 	render_minimap_tiles(data);
 	render_minimap_border(data);
 	render_minimap_player(data);
-
-	//! TEST the collision detection here
-	t_rect static_rect = rect_new2(vec_new(100, 100), vec_new(200, 200));
-	t_circle circle = { vec_subtract_n(data->inputs.mouse_pos, MINIMAP_MARGIN), 50 };
-
-	// Change the color of the second rect based on collision
-	uint32_t color = 0x005500FF;
-	t_collision collision = circle_collides_rect(&circle, &static_rect);
-	if (collision.colliding)
-	{
-		color = 0xFF0000FF;
-		t_vec2 move_amount = vec_multiply_n(collision.dir, collision.amount);
-		vec_subtract_to(&circle.pos, &move_amount);
-	}
-	
-	put_fill_rect_rotation(data->minimap.img, &static_rect, (t_transform) {(t_vec2){0,0}, 0}, 0x005500FF);
-	put_circle(data->minimap.img, circle.pos, circle.radius, color);
 }

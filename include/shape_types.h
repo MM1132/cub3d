@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:27:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 01:20:56 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 14:48:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_bounds
 	double	left;
 	double	right;
 	double	bottom;
+	double	width;
+	double	height;
 }	t_bounds;
 
 typedef struct s_line

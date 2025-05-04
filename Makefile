@@ -42,6 +42,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_line_rotation.c \
 	$(SRC_DIR)/render/utils/put_fill_rect.c \
 	$(SRC_DIR)/render/utils/put_fill_rect_rotation.c \
+	$(SRC_DIR)/render/utils/put_fill_rect_transform_fast.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
 	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \

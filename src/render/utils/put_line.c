@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:24:40 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 01:22:23 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:07:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,3 @@ void	put_line(mlx_image_t *img, t_vec2 start, t_vec2 end, uint32_t color)
 		current_step++;
 	}
 }
-
-// void	put_fast_line(mlx_image_t *img, t_line *line, uint32_t color)
-// {
-	
-// }
