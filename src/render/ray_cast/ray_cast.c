@@ -15,10 +15,7 @@
 #include "settings.h"
 #include <math.h>
 
-// void	calculate_wall_height(void)
-// {
-// }
-
+/*
 void	draw_ray_mini_map(t_data *data, int32_t	rn)
 {
 	t_vec2	line_to;
@@ -36,90 +33,94 @@ void	draw_ray_mini_map(t_data *data, int32_t	rn)
 	data->ray[rn].angle.y = -data->ray[rn].angle.y;
 	put_line(data->img, pl_view, line_to, 0xFF00FFFF);
 }
+*/
 
-void	ray_dis_calc(t_data *data, int32_t rn)
+void calc_next_end_pos(t_data *data, int32_t rn, double next_dis, double angle)
 {
-	t_vec2	next_tile;
-	t_vec2	num;
+	t_vec2		num;
 
-	(void)num;
-	if (data->ray[rn].angle.x >= 0)
+	num.x = next_dis * data->ray[rn].angle.x;
+	num.y = next_dis * data->ray[rn].angle.y;
+	if (next_dis < 0 && angle < 0)
 	{
-		next_tile.x = data->ray[rn].next_tile.x + 1;
-		if (data->ray[rn].angle.x == 0)
-			data->ray[rn].angle.x = 1e-6;
-		data->ray[rn].next_dis.x = (next_tile.x - data->ray[rn].last_dis_pos.x)
-			/ data->ray[rn].angle.x;
+		num.x = -num.x;
+		num.y = -num.y;
+	}
+	data->ray[rn].dis_pos.x = data->ray[rn].dis_pos.x + num.x;
+	data->ray[rn].dis_pos.y = data->ray[rn].dis_pos.y + num.y;
+}
+
+
+void calc_next_dis(t_help_ray ray, double *next_dis , int *next_tile)
+{
+	if (ray.angle >= 0)
+	{
+		*next_tile = ray.ray_next_tile + 1;
+		if (ray.angle == 0)
+			ray.angle = 1e-6;
+		*next_dis = (*next_tile - ray.dis_pos) / ray.angle;
 	}
 	else
 	{
-		next_tile.x = data->ray[rn].next_tile.x;
-		data->ray[rn].next_dis.x = (data->ray[rn].last_dis_pos.x - next_tile.x)
-			/ data->ray[rn].angle.x;
-		next_tile.x -= 1;
+		*next_tile = ray.ray_next_tile;
+		*next_dis = (ray.dis_pos - *next_tile) / ray.angle;
+		*next_tile -= 1;
 	}
-	if (data->ray[rn].angle.y >= 0)
-	{
-		next_tile.y = data->ray[rn].next_tile.y + 1;
-		if (data->ray[rn].angle.y == 0)
-			data->ray[rn].angle.y = 1e-6;
-		data->ray[rn].next_dis.y = (next_tile.y - data->ray[rn].last_dis_pos.y)
-			/ data->ray[rn].angle.y;
-	}
-	else
-	{
-		next_tile.y = data->ray[rn].next_tile.y;
-		data->ray[rn].next_dis.y = (data->ray[rn].last_dis_pos.y - next_tile.y)
-			/ data->ray[rn].angle.y;
-		next_tile.y -= 1;
-	}
-	if (fabs(data->ray[rn].next_dis.x) <= fabs(data->ray[rn].next_dis.y))
-	{
-		data->ray[rn].next_tile.x = next_tile.x;
-		num.x = data->ray[rn].next_dis.x * data->ray[rn].angle.x;
-		num.y = data->ray[rn].next_dis.x * data->ray[rn].angle.y;
-		if (data->ray[rn].next_dis.x < 0 && data->ray[rn].angle.x < 0)
-		{
-			num.x = -(data->ray[rn].next_dis.x * data->ray[rn].angle.x);
-			num.y = -(data->ray[rn].next_dis.x * data->ray[rn].angle.y);
-		}
-		data->ray[rn].last_dis_pos.x = data->ray[rn].last_dis_pos.x + num.x;
-		data->ray[rn].last_dis_pos.y = data->ray[rn].last_dis_pos.y + num.y;
+}
+
+void	ray_dis_calc(t_data *data, int32_t rn, s_vec2_int *ray_next_tile)
+{
+	s_vec2_int	next_tile;
+	t_vec2 		next_dis;
+	t_help_ray	help_ray;
+	double		angle;
+
+	help_ray.angle = data->ray[rn].angle.x;
+	help_ray.dis_pos = data->ray[rn].dis_pos.x;
+	help_ray.ray_next_tile = ray_next_tile->x;
+	calc_next_dis(help_ray, &next_dis.x, &next_tile.x);
+	help_ray.angle = data->ray[rn].angle.y;
+	help_ray.dis_pos = data->ray[rn].dis_pos.y;
+	help_ray.ray_next_tile = ray_next_tile->y;
+	calc_next_dis(help_ray, &next_dis.y, &next_tile.y);
+	if (fabs(next_dis.x) <= fabs(next_dis.y))
+	{	
+		data->ray[rn].tile_touched = 'E';
+		if (data->ray[rn].angle.x < 0)
+			data->ray[rn].tile_touched = 'W';
+		ray_next_tile->x = next_tile.x;
+		angle = data->ray[rn].angle.x;
+		calc_next_end_pos(data, rn, next_dis.x, angle);
 	}
 	else
 	{
-		data->ray[rn].next_tile.y = next_tile.y;
-		num.x = data->ray[rn].next_dis.y * data->ray[rn].angle.x;
-		num.y = data->ray[rn].next_dis.y * data->ray[rn].angle.y;
-		if (data->ray[rn].next_dis.y < 0 && data->ray[rn].angle.y < 0)
-		{
-			num.x = -(data->ray[rn].next_dis.y * data->ray[rn].angle.x);
-			num.y = -(data->ray[rn].next_dis.y * data->ray[rn].angle.y);
-		}
-		data->ray[rn].last_dis_pos.x = data->ray[rn].last_dis_pos.x + num.x;
-		data->ray[rn].last_dis_pos.y = data->ray[rn].last_dis_pos.y + num.y;
+		data->ray[rn].tile_touched = 'S';
+		if (data->ray[rn].angle.y < 0)
+			data->ray[rn].tile_touched = 'N';
+		ray_next_tile->y = next_tile.y;
+		angle = data->ray[rn].angle.y;
+		calc_next_end_pos(data, rn, next_dis.y, angle);
 	}
 }
 
 void	calculate_ray(t_data *data, int32_t	rn)
 {
 	int	hit;
+	s_vec2_int ray_next_tile;
 
 	hit = 0;
-	data->ray[rn].next_tile.x = (int)data->ray[rn].start_pos.x;
-	data->ray[rn].next_tile.y = (int)data->ray[rn].start_pos.y;
-	first_dis_calc(data, rn);
-	if (data->map.tiles[(int)data->ray[rn].next_tile.y][(int)data->ray[rn].next_tile.x].tile_type != TILE_FLOOR)
-		hit = 1;
+	ray_next_tile.x = (int)data.player.center.x;
+	ray_next_tile.y = (int)data.player.center.y;
+	data->ray[rn].dis_pos = data->player.center;
 	while (hit == 0)
 	{
-		ray_dis_calc(data, rn);
-		if (data->map.tiles[(int)data->ray[rn].next_tile.y][(int)data->ray[rn].next_tile.x].tile_type != TILE_FLOOR)
+		ray_dis_calc(data, rn, &ray_next_tile);
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type != TILE_FLOOR)
 			hit = 1;
 	}
-	data->ray[rn].length = sqrt(pow(data->ray[rn].last_dis_pos.x
-				- data->ray[rn].start_pos.x, 2)
-			+ pow(data->ray[rn].last_dis_pos.y - data->ray[rn].start_pos.y, 2));
+	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x
+				- data->player.center.x, 2)
+			+ pow(data->ray[rn].dis_pos.y - data->player.center.y, 2));
 }
 
 void	ray_cast(t_data *data)
@@ -127,13 +128,12 @@ void	ray_cast(t_data *data)
 	int32_t	rn;
 
 	rn = 0;
+	data->player.center = vec_add(data->player.pos, PLAYER_SIZE / 2);
 	while (rn < mlx->width)
 	{
-		data->ray[rn].start_pos = vec_add_value(data->player.pos, PLAYER_SIZE/ 2);
 		data->ray[rn].angle = vec_rotate(data->player.dir, -PLAYER_VIEW_ANGLE/ 2 + rn* PLAYER_VIEW_ANGLE/ mlx->width);
 		calculate_ray(data, rn);
-		draw_ray_mini_map(data, rn);
-		data->ray[rn].angle = vec_rotate(data->ray[rn].angle, PLAYER_VIEW_ANGLE/ mlx->width);
+		//draw_ray_mini_map(data, rn);
 		rn++;
 	}
 }

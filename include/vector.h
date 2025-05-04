@@ -15,6 +15,12 @@
 
 # include <stdlib.h>
 
+typedef struct s_vec2_int
+{
+	int	x;
+	int	y;
+}	t_vec2_int;
+
 typedef struct s_vec2
 {
 	double	x;

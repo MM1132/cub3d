@@ -36,10 +36,9 @@ static void	main_game_loop(t_data *data)
 
 	// Render
 	put_fill(data->img, 0x000000FF);
-	if(data->ray[0].length != -1)
-		render_world(data);
-	render_minimap(data);
 	ray_cast(data);
+	render_world(data);
+	render_minimap(data);
 }
 
 void	main_loop_hook(void *param)

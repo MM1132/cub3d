@@ -49,9 +49,6 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	init_data(&data);
-
-	data.ray = gc_malloc(mlx->width * sizeof (*data.ray));
-	data.ray[0].length = -1;
 	mlx_image_to_window(mlx, data.img, 0, 0);
 	mlx_image_to_window(mlx, data.minimap_img, MINIMAP_MARGIN, MINIMAP_MARGIN);
 	if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],

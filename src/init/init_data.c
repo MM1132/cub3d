@@ -32,4 +32,5 @@ void init_data(t_data *data)
 	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	minimap_img_size = 2 * MINIMAP_RANGE * MINIMAP_SCALE;
 	data->minimap_img = mlx_new_image(mlx, minimap_img_size, minimap_img_size);
+	data->ray = gc_malloc(mlx->width * sizeof (*data.ray));
 }

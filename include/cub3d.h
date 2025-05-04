@@ -32,13 +32,19 @@ typedef struct s_rect
 	size_t	height;
 }	t_rect;
 
+typedef struct s_help_ray
+{
+	double	angle;
+	double	dis_pos;
+	int 	ray_next_tile;
+	char 	tile_dir[2];
+}	t_help_ray;
+
 typedef struct s_ray
 {
-	t_vec2	start_pos;
 	t_vec2	angle;
-	t_vec2  next_dis;
-	t_vec2	last_dis_pos;
-	t_vec2	next_tile;
+	t_vec2	dis_pos;
+	char	tile_touched;
 	double	length;
 }	t_ray;
 
@@ -47,6 +53,7 @@ typedef struct s_player
 	t_vec2	pos;
 	t_vec2	speed;
 	t_vec2	dir;
+	s_vec2	center;
 }	t_player;
 
 #define NUMBER_OF_TILES 3
@@ -133,7 +140,6 @@ int			find_map_start(char *file);
 t_tile_type	ft_atott(char c);
 //checks if the zeros in the map are enclosed by ones
 int			zeros_enclosed(t_data *data);
-t_vec2		vec_add_value(t_vec2 vec, double value);
 void		first_dis_calc(t_data *data, int32_t	rn);
 void		render_world(t_data *data);
 
