@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:36:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 15:08:47 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/01 00:56:10 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "render.h"
 #include "settings.h"
+#include <math.h>
 
 t_vec2	pos_to_minimap(t_vec2 pos)
 {
@@ -24,20 +25,35 @@ t_vec2	pos_to_minimap(t_vec2 pos)
 void	render_minimap_player(t_data *data)
 {
 	t_vec2	player_center;
-	t_vec2	line_to;
+	t_line	player_line;
+	t_vec2	transform_rotation;
 
-	player_center = vec_new(\
-		MINIMAP_RANGE * MINIMAP_SCALE, \
-		MINIMAP_RANGE * MINIMAP_SCALE \
-	);
-	put_circle(data->minimap_img, player_center, \
-		PLAYER_SIZE * MINIMAP_SCALE / 2, 0xFFFFFFFF);
+	player_center = vec_subtract(data->player.pos, data->minimap.camera_pos);
+	vec_add_n_to(&player_center, PLAYER_SIZE / 2);
+	vec_multiply_n_to(&player_center, MINIMAP_SCALE);
+
 	if (data->inputs.toggle_minimap_rotation)
-		put_line(data->minimap_img, vec_subtract(player_center, vec_new(0, MINIMAP_SCALE * PLAYER_SIZE)), player_center, 0xFF00FFFF);
-	else
 	{
-		line_to = vec_multiply_n(data->player.dir, MINIMAP_SCALE * PLAYER_SIZE);
-		line_to = vec_add(line_to, player_center);
-		put_line(data->minimap_img, player_center, line_to, 0xFF00FFFF);
+		// Transform the origin point of the player center
+		transform_rotation.x = data->minimap.img->width / 2;
+		transform_rotation.y = data->minimap.img->height / 2;
+		vec_subtract_to(&player_center, &transform_rotation);
+		vec_rotate_to(&player_center, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x));
+		vec_add_to(&player_center, &transform_rotation);
 	}
+	put_circle(data->minimap.img, player_center, \
+		PLAYER_SIZE * MINIMAP_SCALE / 2, 0xfffb00FF);
+
+	player_line.start = player_center;
+	player_line.end = vec_multiply_n(data->player.dir, MINIMAP_SCALE * PLAYER_SIZE);
+	vec_add_to(&player_line.end, &player_center);
+
+	if (data->inputs.toggle_minimap_rotation)
+	{
+		vec_subtract_to(&player_line.end, &player_line.start);
+		vec_rotate_to(&player_line.end, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x));
+		vec_add_to(&player_line.end, &player_line.start);
+	}
+
+	put_line(data->minimap.img, player_line.start, player_line.end, 0xFF00FFFF);
 }

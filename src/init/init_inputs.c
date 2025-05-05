@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_subtract.c                                     :+:      :+:    :+:   */
+/*   init_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 14:26:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:38:28 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 22:40:08 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 22:40:23 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "cub3d.h"
 
-t_vec2	vec_subtract(t_vec2 first, t_vec2 second)
+void	init_inputs(t_inputs *inputs)
 {
-	t_vec2	new_vec;
+	int32_t	mouse_x;
+	int32_t	mouse_y;
 
-	new_vec.x = first.x - second.x;
-	new_vec.y = first.y - second.y;
-	return (new_vec);
-}
-
-t_vec2	vec_subtract_n(t_vec2 first, double n)
-{
-	t_vec2	new_vec;
-
-	new_vec.x = first.x - n;
-	new_vec.y = first.y - n;
-	return (new_vec);
+	inputs->key_w = false;
+	inputs->key_a = false;
+	inputs->key_s = false;
+	inputs->key_d = false;
+	mlx_get_mouse_pos(mlx, &mouse_x, &mouse_y);
+	inputs->mouse_pos.x = mouse_x;
+	inputs->mouse_pos.y = mouse_y;
 }

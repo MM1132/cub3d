@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:20:53 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 15:20:20 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:27:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	put_pixel_rotation( \
 	mlx_image_t *img, \
 	t_vec2 pos, \
-	t_pixel_transform transform, \
+	t_transform transform, \
 	uint32_t color \
 )
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/30 17:29:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:42:35 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void calc_next_dis(t_help_ray ray, double *next_dis , int *next_tile)
 	}
 }
 
-void	ray_dis_calc(t_data *data, int32_t rn, s_vec2_int *ray_next_tile)
+void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
 {
-	s_vec2_int	next_tile;
+	t_vec2_int	next_tile;
 	t_vec2 		next_dis;
 	t_help_ray	help_ray;
 	double		angle;
@@ -106,11 +106,11 @@ void	ray_dis_calc(t_data *data, int32_t rn, s_vec2_int *ray_next_tile)
 void	calculate_ray(t_data *data, int32_t	rn)
 {
 	int	hit;
-	s_vec2_int ray_next_tile;
+	t_vec2_int ray_next_tile;
 
 	hit = 0;
-	ray_next_tile.x = (int)data.player.center.x;
-	ray_next_tile.y = (int)data.player.center.y;
+	ray_next_tile.x = (int)data->player.center.x;
+	ray_next_tile.y = (int)data->player.center.y;
 	data->ray[rn].dis_pos = data->player.center;
 	while (hit == 0)
 	{
@@ -128,7 +128,7 @@ void	ray_cast(t_data *data)
 	int32_t	rn;
 
 	rn = 0;
-	data->player.center = vec_add(data->player.pos, PLAYER_SIZE / 2);
+	data->player.center = vec_add_n(data->player.pos, PLAYER_SIZE / 2);
 	while (rn < mlx->width)
 	{
 		data->ray[rn].angle = vec_rotate(data->player.dir, -PLAYER_VIEW_ANGLE/ 2 + rn* PLAYER_VIEW_ANGLE/ mlx->width);

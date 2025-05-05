@@ -1,41 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_add.c                                          :+:      :+:    :+:   */
+/*   shape_types.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 12:44:48 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 23:49:37 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 20:27:49 by rreimann          #+#    #+#             */
+/*   Updated: 2025/05/02 14:48:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SHAPE_TYPES_H
+#define SHAPE_TYPES_H
+
 #include "vector.h"
 
-t_vec2	vec_add(t_vec2 first, t_vec2 second)
+typedef struct s_circle
 {
-	t_vec2	new_vec;
+	t_vec2	pos;
+	double	radius;
+}	t_circle;
 
-	new_vec.x = first.x + second.x;
-	new_vec.y = first.y + second.y;
-	return (new_vec);
-}
-
-t_vec2	vec_add_n(t_vec2 vec, double n)
+typedef struct s_rect
 {
-	vec.x += n;
-	vec.y += n;
-	return (vec);
-}
+	t_vec2	vertices[4];
+}	t_rect;
 
-void	vec_add_to(t_vec2 *vec, t_vec2 *addition)
+typedef struct s_bounds
 {
-	vec->x += addition->x;
-	vec->y += addition->y;
-}
+	double	top;
+	double	left;
+	double	right;
+	double	bottom;
+	double	width;
+	double	height;
+}	t_bounds;
 
-void	vec_add_n_to(t_vec2 *vec, double n)
+typedef struct s_line
 {
-	vec->x += n;
-	vec->y += n;
-}
+	t_vec2	start;
+	t_vec2	end;
+}	t_line;
+
+typedef struct s_transform
+{
+	t_vec2	origin;
+	double	rotation;
+}	t_transform;
+
+#endif

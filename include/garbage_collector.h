@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:10:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/25 12:42:47 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:00:54 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void			*gc_malloc(size_t size_bytes);
 
 // Free the passed address of memmory
 // also remove it from the `allocs` linked list
-//! if the passed address was not found from the `allocs` list
-//! ...print a warning message in the console (aka "double free detected")
+// if the passed address was not found from the `allocs` list
+// ...print a warning message in the console (aka "double free detected")
 void			gc_free(void *pointer);
 
 // Free up all the memory in the `allocs` list
@@ -59,7 +59,7 @@ void			unplanned_exit(void);
 void			gc_print_alloc_report();
 
 // SAFE FUNCTIONS
-char    **safe_split(char *str, char c);
-void	free_split(char **split);
+char			**safe_split(char *str, char c);
+void			free_split(char **split);
 
 #endif
