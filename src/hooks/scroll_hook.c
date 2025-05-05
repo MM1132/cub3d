@@ -6,14 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:53:27 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 18:59:57 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:56:13 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "settings.h"
 
-void	scroll_hook(double xdelta, double ydelta, void* param)
+void	scroll_hook(double xdelta, double ydelta, void *param)
 {
 	t_data	*data;
 
