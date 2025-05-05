@@ -43,7 +43,7 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		put_fill_rect_transform_fast( \
 			data->minimap.img, \
 			&tile_rect, \
-			(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->height / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+			(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->height / 2 }, M_PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 			color \
 		);
 	else

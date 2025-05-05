@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:26:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 16:29:11 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:51:36 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	put_color(int i, char *line, uint32_t *color)
 	b = ft_atoi(split[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (free_split(split), err_mssg());
-	*color = (r << 16) | (g << 8) | b;
+	*color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
 	return (free_split(split), 0);
 }
 
