@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 14:44:20 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:38:49 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
-# define MINIMAP_SCALE 30
+# define MINIMAP_SCALE 10
 # define MINIMAP_MARGIN 15
 # define MINIMAP_RANGE 12
 # define MINIMAP_CAMERA_FOLLOW_SPEED 1
@@ -33,9 +33,6 @@
 # define PLAYER_ROTATION_SPEED 0.005
 # define PLAYER_SIZE 0.8
 
-# define PI 3.141592653589793
-
 // Defines the viewing angle and the number of rays
-# define PLAYER_VIEW_ANGLE PI/2
-
+# define PLAYER_VIEW_ANGLE M_PI/2
 #endif
