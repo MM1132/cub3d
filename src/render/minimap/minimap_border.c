@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   minimap_border.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 19:34:07 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 15:02:50 by rreimann         ###   ########.fr       */
+/*   Created: 2025/05/05 14:54:05 by rreimann          #+#    #+#             */
+/*   Updated: 2025/05/05 14:54:34 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+#include "shape_types.h"
+#include "settings.h"
 #include "render.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+void	render_minimap_border(t_data *data)
 {
-	put_line(img, rect->vertices[0], rect->vertices[1], color);
-	put_line(img, rect->vertices[1], rect->vertices[2], color);
-	put_line(img, rect->vertices[3], rect->vertices[2], color);
-	put_line(img, rect->vertices[0], rect->vertices[3], color);
+	t_rect	border_rect;
+
+	border_rect = rect_from_point( \
+		vec_new(0, 0), \
+		2 * MINIMAP_RANGE * MINIMAP_SCALE, \
+		2 * MINIMAP_RANGE * MINIMAP_SCALE
+	);
+	put_rect(data->minimap.img, &border_rect, 0xFFFFFFFF);
 }

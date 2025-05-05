@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 14:38:57 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:21:54 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_inputs
 	t_vec2	mouse_pos;
 	bool	toggle_minimap_grid;
 	bool	toggle_minimap_rotation;
+	bool	toggle_minimap_rays;
 }	t_inputs;
 
 typedef struct s_minimap
@@ -123,6 +124,8 @@ int			white_space(char *str, int i);
 int			white_space_skip(char *str, int i);
 // Create the map and return 0 if the map is valid
 int			create_map(char *file, char *line, t_data *data);
+// Check if a coordinate is within the map
+int			within_map_bounds(t_map *map, size_t x, size_t y);
 // free split
 void		free_split(char **split);
 // write error massage, return 1

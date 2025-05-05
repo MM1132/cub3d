@@ -72,8 +72,8 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 	}
 }
 
-void	minimap_render_grid(t_data *data, t_vec2 offset)
+void	minimap_render_grid(t_data *data)
 {
-	minimap_render_grid_vertical(data, offset);
-	minimap_render_grid_horizontal(data, offset);
+	minimap_render_grid_vertical(data, data->minimap.camera_pos);
+	minimap_render_grid_horizontal(data, data->minimap.camera_pos);
 }
