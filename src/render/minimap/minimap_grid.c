@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_grid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 17:07:25 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 20:51:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include "settings.h"
 #include <math.h>
+
+static void	put_grid_line(t_data *data, t_vec2 start, t_vec2 end)
+{
+	put_line_rotation(\
+		data->minimap.img, \
+		&(t_line){start, end}, \
+		(t_transform){{data->minimap.img->width / 2, \
+			data->minimap.img->width / 2}, \
+			M_PI * 1.5 - atan2(data->player.dir.y, \
+				data->player.dir.x)}, \
+		0xFF2BEEFF \
+	);
+}
 
 static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 {
@@ -30,12 +43,7 @@ static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 	while (start.x < last_x)
 	{
 		if (data->inputs.toggle_minimap_rotation)
-			put_line_rotation( \
-				data->minimap.img, \
-				&(t_line){ start, end }, \
-				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, M_PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
-				0xFF2BEEFF \
-			);
+			put_grid_line(data, start, end);
 		else
 			put_line(data->minimap.img, start, end, 0xFF2BEEFF);
 		start.x += MINIMAP_SCALE;
@@ -59,12 +67,7 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 	while (start.y < last_y)
 	{
 		if (data->inputs.toggle_minimap_rotation)
-			put_line_rotation( \
-				data->minimap.img, \
-				&(t_line){ start, end }, \
-				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, M_PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
-				0xFF2BEEFF \
-			);
+			put_grid_line(data, start, end);
 		else
 			put_line(data->minimap.img, start, end, 0xFF2BEEFF);
 		start.y += MINIMAP_SCALE;

@@ -33,6 +33,7 @@ SRC_FILES := \
 	$(SRC_DIR)/update/player_movement.c \
 	$(SRC_DIR)/update/minimap_update.c \
 	$(SRC_DIR)/render/minimap/minimap_border.c \
+	$(SRC_DIR)/render/minimap/minimap_utils.c \
 	$(SRC_DIR)/render/minimap/minimap_rays.c \
 	$(SRC_DIR)/render/minimap/minimap_grid.c \
 	$(SRC_DIR)/render/minimap/minimap_player.c \

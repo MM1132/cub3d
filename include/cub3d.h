@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 18:55:15 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:41:39 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void		first_dis_calc(t_data *data, int32_t	rn);
 void		render_world(t_data *data);
 
 t_vec2		pos_to_minimap(t_vec2 pos);
+void		transform_vec_to_rotation(t_data *data, t_vec2 *vec);
 
 // HOOKS
 void		main_loop_hook(void *param);

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:56:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 19:58:45 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:35:45 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,50 +17,29 @@
 #include <limits.h>
 #include <math.h>
 
-typedef struct s_intersection
-{
-	t_vec2	line1_dir;
-	t_vec2	line2_dir;
-	t_vec2	between_starts;
-	double	denominator;
-	double	parameter1;
-	double	parameter2;
-}	t_intersection;
-
-typedef struct	s_intersection_result
-{
-	bool	collinear;
-	t_vec2	point;
-}	t_intersection_result;
-
-static t_intersection_result	intersection_of_two_lines(t_line line1, t_line line2)
+static t_intersection_result	intersection_of_two_lines( \
+	t_line line1, \
+	t_line line2)
 {
 	t_intersection			values;
 
 	values.line1_dir = vec_subtract(line1.end, line1.start);
 	values.line2_dir = vec_subtract(line2.end, line2.start);
-	
-	values.denominator = vec_cross_product(&values.line1_dir, &values.line2_dir);
-	
-	// If lines are parallel, then there is no intersection point
+	values.denominator = vec_cross_product(&values.line1_dir, \
+		&values.line2_dir);
 	if (values.denominator == 0)
-		return ((t_intersection_result) { false, (t_vec2) { 0, 0 } });
-
+		return ((t_intersection_result){false, (t_vec2){0, 0}});
 	values.between_starts = vec_subtract(line2.start, line1.start);
-
-	values.parameter1 = vec_cross_product(&values.between_starts, &values.line2_dir) / values.denominator;
-	values.parameter2 = vec_cross_product(&values.between_starts, &values.line1_dir) / values.denominator;
-
-	// Check if the intersection point of the lines is in the segments
-	// If not, we just return
+	values.parameter1 = vec_cross_product(&values.between_starts, \
+		&values.line2_dir) / values.denominator;
+	values.parameter2 = vec_cross_product(&values.between_starts, \
+		&values.line1_dir) / values.denominator;
 	if ((values.parameter1 < 0 || values.parameter1 > 1) && \
 		(values.parameter2 < 0 || values.parameter2 > 1))
-		return ((t_intersection_result) { false, (t_vec2) { 0, 0 } });
-	
-	// Here, we can calculate and return the true intersection point
-	return ((t_intersection_result) { true, (t_vec2) { \
+		return ((t_intersection_result){false, (t_vec2){0, 0}});
+	return ((t_intersection_result){true, (t_vec2){\
 		line1.start.x + values.parameter1 * values.line1_dir.x, \
-		line1.start.y + values.parameter1 * values.line1_dir.y } });
+		line1.start.y + values.parameter1 * values.line1_dir.y}});
 }
 
 // Make sure that we only have one line out of all the 4 results
@@ -124,11 +103,8 @@ void	put_fill_rect_transform( \
 	t_line		fill_line;
 	uint32_t	x;
 
-	// Transform the rect
 	rect_rotate_to(rect, transform);
 	rect_bounds = rect_get_bounds(rect);
-
-	// Loop through all the y coordinates of the rect
 	horizontal_line.start = vec_new(rect_bounds.left, rect_bounds.top);
 	horizontal_line.end = vec_new(rect_bounds.right, rect_bounds.top);
 	while (horizontal_line.start.y <= rect_bounds.bottom)

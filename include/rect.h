@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:55:30 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 21:43:59 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:34:00 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 
 #include "vector.h"
 #include "shape_types.h"
+
+typedef struct s_intersection
+{
+	t_vec2	line1_dir;
+	t_vec2	line2_dir;
+	t_vec2	between_starts;
+	double	denominator;
+	double	parameter1;
+	double	parameter2;
+}	t_intersection;
+
+typedef struct	s_intersection_result
+{
+	bool	collinear;
+	t_vec2	point;
+}	t_intersection_result;
 
 // Create and return a new transformed rect based on a reference
 void		rect_rotate_to(t_rect *rect, t_transform transform);

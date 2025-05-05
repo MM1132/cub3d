@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 19:56:17 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:36:58 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
 #include "rect.h"
 #include "collision_detection.h"
 
-static void	render_tile_with_offset(t_data *data, size_t x, size_t y, t_vec2 offset)
+static void	render_tile_with_offset( \
+	t_data *data, \
+	size_t x, \
+	size_t y, \
+	t_vec2 offset)
 {
 	t_rect		tile_rect;
 	uint32_t	color;
 
-	tile_rect = rect_from_point( \
-		vec_new( \
+	tile_rect = rect_from_point(\
+		vec_new(\
 			((double)x - (offset.x)) * MINIMAP_SCALE, \
 			((double)y - (offset.y)) * MINIMAP_SCALE), \
 		MINIMAP_SCALE, MINIMAP_SCALE);
@@ -35,11 +39,11 @@ static void	render_tile_with_offset(t_data *data, size_t x, size_t y, t_vec2 off
 	if (color == 0)
 		return ;
 	if (data->inputs.toggle_minimap_rotation)
-		put_fill_rect_transform( \
+		put_fill_rect_transform(\
 			data->minimap.img, \
 			&tile_rect, \
-			(t_transform) {{ data->minimap.img->width / 2, \
-				data->minimap.img->height / 2 }, M_PI * 1.5 - \
+			(t_transform){{data->minimap.img->width / 2, \
+				data->minimap.img->height / 2}, M_PI * 1.5 - \
 				atan2(data->player.dir.y, data->player.dir.x)}, color);
 	else
 		put_fill_rect(data->minimap.img, &tile_rect, color);
