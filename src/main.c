@@ -49,9 +49,6 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	init_data(&data);
-
-	data.ray = gc_malloc(mlx->width * sizeof (*data.ray));
-	data.ray[0].length = -1;
 	if (argc != 2 || !ft_strrchr(argv[1], '.') || ft_strncmp(ft_strrchr(argv[1],
 				'.'), ".cub", 5))
 		return (write(2, "Error: Usage: ./cub3D <map.cub>\n", 33), 1);

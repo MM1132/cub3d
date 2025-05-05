@@ -17,4 +17,5 @@ void	init_player(t_player *player)
 	player->pos = vec_new(3, 3);
 	player->speed = vec_new(0, 0);
 	player->dir = vec_new(1, 0);
+	player->center = vec_new(0, 0);
 }

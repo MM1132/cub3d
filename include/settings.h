@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 21:14:39 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:44:20 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // Defines the speed at which the speed will be decreasing over time
 # define PLAYER_SPEED_DECREASE_MULTIPLIER 0.82
 # define PLAYER_ROTATION_SPEED 0.005
-# define PLAYER_SIZE 1.2
+# define PLAYER_SIZE 0.8
 
 # define PI 3.141592653589793
 
