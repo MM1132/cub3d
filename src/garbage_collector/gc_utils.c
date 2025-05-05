@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:09:56 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/28 15:44:13 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:03:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static t_alloc_report	gc_get_allocs_report(void)
 	return (report);
 }
 
-void	gc_print_alloc_report()
+void	gc_print_alloc_report(void)
 {
-	t_alloc_report report;
+	t_alloc_report	report;
 
 	report = gc_get_allocs_report();
 	if (report.tracked_count != 0 || \

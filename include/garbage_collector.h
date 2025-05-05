@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:10:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 15:00:54 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:03:14 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			gc_add(void *pointer, size_t size);
 void			unplanned_exit(void);
 
 // Print out the repot of allocs in our program
-void			gc_print_alloc_report();
+void			gc_print_alloc_report(void);
 
 // SAFE FUNCTIONS
 char			**safe_split(char *str, char c);
