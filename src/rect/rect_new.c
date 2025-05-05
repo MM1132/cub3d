@@ -6,23 +6,24 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:55:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/04 20:16:42 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 09:34:42 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rect.h"
 #include "vector.h"
+#include <math.h>
 
-t_rect	rect_new2(t_vec2 a, t_vec2 c)
+t_rect	rect_new2(t_vec2 a, t_vec2 b)
 {
 	t_rect	new_rect;
 
 	new_rect.vertices[0] = a;
-	new_rect.vertices[1].x = c.x;
+	new_rect.vertices[1].x = b.x;
 	new_rect.vertices[1].y = a.y;
-	new_rect.vertices[2] = c;
+	new_rect.vertices[2] = b;
 	new_rect.vertices[3].x = a.x;
-	new_rect.vertices[3].y = c.x;
+	new_rect.vertices[3].y = b.y;
 	return (new_rect);
 }
 

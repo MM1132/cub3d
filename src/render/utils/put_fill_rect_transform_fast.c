@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:56:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/04 20:32:49 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:44:14 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	put_fill_rect_transform_fast( \
 	// Loop through all the y coordinates of the rect
 	horizontal_line.start = vec_new(rect_bounds.left, rect_bounds.top);
 	horizontal_line.end = vec_new(rect_bounds.right, rect_bounds.top);
-	while (horizontal_line.start.y < rect_bounds.bottom)
+	while (horizontal_line.start.y <= rect_bounds.bottom)
 	{
 		fill_line = calculate_line_points(&horizontal_line, rect);
 
