@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:37 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 12:13:00 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:06:59 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "collision_detection.h"
 #include "rect.h"
 #include "render.h"
+#include "math.h"
 
 static int	four_keys(t_data *data)
 {
@@ -31,11 +32,11 @@ static int	three_keys(t_data *data, t_vec2 *speed)
 	if (data->inputs.key_w && data->inputs.key_a && data->inputs.key_d)
 		return (1);
 	else if (data->inputs.key_a && data->inputs.key_w && data->inputs.key_s)
-		return (vec_rotate_to(speed, PI * -0.5), 1);
+		return (vec_rotate_to(speed, -M_PI_2), 1);
 	else if (data->inputs.key_s && data->inputs.key_a && data->inputs.key_d)
-		return (vec_rotate_to(speed, PI * -1), 1);
+		return (vec_rotate_to(speed, -M_PI), 1);
 	else if (data->inputs.key_d && data->inputs.key_w && data->inputs.key_s)
-		return (vec_rotate_to(speed, PI * 0.5), 1);
+		return (vec_rotate_to(speed, M_PI_2), 1);
 	return (0);
 }
 
@@ -44,15 +45,15 @@ static int	two_keys(t_data *data, t_vec2 *speed)
 	if (data->inputs.key_w && data->inputs.key_s)
 		return (1);
 	else if (data->inputs.key_a && data->inputs.key_d)
-		return (vec_rotate_to(speed, PI * -0.5), 1);
+		return (vec_rotate_to(speed, -M_PI_2), 1);
 	else if (data->inputs.key_w && data->inputs.key_d)
-		return (vec_rotate_to(speed, PI * 0.25), 1);
+		return (vec_rotate_to(speed, M_PI_4), 1);
 	else if (data->inputs.key_d && data->inputs.key_s)
-		return (vec_rotate_to(speed, PI * 0.75), 1);
+		return (vec_rotate_to(speed, M_PI * 0.75), 1);
 	else if (data->inputs.key_s && data->inputs.key_a)
-		return (vec_rotate_to(speed, PI * -0.75), 1);
+		return (vec_rotate_to(speed, M_PI * -0.75), 1);
 	else if (data->inputs.key_w && data->inputs.key_a)
-		return (vec_rotate_to(speed, PI * -0.25), 1);
+		return (vec_rotate_to(speed, -M_PI_4), 1);
 	return (0);
 }
 
@@ -61,11 +62,11 @@ static int	one_key(t_data *data, t_vec2 *speed)
 	if (data->inputs.key_w)
 		return (1);
 	else if (data->inputs.key_a)
-		return (vec_rotate_to(speed, PI * -0.5), 1);
+		return (vec_rotate_to(speed, -M_PI_2), 1);
 	else if (data->inputs.key_s)
-		return (vec_rotate_to(speed, PI * -1), 1);
+		return (vec_rotate_to(speed, -M_PI), 1);
 	else if (data->inputs.key_d)
-		return (vec_rotate_to(speed, PI * 0.5), 1);
+		return (vec_rotate_to(speed, M_PI_2), 1);
 	return (0);
 }
 

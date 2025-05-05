@@ -6,18 +6,18 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 14:41:29 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:12:40 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "settings.h"
 #include "garbage_collector.h"
+#include "settings.h"
 
-void init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	uint32_t	minimap_img_size;
-	
+
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	data->no_texture = NULL;

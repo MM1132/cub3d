@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_grid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:50:10 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:07:25 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 			put_line_rotation( \
 				data->minimap.img, \
 				&(t_line){ start, end }, \
-				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, M_PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 				0xFF2BEEFF \
 			);
 		else
@@ -62,7 +62,7 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 			put_line_rotation( \
 				data->minimap.img, \
 				&(t_line){ start, end }, \
-				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, M_PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 				0xFF2BEEFF \
 			);
 		else
