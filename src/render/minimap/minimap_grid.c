@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 16:06:13 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/04/30 22:50:10 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 	{
 		if (data->inputs.toggle_minimap_rotation)
 			put_line_rotation( \
-				data->minimap_img, \
+				data->minimap.img, \
 				&(t_line){ start, end }, \
-				(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 				0xFF2BEEFF \
 			);
 		else
-			put_line(data->minimap_img, start, end, 0xFF2BEEFF);
+			put_line(data->minimap.img, start, end, 0xFF2BEEFF);
 		start.x += MINIMAP_SCALE;
 		end.x = start.x;
 	}
@@ -60,13 +60,13 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 	{
 		if (data->inputs.toggle_minimap_rotation)
 			put_line_rotation( \
-				data->minimap_img, \
+				data->minimap.img, \
 				&(t_line){ start, end }, \
-				(t_pixel_transform) {{ data->minimap_img->width / 2, data->minimap_img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
+				(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->width / 2 }, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
 				0xFF2BEEFF \
 			);
 		else
-			put_line(data->minimap_img, start, end, 0xFF2BEEFF);
+			put_line(data->minimap.img, start, end, 0xFF2BEEFF);
 		start.y += MINIMAP_SCALE;
 		end.y = start.y;
 	}

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cursor_hook.c                                      :+:      :+:    :+:   */
+/*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 14:57:02 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 18:37:00 by rreimann         ###   ########.fr       */
+/*   Created: 2025/04/30 22:38:50 by rreimann          #+#    #+#             */
+/*   Updated: 2025/04/30 23:39:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "MLX42.h"
 #include "settings.h"
 
-// void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param)
-void	cursor_hook(double xpos, double ypos, void *param)
+void	init_minimap(t_data *data)
 {
-	t_data	*data;
-	double	diff_x;
+	uint32_t	minimap_img_size;
 
-	data = (t_data *)param;
-	if (xpos != data->inputs.mouse_pos.x)
-	{
-		diff_x = xpos - data->inputs.mouse_pos.x;
-		vec_rotate_to(&data->player.dir, diff_x * PLAYER_ROTATION_SPEED);
-	}
-
-	data->inputs.mouse_pos.x = xpos;
-	data->inputs.mouse_pos.y = ypos;
+	data->minimap.camera_pos = vec_add_n( \
+		data->player.pos, \
+		PLAYER_SIZE / 2 - MINIMAP_RANGE \
+	);
+	minimap_img_size = 2 * MINIMAP_RANGE * MINIMAP_SCALE;
+	data->minimap.img = mlx_new_image(mlx, minimap_img_size, minimap_img_size);
 }
