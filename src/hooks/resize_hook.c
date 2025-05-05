@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resize_hook.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:03:53 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/30 15:54:26 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ray_malloc(t_data *data)
 {
 	if (data->ray)
 		gc_free(data->ray);
-	data->ray = gc_malloc(mlx->width * sizeof(t_ray));
+	data->ray = gc_malloc(g_mlx->width * sizeof(t_ray));
 }
 
 void	resize_hook(int32_t width, int32_t height, void *param)
@@ -27,7 +27,7 @@ void	resize_hook(int32_t width, int32_t height, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	mlx->height = height;
-	mlx->width = width;
+	g_mlx->height = height;
+	g_mlx->width = width;
 	ray_malloc(data);
 }

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:57:27 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 
 static void	get_keyboard_input(t_data *data)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	data->inputs.key_w = mlx_is_key_down(mlx, MLX_KEY_W);
-	data->inputs.key_a = mlx_is_key_down(mlx, MLX_KEY_A);
-	data->inputs.key_s = mlx_is_key_down(mlx, MLX_KEY_S);
-	data->inputs.key_d = mlx_is_key_down(mlx, MLX_KEY_D);
-	data->inputs.key_right = mlx_is_key_down(mlx, MLX_KEY_RIGHT);
-	data->inputs.key_left = mlx_is_key_down(mlx, MLX_KEY_LEFT);
+	if (mlx_is_key_down(g_mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(g_mlx);
+	data->inputs.key_w = mlx_is_key_down(g_mlx, MLX_KEY_W);
+	data->inputs.key_a = mlx_is_key_down(g_mlx, MLX_KEY_A);
+	data->inputs.key_s = mlx_is_key_down(g_mlx, MLX_KEY_S);
+	data->inputs.key_d = mlx_is_key_down(g_mlx, MLX_KEY_D);
+	data->inputs.key_right = mlx_is_key_down(g_mlx, MLX_KEY_RIGHT);
+	data->inputs.key_left = mlx_is_key_down(g_mlx, MLX_KEY_LEFT);
 }
 
 static void	update(t_data *data)

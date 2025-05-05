@@ -6,15 +6,16 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:55:30 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:34:00 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:07:34 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RECT_H
-#define RECT_H
+# define RECT_H
 
-#include "vector.h"
-#include "shape_types.h"
+# include "vector.h"
+# include "shape_types.h"
+# include <stdbool.h>
 
 typedef struct s_intersection
 {
@@ -26,7 +27,7 @@ typedef struct s_intersection
 	double	parameter2;
 }	t_intersection;
 
-typedef struct	s_intersection_result
+typedef struct s_intersection_result
 {
 	bool	collinear;
 	t_vec2	point;

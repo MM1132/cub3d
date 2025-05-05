@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:53:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:40:59 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	render_minimap_rays(t_data *data)
 	if (data->inputs.toggle_minimap_rotation)
 		transform_vec_to_rotation(data, &player_center);
 	ray_index = 0;
-	while (ray_index < mlx->width)
+	while (ray_index < g_mlx->width)
 	{
 		ray_line.start = player_center;
 		ray_line.end = vec_subtract(data->ray[ray_index].dis_pos, \

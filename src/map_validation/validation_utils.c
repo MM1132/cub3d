@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:18:31 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 15:45:57 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:08:44 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	white_space(char *str, int i)
 		return (1);
 	return (0);
 }
-int err_mssg()
+int err_mssg(void)
 {
 	write(2, "Error: invalid map\n", 20);
 	return(1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 15:12:40 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	init_data(t_data *data)
 {
 	uint32_t	minimap_img_size;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	g_mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	data->no_texture = NULL;
 	data->so_texture = NULL;
 	data->we_texture = NULL;
@@ -32,8 +32,8 @@ void	init_data(t_data *data)
 	data->ray = NULL;
 	init_player(&data->player);
 	init_inputs(&data->inputs);
-	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	minimap_img_size = 2 * MINIMAP_RANGE * MINIMAP_SCALE;
-	data->minimap.img = mlx_new_image(mlx, minimap_img_size, minimap_img_size);
-	data->ray = gc_malloc(mlx->width * sizeof(t_ray));
+	data->minimap.img = mlx_new_image(g_mlx, minimap_img_size, minimap_img_size);
+	data->ray = gc_malloc(g_mlx->width * sizeof(t_ray));
 }

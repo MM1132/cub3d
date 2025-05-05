@@ -6,12 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:12:11 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:06:23 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTINGS_H
 # define SETTINGS_H
+
+# include <math.h>
 
 // Window
 # define WIDTH 1800
@@ -35,5 +37,6 @@
 # define MINIMAP_PLAYER_SIZE 2
 
 // Defines the viewing angle and the number of rays
-# define PLAYER_VIEW_ANGLE M_PI/2
+# define PLAYER_VIEW_ANGLE M_PI_2
+
 #endif

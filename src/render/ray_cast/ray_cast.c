@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 14:42:35 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,9 @@ void	ray_cast(t_data *data)
 
 	rn = 0;
 	data->player.center = vec_add_n(data->player.pos, PLAYER_SIZE / 2);
-	while (rn < mlx->width)
+	while (rn < g_mlx->width)
 	{
-		data->ray[rn].angle = vec_rotate(data->player.dir, -PLAYER_VIEW_ANGLE/ 2 + rn* PLAYER_VIEW_ANGLE/ mlx->width);
+		data->ray[rn].angle = vec_rotate(data->player.dir, -PLAYER_VIEW_ANGLE/ 2 + rn* PLAYER_VIEW_ANGLE/ g_mlx->width);
 		calculate_ray(data, rn);
 		//draw_ray_mini_map(data, rn);
 		rn++;

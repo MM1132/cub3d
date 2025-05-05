@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 17:41:23 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ void	render_world(t_data *data)
 
 	i = 0;
 	player_angle = atan2(data->player.dir.y, data->player.dir.x);
-	while (i < mlx->width)
+	while (i < g_mlx->width)
 	{
 		u = 0;
-		height = mlx->height / calc_distance(i, data, player_angle);
-		while (u < mlx->height)
+		height = g_mlx->height / calc_distance(i, data, player_angle);
+		while (u < g_mlx->height)
 		{
-			if (u < ((mlx->height / 2) - ((int)height / 2)))
+			if (u < ((g_mlx->height / 2) - ((int)height / 2)))
 				mlx_put_pixel(data->img, i, u, data->ceiling_color);
-			else if (u > ((mlx->height / 2) + ((int)height / 2)))
+			else if (u > ((g_mlx->height / 2) + ((int)height / 2)))
 				mlx_put_pixel(data->img, i, u, data->floor_color);
 			else
 				put_wall_pixel(data, i, u);

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:37 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 19:47:00 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	player_update(t_data *data)
 	t_vec2		speed;
 
 	speed = vec_multiply_n(data->player.dir, \
-		PLAYER_ACCELERATION * mlx->delta_time);
+		PLAYER_ACCELERATION * g_mlx->delta_time);
 	if (four_keys(data) || three_keys(data, &speed) || \
 		two_keys(data, &speed) || one_key(data, &speed))
 		vec_add_to(&data->player.speed, &speed);
