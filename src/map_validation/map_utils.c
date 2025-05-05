@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_rect.c                                         :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 19:34:07 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 15:02:50 by rreimann         ###   ########.fr       */
+/*   Created: 2025/05/05 14:56:09 by rreimann          #+#    #+#             */
+/*   Updated: 2025/05/05 14:57:16 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "cub3d.h"
 
-void	put_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+int	within_map_bounds(t_map *map, size_t x, size_t y)
 {
-	put_line(img, rect->vertices[0], rect->vertices[1], color);
-	put_line(img, rect->vertices[1], rect->vertices[2], color);
-	put_line(img, rect->vertices[3], rect->vertices[2], color);
-	put_line(img, rect->vertices[0], rect->vertices[3], color);
+	return (x >= 0 && x < map->width && y >= 0 && y < map->height);
 }

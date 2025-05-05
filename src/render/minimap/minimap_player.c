@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:36:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/01 00:56:10 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:37:08 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void	render_minimap_player(t_data *data)
 		vec_rotate_to(&player_line.end, PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x));
 		vec_add_to(&player_line.end, &player_line.start);
 	}
-
-	put_line(data->minimap.img, player_line.start, player_line.end, 0xFF00FFFF);
+	put_line(data->minimap.img, player_line.start, player_line.end, 0x00FF00FF);
 }

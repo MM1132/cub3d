@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:50:10 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:58:51 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 	}
 }
 
-void	minimap_render_grid(t_data *data, t_vec2 offset)
+void	minimap_render_grid(t_data *data)
 {
-	minimap_render_grid_vertical(data, offset);
-	minimap_render_grid_horizontal(data, offset);
+	minimap_render_grid_vertical(data, data->minimap.camera_pos);
+	minimap_render_grid_horizontal(data, data->minimap.camera_pos);
 }

@@ -31,6 +31,8 @@ SRC_FILES := \
 	$(SRC_DIR)/init/init_inputs.c \
 	$(SRC_DIR)/update/player_update.c \
 	$(SRC_DIR)/update/minimap_update.c \
+	$(SRC_DIR)/render/minimap/minimap_border.c \
+	$(SRC_DIR)/render/minimap/minimap_rays.c \
 	$(SRC_DIR)/render/minimap/minimap_grid.c \
 	$(SRC_DIR)/render/minimap/minimap_player.c \
 	$(SRC_DIR)/render/minimap/minimap.c \
@@ -70,6 +72,7 @@ SRC_FILES := \
 	$(SRC_DIR)/garbage_collector/gc_utils.c \
 	$(SRC_DIR)/garbage_collector/safe_functions/safe_split.c \
 	$(SRC_DIR)/garbage_collector/safe_functions/safe_gnl.c \
+	$(SRC_DIR)/map_validation/map_utils.c \
 	$(SRC_DIR)/map_validation/map_validation.c \
 	$(SRC_DIR)/map_validation/validation_utils.c \
 	$(SRC_DIR)/map_validation/create_map.c \

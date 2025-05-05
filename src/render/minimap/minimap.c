@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 14:46:36 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:34:03 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 #include <math.h>
 #include "rect.h"
 #include "collision_detection.h"
-
-static int	within_bounds(t_map *map, size_t x, size_t y)
-{
-	return (x >= 0 && x < map->width && y >= 0 && y < map->height);
-}
 
 static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 {
@@ -34,7 +29,7 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		MINIMAP_SCALE,
 		MINIMAP_SCALE
 	);
-	if (!within_bounds(&data->map, x, y))
+	if (!within_map_bounds(&data->map, x, y))
 		return ;
 	color = 0;
 	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
@@ -72,26 +67,16 @@ void	render_minimap_tiles(t_data *data)
 			render_tile_with_offset(data, x, y, data->minimap.camera_pos);
 		}
 	}
-	if (data->inputs.toggle_minimap_grid)
-		minimap_render_grid(data, data->minimap.camera_pos);
-}
-
-void	render_minimap_border(t_data *data)
-{
-	t_rect	border_rect;
-
-	border_rect = rect_from_point( \
-		vec_new(0, 0), \
-		2 * MINIMAP_RANGE * MINIMAP_SCALE, \
-		2 * MINIMAP_RANGE * MINIMAP_SCALE
-	);
-	put_rect(data->minimap.img, &border_rect, 0xFFFFFFFF);
 }
 
 void	minimap_render(t_data *data)
 {
 	put_fill(data->minimap.img, 0x222222AA);
 	render_minimap_tiles(data);
-	render_minimap_border(data);
+	if (data->inputs.toggle_minimap_grid)
+		minimap_render_grid(data);
+	if (data->inputs.toggle_minimap_rays)
+		render_minimap_rays(data);
 	render_minimap_player(data);
+	render_minimap_border(data);
 }
