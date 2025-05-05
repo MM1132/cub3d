@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 17:34:03 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:51:58 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "rect.h"
 #include "collision_detection.h"
 
-static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
+static void	render_tile_with_offset(t_data *data, size_t x, size_t y, t_vec2 offset)
 {
 	t_rect		tile_rect;
 	uint32_t	color;
@@ -26,11 +26,7 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		vec_new( \
 			((double)x - (offset.x)) * MINIMAP_SCALE, \
 			((double)y - (offset.y)) * MINIMAP_SCALE), \
-		MINIMAP_SCALE,
-		MINIMAP_SCALE
-	);
-	if (!within_map_bounds(&data->map, x, y))
-		return ;
+		MINIMAP_SCALE, MINIMAP_SCALE);
 	color = 0;
 	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
 		color = 0xdbdbdbFF;
@@ -38,33 +34,30 @@ static void	render_tile_with_offset(t_data *data, int x, int y, t_vec2 offset)
 		color = 0x555555FF;
 	if (color == 0)
 		return ;
-
 	if (data->inputs.toggle_minimap_rotation)
 		put_fill_rect_transform_fast( \
 			data->minimap.img, \
 			&tile_rect, \
-			(t_transform) {{ data->minimap.img->width / 2, data->minimap.img->height / 2 }, M_PI * 1.5 -atan2(data->player.dir.y, data->player.dir.x)}, \
-			color \
-		);
+			(t_transform) {{ data->minimap.img->width / 2, \
+				data->minimap.img->height / 2 }, M_PI * 1.5 - \
+				atan2(data->player.dir.y, data->player.dir.x)}, color);
 	else
 		put_fill_rect(data->minimap.img, &tile_rect, color);
 }
 
 void	render_minimap_tiles(t_data *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
-	// printf("Camera pos: %f; %f\n", data->minimap.camera_pos.x,data->minimap.camera_pos.y);
-	y = (int)data->minimap.camera_pos.y;
-	// printf("x start: %f\n", (int)data->minimap.camera_pos.x / MINIMAP_SCALE - 1);
-	while (y++ < data->minimap.camera_pos.y + MINIMAP_RANGE * 2 - 2)
+	y = (int)data->minimap.camera_pos.y - 1;
+	while (++y < data->minimap.camera_pos.y + MINIMAP_RANGE * 2)
 	{
-		x = (int)data->minimap.camera_pos.x;
-		while (x++ < data->minimap.camera_pos.x + MINIMAP_RANGE * 2 - 2)
+		x = (int)data->minimap.camera_pos.x - 1;
+		while (++x < data->minimap.camera_pos.x + MINIMAP_RANGE * 2)
 		{
-			// printf("rendering tile at: %d; %d\n", x, y);
-			render_tile_with_offset(data, x, y, data->minimap.camera_pos);
+			if (within_map_bounds(&data->map, x, y))
+				render_tile_with_offset(data, x, y, data->minimap.camera_pos);
 		}
 	}
 }
