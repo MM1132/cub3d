@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:54:05 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 14:54:34 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:33:37 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	render_minimap_border(t_data *data)
 
 	border_rect = rect_from_point( \
 		vec_new(0, 0), \
-		2 * MINIMAP_RANGE * MINIMAP_SCALE, \
-		2 * MINIMAP_RANGE * MINIMAP_SCALE
+		2 * MINIMAP_RANGE * MINIMAP_SCALE - 1, \
+		2 * MINIMAP_RANGE * MINIMAP_SCALE - 1
 	);
 	put_rect(data->minimap.img, &border_rect, 0xFFFFFFFF);
 }

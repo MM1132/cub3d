@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 18:51:58 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:56:17 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	render_tile_with_offset(t_data *data, size_t x, size_t y, t_vec2 off
 	if (color == 0)
 		return ;
 	if (data->inputs.toggle_minimap_rotation)
-		put_fill_rect_transform_fast( \
+		put_fill_rect_transform( \
 			data->minimap.img, \
 			&tile_rect, \
 			(t_transform) {{ data->minimap.img->width / 2, \

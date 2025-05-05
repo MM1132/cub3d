@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 17:21:54 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:55:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,11 @@ void 		resize_hook(int32_t width, int32_t height, void* param);
 
 // UPDATING STUFF
 void		player_update(t_data *data);
+int			four_keys(t_data *data);
+int			three_keys(t_data *data, t_vec2 *speed);
+int			two_keys(t_data *data, t_vec2 *speed);
+int			one_key(t_data *data, t_vec2 *speed);
+
 void		minimap_update(t_data *data);
 
 #endif

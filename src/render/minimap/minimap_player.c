@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:36:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 17:37:08 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:00:43 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	render_minimap_player(t_data *data)
 		vec_add_to(&player_center, &transform_rotation);
 	}
 	put_circle(data->minimap.img, player_center, \
-		PLAYER_SIZE * MINIMAP_SCALE / 2, 0xfffb00FF);
+		MINIMAP_PLAYER_SIZE * MINIMAP_SCALE / 2, 0xfffb00FF);
 
 	player_line.start = player_center;
-	player_line.end = vec_multiply_n(data->player.dir, MINIMAP_SCALE * PLAYER_SIZE);
+	player_line.end = vec_multiply_n(data->player.dir, MINIMAP_SCALE * MINIMAP_PLAYER_SIZE);
 	vec_add_to(&player_line.end, &player_center);
 
 	if (data->inputs.toggle_minimap_rotation)

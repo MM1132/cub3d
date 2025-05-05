@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_fill_rect_transform_fast.c                     :+:      :+:    :+:   */
+/*   put_fill_rect_transform.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:56:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/04 20:44:14 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:58:45 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static t_line	calculate_line_points(t_line *horizontal, t_rect *rect)
 	return (filter_results(results));
 }
 
-void	put_fill_rect_transform_fast( \
+void	put_fill_rect_transform( \
 	mlx_image_t *img, \
 	t_rect *rect, \
 	t_transform transform, \
@@ -122,12 +122,11 @@ void	put_fill_rect_transform_fast( \
 	t_bounds	rect_bounds;
 	t_line		horizontal_line;
 	t_line		fill_line;
+	uint32_t	x;
 
 	// Transform the rect
 	rect_rotate_to(rect, transform);
 	rect_bounds = rect_get_bounds(rect);
-
-	// put_rect_rotation(img, rect, (t_transform){(t_vec2){0,0},0}, color);
 
 	// Loop through all the y coordinates of the rect
 	horizontal_line.start = vec_new(rect_bounds.left, rect_bounds.top);
@@ -135,18 +134,14 @@ void	put_fill_rect_transform_fast( \
 	while (horizontal_line.start.y <= rect_bounds.bottom)
 	{
 		fill_line = calculate_line_points(&horizontal_line, rect);
-
 		if (fill_line.start.x < 0)
 			fill_line.start.x = 0;
-
 		if (fill_line.start.x != __DBL_MAX__ && fill_line.end.x != __DBL_MIN__)
 		{
-			for (uint32_t x = (uint32_t)fill_line.start.x; x <= (uint32_t)ceil(fill_line.end.x); x++)
-			{
+			x = (uint32_t)fill_line.start.x - 1;
+			while (++x <= (uint32_t)ceil(fill_line.end.x))
 				put_pixel(img, x, (uint32_t)horizontal_line.start.y, color);
-			}
 		}
-		
 		horizontal_line.start.y += 1;
 		horizontal_line.end.y = horizontal_line.start.y;
 	}
