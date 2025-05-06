@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/04 16:43:45 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:15 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "settings.h"
 #include "MLX42.h"
 
-mlx_t		*mlx = NULL;
-int			map_value = 0;
+mlx_t		*g_mlx = NULL;
+int			g_map_value = 0;
 
 void	gc_free_map(t_data *data)
 {
@@ -55,19 +55,19 @@ int	main(int argc, char **argv)
 	if (map_validation(argv, &data))
 		return (1);
 	init_minimap(&data);
-	mlx_image_to_window(mlx, data.img, 0, 0);
-	mlx_image_to_window(mlx, data.minimap.img, MINIMAP_MARGIN, MINIMAP_MARGIN);
+	mlx_image_to_window(g_mlx, data.img, 0, 0);
+	mlx_image_to_window(g_mlx, data.minimap.img, MINIMAP_MARGIN, MINIMAP_MARGIN);
 
 	// Hooks
-	mlx_cursor_hook(mlx, cursor_hook, &data);
-	mlx_scroll_hook(mlx, scroll_hook, &data);
-	mlx_key_hook(mlx, key_hook, &data);
-	mlx_resize_hook(mlx, resize_hook, &data);
-	mlx_loop_hook(mlx, main_loop_hook, &data);
-	mlx_loop(mlx);
+	mlx_cursor_hook(g_mlx, cursor_hook, &data);
+	mlx_scroll_hook(g_mlx, scroll_hook, &data);
+	mlx_key_hook(g_mlx, key_hook, &data);
+	mlx_resize_hook(g_mlx, resize_hook, &data);
+	mlx_loop_hook(g_mlx, main_loop_hook, &data);
+	mlx_loop(g_mlx);
 
 	// Cleanup
-	mlx_terminate(mlx);
+	mlx_terminate(g_mlx);
 	free_data(&data);
 	gc_free_all();
 	return (0);

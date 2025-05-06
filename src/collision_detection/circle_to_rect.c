@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 01:19:13 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 11:47:37 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:26:57 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,16 +167,11 @@ t_collision	circle_collides_rect(t_circle *circle, t_rect *rect)
 	t_collision	collisions[5];
 
 	side_index = 0;
-	// printf("Calculating collision: \n");
 	while (side_index < 4)
 	{
 		collisions[side_index] = rect_collision(side_index, rect, circle);
-		
-		//printf("%d, %f, %f;%f -> %f\n", collisions[side_index].colliding, dot_product, collisions[side_index].dir.x, collisions[side_index].dir.y, collisions[side_index].amount);
-
 		side_index++;
 	}
 	collisions[4] = circle_collision(circle, rect);
-
 	return (filter_collisions(collisions, circle, rect));
 }

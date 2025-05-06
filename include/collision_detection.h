@@ -6,15 +6,15 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 23:35:23 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 01:48:30 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:33 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLLISION_DETECTION_H
-#define COLLISION_DETECTION_H
+# define COLLISION_DETECTION_H
 
-#include "rect.h"
-#include <stdbool.h>
+# include "rect.h"
+# include <stdbool.h>
 
 typedef struct s_collision
 {

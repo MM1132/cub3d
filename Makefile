@@ -30,8 +30,10 @@ SRC_FILES := \
 	$(SRC_DIR)/init/init_minimap.c \
 	$(SRC_DIR)/init/init_inputs.c \
 	$(SRC_DIR)/update/player_update.c \
+	$(SRC_DIR)/update/player_movement.c \
 	$(SRC_DIR)/update/minimap_update.c \
 	$(SRC_DIR)/render/minimap/minimap_border.c \
+	$(SRC_DIR)/render/minimap/minimap_utils.c \
 	$(SRC_DIR)/render/minimap/minimap_rays.c \
 	$(SRC_DIR)/render/minimap/minimap_grid.c \
 	$(SRC_DIR)/render/minimap/minimap_player.c \
@@ -43,8 +45,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_line.c \
 	$(SRC_DIR)/render/utils/put_line_rotation.c \
 	$(SRC_DIR)/render/utils/put_fill_rect.c \
-	$(SRC_DIR)/render/utils/put_fill_rect_rotation.c \
-	$(SRC_DIR)/render/utils/put_fill_rect_transform_fast.c \
+	$(SRC_DIR)/render/utils/put_fill_rect_transform.c \
 	$(SRC_DIR)/render/utils/put_rect.c \
 	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \

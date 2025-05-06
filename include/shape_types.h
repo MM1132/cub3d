@@ -6,14 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:27:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 14:48:00 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:04:30 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_TYPES_H
-#define SHAPE_TYPES_H
+# define SHAPE_TYPES_H
 
-#include "vector.h"
+# include "vector.h"
 
 typedef struct s_circle
 {

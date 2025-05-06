@@ -6,14 +6,14 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:47:47 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 17:22:20 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:57:41 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "MLX42.h"
 
-void	key_hook(mlx_key_data_t keydata, void* param)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
 

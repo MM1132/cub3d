@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:20:53 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 20:27:15 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:31:58 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ void	put_pixel_rotation( \
 	vec_subtract_to(&pos, &transform.origin);
 	vec_rotate_to(&pos, transform.rotation);
 	vec_add_to(&pos, &transform.origin);
-	
 	put_pixel(img, pos.x, pos.y, color);
 }

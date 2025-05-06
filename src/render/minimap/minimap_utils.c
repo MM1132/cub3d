@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_fill_rect.c                                    :+:      :+:    :+:   */
+/*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 15:39:09 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 18:52:35 by rreimann         ###   ########.fr       */
+/*   Created: 2025/05/05 20:40:42 by rreimann          #+#    #+#             */
+/*   Updated: 2025/05/05 20:41:23 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "render.h"
+#include "vector.h"
+#include <math.h>
 
-// This is filling a rect assuming no rotation
-void	put_fill_rect(mlx_image_t *img, t_rect *rect, uint32_t color)
+void	transform_vec_to_rotation(t_data *data, t_vec2 *vec)
 {
-	int	x;
-	int	y;
+	t_vec2	transform_rotation;
 
-	x = rect->vertices[0].x;
-	while (x < rect->vertices[1].x)
-	{
-		y = rect->vertices[0].y;
-		while (y < rect->vertices[2].y)
-		{
-			put_pixel(img, x, y, color);
-			y++;
-		}
-		x++;
-	}
+	transform_rotation.x = data->minimap.img->width / 2;
+	transform_rotation.y = data->minimap.img->height / 2;
+	vec_subtract_to(vec, &transform_rotation);
+	vec_rotate_to(vec, M_PI * 1.5 - atan2(data->player.dir.y, \
+		data->player.dir.x));
+	vec_add_to(vec, &transform_rotation);
 }

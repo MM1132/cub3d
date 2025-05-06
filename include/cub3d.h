@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 17:21:54 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:20 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 # include <stdio.h>
 # include <unistd.h>
 
-extern mlx_t	*mlx;
-extern int		map_value;
+extern mlx_t	*g_mlx;
+extern int		g_map_value;
 
 typedef struct s_help_ray
 {
 	double	angle;
 	double	dis_pos;
-	int 	ray_next_tile;
-	char 	tile_dir[2];
+	int		ray_next_tile;
+	char	tile_dir[2];
 }	t_help_ray;
 
 typedef struct s_ray
@@ -48,7 +48,8 @@ typedef struct s_player
 	t_vec2	center;
 }	t_player;
 
-#define NUMBER_OF_TILES 3
+# define NUMBER_OF_TILES 3
+
 typedef enum s_tile_type
 {
 	TILE_FLOOR,
@@ -114,7 +115,7 @@ void		init_data(t_data *data);
 
 // MAP VALIDATAION
 // set width and height of the map
-void	    set_width_height(char *file, t_data *data, int i);
+void		set_width_height(char *file, t_data *data, int i);
 // returns 1 when the map is invalid, and 0 when it is valid
 int			map_validation(char **argv, t_data *data);
 // returns 1 when the character is a whitespace
@@ -129,13 +130,13 @@ int			within_map_bounds(t_map *map, size_t x, size_t y);
 // free split
 void		free_split(char **split);
 // write error massage, return 1
-int			err_mssg();
+int			err_mssg(void);
 // frees the map
 void		gc_free_map(t_data *data);
 // read the map and create a file
 char		*read_file(char **argv);
 // get_next_line from file with gc
-char 		*safe_gnl(char *file);
+char		*safe_gnl(char *file);
 // find the start of the map
 int			find_map_start(char *file);
 // like atoi: it changes 'a' to tile_type
@@ -146,16 +147,22 @@ void		first_dis_calc(t_data *data, int32_t	rn);
 void		render_world(t_data *data);
 
 t_vec2		pos_to_minimap(t_vec2 pos);
+void		transform_vec_to_rotation(t_data *data, t_vec2 *vec);
 
 // HOOKS
 void		main_loop_hook(void *param);
-void		cursor_hook(double xpos, double ypos, void* param);
-void		scroll_hook(double xdelta, double ydelta, void* param);
-void		key_hook(mlx_key_data_t keydata, void* param);
-void 		resize_hook(int32_t width, int32_t height, void* param);
+void		cursor_hook(double xpos, double ypos, void *param);
+void		scroll_hook(double xdelta, double ydelta, void *param);
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		resize_hook(int32_t width, int32_t height, void *param);
 
 // UPDATING STUFF
 void		player_update(t_data *data);
+int			four_keys(t_data *data);
+int			three_keys(t_data *data, t_vec2 *speed);
+int			two_keys(t_data *data, t_vec2 *speed);
+int			one_key(t_data *data, t_vec2 *speed);
+
 void		minimap_update(t_data *data);
 
 #endif

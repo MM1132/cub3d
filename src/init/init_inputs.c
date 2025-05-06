@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:40:08 by rreimann          #+#    #+#             */
-/*   Updated: 2025/04/30 22:40:23 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	init_inputs(t_inputs *inputs)
 	inputs->key_a = false;
 	inputs->key_s = false;
 	inputs->key_d = false;
-	mlx_get_mouse_pos(mlx, &mouse_x, &mouse_y);
+	mlx_get_mouse_pos(g_mlx, &mouse_x, &mouse_y);
 	inputs->mouse_pos.x = mouse_x;
 	inputs->mouse_pos.y = mouse_y;
+	inputs->toggle_minimap_grid = false;
+	inputs->toggle_minimap_rays = true;
+	inputs->toggle_minimap_rotation = true;
 }

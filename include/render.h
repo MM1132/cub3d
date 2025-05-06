@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 15:06:13 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:07:10 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 void	put_pixel_rotation( \
 	mlx_image_t *img, \
 	t_vec2 pos, \
-	t_transform transform,
+	t_transform transform, \
 	uint32_t color \
 );
 
@@ -47,7 +47,7 @@ void	put_fill_rect_rotation( \
 	t_transform transform, \
 	uint32_t color \
 );
-void	put_fill_rect_transform_fast( \
+void	put_fill_rect_transform( \
 	mlx_image_t *img, \
 	t_rect *rect, \
 	t_transform transform, \
