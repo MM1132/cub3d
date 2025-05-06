@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:23:56 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ void	calculate_ray(t_data *data, int32_t	rn)
 	while (hit == 0)
 	{
 		ray_dis_calc(data, rn, &ray_next_tile);
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type != TILE_FLOOR)
+		if (!within_map_bounds(&data->map, ray_next_tile.x, ray_next_tile.y))
+			break ;
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_WALL)
 			hit = 1;
 	}
 	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x

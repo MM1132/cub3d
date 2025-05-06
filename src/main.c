@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:15 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:47:54 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 	init_minimap(&data);
 	mlx_image_to_window(g_mlx, data.img, 0, 0);
 	mlx_image_to_window(g_mlx, data.minimap.img, MINIMAP_MARGIN, MINIMAP_MARGIN);
+	put_help();
 
 	// Hooks
 	mlx_cursor_hook(g_mlx, cursor_hook, &data);

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:44:33 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	render(t_data *data)
 	put_fill(data->img, 0x000000FF);
 	ray_cast(data);
 	render_world(data);
+	render_crosshair(data);
 	minimap_render(data);
 }
 

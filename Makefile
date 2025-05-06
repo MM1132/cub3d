@@ -2,7 +2,7 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Wshadow
+CFLAGS := -Wall -Wextra -Werror -Wshadow
 #-fsanitize=address -g
 
 # Libft
@@ -50,6 +50,8 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \
 	$(SRC_DIR)/render/world/world.c \
+	$(SRC_DIR)/render/overlay/crosshair.c \
+	$(SRC_DIR)/render/overlay/help.c \
 	$(SRC_DIR)/vector/vec_swap_xy.c \
 	$(SRC_DIR)/vector/vec_product.c \
 	$(SRC_DIR)/vector/vec_add.c \

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 21:07:10 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:47:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "vector.h"
 # include "rect.h"
 # include "shape_types.h"
+
+// Overlay rendering
+void	render_crosshair(t_data *data);
+void	put_help(void);
 
 // Minimap rendering
 void	minimap_render(t_data *data);

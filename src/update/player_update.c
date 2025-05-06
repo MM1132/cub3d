@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:37 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:25:58 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	correct_player_position( \
 
 static t_vec2	collide_player(t_data *data)
 {
-	t_vec2		new_position;
-	int			x;
-	int			y;
+	t_vec2	new_position;
+	int		x;
+	int		y;
 
 	new_position = vec_add(data->player.pos, data->player.speed);
 	x = (int)new_position.x - 2;
