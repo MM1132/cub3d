@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 12:26:04 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:21:47 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_inputs
 	bool	toggle_minimap_grid;
 	bool	toggle_minimap_rotation;
 	bool	toggle_minimap_rays;
+	bool	mouse_locked;
 }	t_inputs;
 
 typedef struct s_minimap
@@ -155,6 +156,11 @@ void		cursor_hook(double xpos, double ypos, void *param);
 void		scroll_hook(double xdelta, double ydelta, void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		resize_hook(int32_t width, int32_t height, void *param);
+void		mouse_hook(\
+	mouse_key_t button, \
+	action_t action, \
+	modifier_key_t mods, \
+	void *param);
 
 // UPDATING STUFF
 void		player_update(t_data *data);

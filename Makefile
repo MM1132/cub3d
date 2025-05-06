@@ -64,6 +64,7 @@ SRC_FILES := \
 	$(SRC_DIR)/vector/vec_subtract_to.c \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/hooks/scroll_hook.c \
+	$(SRC_DIR)/hooks/mouse_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \
 	$(SRC_DIR)/hooks/resize_hook.c \
 	$(SRC_DIR)/hooks/key_hook.c \

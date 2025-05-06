@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 12:47:54 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:57:40 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char **argv)
 	mlx_scroll_hook(g_mlx, scroll_hook, &data);
 	mlx_key_hook(g_mlx, key_hook, &data);
 	mlx_resize_hook(g_mlx, resize_hook, &data);
+	mlx_mouse_hook(g_mlx, mouse_hook, &data);
 	mlx_loop_hook(g_mlx, main_loop_hook, &data);
 	mlx_loop(g_mlx);
 

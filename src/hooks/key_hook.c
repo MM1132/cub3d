@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:47:47 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 12:27:30 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:53:27 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,11 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			!data->inputs.toggle_minimap_rotation;
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 		data->inputs.toggle_minimap_rays = !data->inputs.toggle_minimap_rays;
+	else if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		if (data->inputs.mouse_locked)
+			data->inputs.mouse_locked = false;
+		else
+			mlx_close_window(g_mlx);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:40:08 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 12:25:45 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:21:51 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	init_inputs(t_inputs *inputs)
 	inputs->toggle_minimap_grid = false;
 	inputs->toggle_minimap_rays = true;
 	inputs->toggle_minimap_rotation = true;
+	inputs->mouse_locked = false;
 }
