@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:47:47 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 13:53:27 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:26:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		if (data->inputs.mouse_locked)
+		{
 			data->inputs.mouse_locked = false;
+			mlx_set_cursor_mode(g_mlx, MLX_MOUSE_NORMAL);
+		}
 		else
 			mlx_close_window(g_mlx);
 	}
