@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:13:10 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:51:49 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:28:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@ static void	minimap_render_grid_vertical(t_data *data, t_vec2 offset)
 	t_vec2	end;
 	double	last_x;
 
-	start.x = fmax((1 - offset.x) * MINIMAP_SCALE, \
-		(1 + (int)offset.x - offset.x) * MINIMAP_SCALE);
-	last_x = fmin((int)(data->map.width - offset.x) * MINIMAP_SCALE, \
-		((2 * MINIMAP_RANGE)) * MINIMAP_SCALE);
-	start.y = -offset.y * MINIMAP_SCALE;
+	start.x = fmax((1 - offset.x) * data->minimap.scale, \
+		(1 + (int)offset.x - offset.x) * data->minimap.scale);
+	last_x = fmin((int)(data->map.width - offset.x) * data->minimap.scale, \
+		((2 * data->minimap.range)) * data->minimap.scale);
+	start.y = -offset.y * data->minimap.scale;
 	end.x = start.x;
-	end.y = (data->map.height - offset.y) * MINIMAP_SCALE;
+	end.y = (data->map.height - offset.y) * data->minimap.scale;
 	while (start.x < last_x)
 	{
 		if (data->inputs.toggle_minimap_rotation)
 			put_grid_line(data, start, end);
 		else
 			put_line(data->minimap.img, start, end, 0xFF2BEEFF);
-		start.x += MINIMAP_SCALE;
+		start.x += data->minimap.scale;
 		end.x = start.x;
 	}
 }
@@ -57,20 +57,20 @@ static void	minimap_render_grid_horizontal(t_data *data, t_vec2 offset)
 	t_vec2	end;
 	double	last_y;
 
-	start.y = fmax((1 - offset.y) * MINIMAP_SCALE, \
-		(1 + (int)offset.y - offset.y) * MINIMAP_SCALE);
-	last_y = fmin((int)(data->map.height - offset.y) * MINIMAP_SCALE, \
-		((2 * MINIMAP_RANGE)) * MINIMAP_SCALE);
-	start.x = -offset.x * MINIMAP_SCALE;
+	start.y = fmax((1 - offset.y) * data->minimap.scale, \
+		(1 + (int)offset.y - offset.y) * data->minimap.scale);
+	last_y = fmin((int)(data->map.height - offset.y) * data->minimap.scale, \
+		((2 * data->minimap.range)) * data->minimap.scale);
+	start.x = -offset.x * data->minimap.scale;
 	end.y = start.y;
-	end.x = (data->map.width - offset.x) * MINIMAP_SCALE;
+	end.x = (data->map.width - offset.x) * data->minimap.scale;
 	while (start.y < last_y)
 	{
 		if (data->inputs.toggle_minimap_rotation)
 			put_grid_line(data, start, end);
 		else
 			put_line(data->minimap.img, start, end, 0xFF2BEEFF);
-		start.y += MINIMAP_SCALE;
+		start.y += data->minimap.scale;
 		end.y = start.y;
 	}
 }

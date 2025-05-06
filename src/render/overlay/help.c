@@ -6,14 +6,15 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:02:20 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 12:47:43 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:16:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "render.h"
+#include "settings.h"
 
-void	put_help(void)
+void	put_help()
 {
 	static char	*texts[7] = {
 		"Controls:",
@@ -29,7 +30,7 @@ void	put_help(void)
 	index = 0;
 	while (index < 7)
 	{
-		mlx_put_string(g_mlx, texts[index], 20, 420 + index * 20);
+		mlx_put_string(g_mlx, texts[index], 20, MAX_MINIMAP_SIZE + 2 * MINIMAP_MARGIN + index * 20);
 		index++;
 	}
 }

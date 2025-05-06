@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:53:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:29:22 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	render_minimap_rays(t_data *data)
 
 	player_center = vec_subtract(data->player.pos, data->minimap.camera_pos);
 	vec_add_n_to(&player_center, PLAYER_SIZE / 2);
-	vec_multiply_n_to(&player_center, MINIMAP_SCALE);
+	vec_multiply_n_to(&player_center, data->minimap.scale);
 	if (data->inputs.toggle_minimap_rotation)
 		transform_vec_to_rotation(data, &player_center);
 	ray_index = 0;
@@ -33,7 +33,7 @@ void	render_minimap_rays(t_data *data)
 		ray_line.start = player_center;
 		ray_line.end = vec_subtract(data->ray[ray_index].dis_pos, \
 			data->minimap.camera_pos);
-		vec_multiply_n_to(&ray_line.end, MINIMAP_SCALE);
+		vec_multiply_n_to(&ray_line.end, data->minimap.scale);
 		if (data->inputs.toggle_minimap_rotation)
 			transform_vec_to_rotation(data, &ray_line.end);
 		put_line(data->minimap.img, ray_line.start, ray_line.end, 0xff33eeFF);

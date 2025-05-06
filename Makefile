@@ -2,7 +2,7 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Wshadow
+CFLAGS := -Wall -Wextra -Werror -Wshadow -g
 #-fsanitize=address -g
 
 # Libft

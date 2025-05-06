@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:36:58 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:29:36 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void	render_tile_with_offset( \
 
 	tile_rect = rect_from_point(\
 		vec_new(\
-			((double)x - (offset.x)) * MINIMAP_SCALE, \
-			((double)y - (offset.y)) * MINIMAP_SCALE), \
-		MINIMAP_SCALE, MINIMAP_SCALE);
+			((double)x - (offset.x)) * data->minimap.scale, \
+			((double)y - (offset.y)) * data->minimap.scale), \
+		data->minimap.scale, data->minimap.scale);
 	color = 0;
 	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
 		color = 0xdbdbdbFF;
@@ -55,10 +55,10 @@ void	render_minimap_tiles(t_data *data)
 	int	y;
 
 	y = (int)data->minimap.camera_pos.y - 1;
-	while (++y < data->minimap.camera_pos.y + MINIMAP_RANGE * 2)
+	while (++y < data->minimap.camera_pos.y + data->minimap.range * 2)
 	{
 		x = (int)data->minimap.camera_pos.x - 1;
-		while (++x < data->minimap.camera_pos.x + MINIMAP_RANGE * 2)
+		while (++x < data->minimap.camera_pos.x + data->minimap.range * 2)
 		{
 			if (within_map_bounds(&data->map, x, y))
 				render_tile_with_offset(data, x, y, data->minimap.camera_pos);

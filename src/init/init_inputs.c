@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:40:08 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 14:41:49 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:28:48 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_inputs(t_inputs *inputs)
 	inputs->toggle_minimap_grid = false;
 	inputs->toggle_minimap_rays = true;
 	inputs->toggle_minimap_rotation = true;
+	inputs->toggle_minimap_target_player = false;
 	inputs->mouse_locked = false;
 	inputs->diff_x = 0;
 }

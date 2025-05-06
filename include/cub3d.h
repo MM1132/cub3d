@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 14:42:07 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:27:41 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_inputs
 	bool	toggle_minimap_grid;
 	bool	toggle_minimap_rotation;
 	bool	toggle_minimap_rays;
+	bool	toggle_minimap_target_player;
 	bool	mouse_locked;
 	double	diff_x;
 }	t_inputs;
@@ -91,6 +92,9 @@ typedef struct s_minimap
 {
 	mlx_image_t	*img;
 	t_vec2		camera_pos;
+	int32_t		scale;
+	int32_t		range;
+	int32_t		size;
 }	t_minimap;
 
 typedef struct s_data
@@ -113,6 +117,7 @@ typedef struct s_data
 void		init_inputs(t_inputs *down_keys);
 void		init_player(t_player *player);
 void		init_minimap(t_data *data);
+void		minimap_set_range(t_data *data, int32_t new_range);
 void		init_data(t_data *data);
 
 // MAP VALIDATAION
