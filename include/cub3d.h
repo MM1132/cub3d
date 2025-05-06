@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 17:27:41 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ typedef struct s_player
 	t_vec2	center;
 }	t_player;
 
-# define NUMBER_OF_TILES 3
+# define NUMBER_OF_TILES 4
 
 typedef enum s_tile_type
 {
 	TILE_FLOOR,
 	TILE_WALL,
 	TILE_SPACE,
-	//TILE_DOOR,
+	TILE_DOOR,
 }	t_tile_type;
 
 typedef struct s_tile

@@ -1,10 +1,10 @@
 msg=$1
 total=$2
 current=$3
-width=50
-filled_char='#'
-empty_char='-'
-color_start='\033[32m'
+color_start=$4
+width=60
+filled_char='█'
+empty_char=' '
 color_end='\033[0m'
 
 percentage=$((current * 100 / total))
@@ -18,5 +18,5 @@ output="\r$msg[$color_start${filled}${color_end}${empty}] ${percentage}%"
 echo -ne "$output"
 
 if [[ "$current" -eq "$total" ]]; then
-	echo "" # Add a newline at the end
+	echo ""
 fi

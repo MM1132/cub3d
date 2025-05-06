@@ -101,7 +101,7 @@ $(MLX42_A):
 	while IFS= read -r line; do \
 		percentage=$$(echo "$$line" | perl -ne 'if (m/(?<=\[)\s*(\d+)(?!.*Linking C static)/) {print "$$1"}'); \
 		if [ -n "$$percentage" ]; then \
-			bash ./lib/libft/loading_bar.sh "MLX42 " 100 $$percentage; \
+			bash ./lib/libft/loading_bar.sh "MLX42 " 100 $$percentage "\033[37m"; \
 		fi \
 	done
 
@@ -112,11 +112,11 @@ $(NAME): $(OBJ_FILES) finish_loading $(LIBFT_A) $(MLX42_A)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
+	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT) "\033[36m"
 	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
 
 finish_loading:
-	@bash ./lib/libft/loading_bar.sh "Cub3D " 100 100
+	@bash ./lib/libft/loading_bar.sh "Cub3D " 100 100 "\033[36m"
 
 # Other rules
 clean:

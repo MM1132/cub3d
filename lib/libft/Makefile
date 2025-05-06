@@ -82,7 +82,7 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
-	@bash ./loading_bar.sh "Libft " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
+	@bash ./loading_bar.sh "Libft " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT) "\033[30m"
 
 clean:
 	@rm -rf $(OBJ_DIR)
