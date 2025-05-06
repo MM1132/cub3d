@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 14:21:47 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:42:07 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_inputs
 	bool	toggle_minimap_rotation;
 	bool	toggle_minimap_rays;
 	bool	mouse_locked;
+	double	diff_x;
 }	t_inputs;
 
 typedef struct s_minimap
