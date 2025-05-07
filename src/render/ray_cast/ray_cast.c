@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 19:57:21 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 12:36:46 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,10 @@
 #include "settings.h"
 #include <math.h>
 
-/*
-void	draw_ray_mini_map(t_data *data, int32_t	rn)
+void	calc_next_end_pos(t_data *data, int32_t rn, double next_dis,
+		double angle)
 {
-	t_vec2	line_to;
-	t_vec2	pl_view;
-
-	pl_view = pos_to_minimap(data->ray[rn].start_pos);
-	data->ray[rn].angle.x = -data->ray[rn].angle.x;
-	data->ray[rn].angle.y = -data->ray[rn].angle.y;
-	line_to = vec_multiply_n(data->ray[rn].angle, data->ray[rn].length);
-	line_to = pos_to_minimap(line_to);
-	line_to = vec_subtract(pl_view, line_to);
-	line_to.x += MINIMAP_MARGIN;
-	line_to.y += MINIMAP_MARGIN;
-	data->ray[rn].angle.x = -data->ray[rn].angle.x;
-	data->ray[rn].angle.y = -data->ray[rn].angle.y;
-	put_line(data->img, pl_view, line_to, 0xFF00FFFF);
-}
-*/
-
-void calc_next_end_pos(t_data *data, int32_t rn, double next_dis, double angle)
-{
-	t_vec2		num;
+	t_vec2	num;
 
 	num.x = next_dis * data->ray[rn].angle.x;
 	num.y = next_dis * data->ray[rn].angle.y;
@@ -50,8 +31,7 @@ void calc_next_end_pos(t_data *data, int32_t rn, double next_dis, double angle)
 	data->ray[rn].dis_pos.y = data->ray[rn].dis_pos.y + num.y;
 }
 
-
-void calc_next_dis(t_help_ray ray, double *next_dis , int *next_tile)
+void	calc_next_dis(t_help_ray ray, double *next_dis, int *next_tile)
 {
 	if (ray.angle >= 0)
 	{
@@ -71,7 +51,7 @@ void calc_next_dis(t_help_ray ray, double *next_dis , int *next_tile)
 void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
 {
 	t_vec2_int	next_tile;
-	t_vec2 		next_dis;
+	t_vec2		next_dis;
 	t_help_ray	help_ray;
 	double		angle;
 
@@ -84,7 +64,7 @@ void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
 	help_ray.ray_next_tile = ray_next_tile->y;
 	calc_next_dis(help_ray, &next_dis.y, &next_tile.y);
 	if (fabs(next_dis.x) <= fabs(next_dis.y))
-	{	
+	{
 		data->ray[rn].tile_touched = 'E';
 		if (data->ray[rn].angle.x < 0)
 			data->ray[rn].tile_touched = 'W';
@@ -103,10 +83,10 @@ void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
 	}
 }
 
-void	calculate_ray(t_data *data, int32_t	rn)
+void	calculate_ray(t_data *data, int32_t rn)
 {
-	int	hit;
-	t_vec2_int ray_next_tile;
+	int			hit;
+	t_vec2_int	ray_next_tile;
 
 	hit = 0;
 	ray_next_tile.x = (int)data->player.center.x;
@@ -123,8 +103,24 @@ void	calculate_ray(t_data *data, int32_t	rn)
 			hit = 1;
 	}
 	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x
-				- data->player.center.x, 2)
-			+ pow(data->ray[rn].dis_pos.y - data->player.center.y, 2));
+				- data->player.center.x, 2) + pow(data->ray[rn].dis_pos.y
+				- data->player.center.y, 2));
+}
+
+void	angle_calculation(t_data *data, int32_t rn)
+{
+	t_vec2	plane_vec_calc;
+	double	step_width;
+	t_vec2	step_vec;
+	t_vec2	norm;
+
+	step_width = (tan(PLAYER_VIEW_ANGLE / 2) * 2) / g_mlx->width;
+	norm = vec_normalize(data->player.dir);
+	plane_vec_calc = vec_add(data->player.center, norm);
+	norm = vec_rotate(norm, -M_PI_2);
+	step_vec = vec_multiply_n(norm, ((g_mlx->width / 2) - rn) * step_width);
+	plane_vec_calc = vec_add(plane_vec_calc, step_vec);
+	data->ray[rn].angle = vec_subtract(plane_vec_calc, data->player.center);
 }
 
 void	ray_cast(t_data *data)
@@ -135,7 +131,7 @@ void	ray_cast(t_data *data)
 	data->player.center = vec_add_n(data->player.pos, PLAYER_SIZE / 2);
 	while (rn < g_mlx->width)
 	{
-		data->ray[rn].angle = vec_rotate(data->player.dir, -PLAYER_VIEW_ANGLE/ 2 + rn* PLAYER_VIEW_ANGLE/ g_mlx->width);
+		angle_calculation(data, rn);
 		calculate_ray(data, rn);
 		rn++;
 	}

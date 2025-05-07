@@ -63,26 +63,31 @@ static int	put_color(int i, char *line, uint32_t *color)
 	return (free_split(split), 0);
 }
 
-static int	put_texture(int i, char *line, char **ptr)
+static int	put_texture(int i, char *line, mlx_texture_t **texture)
 {
-	int	u;
-	int	fd;
+	int		u;
+	int		fd;
+	char	*str;
 
-	if (*ptr)
+	if (*texture != NULL)
 		return (err_mssg());
 	i = white_space_skip(line, i);
 	u = i;
 	while (line[u] && line[u] != '\n')
 		u++;
-	*ptr = gc_malloc(u - i + 1);
+	str = gc_malloc(u - i + 1);
 	u = 0;
 	while (line[i] && line[i] != '\n')
-		(*ptr)[u++] = line[i++];
-	(*ptr)[u] = '\0';
-	fd = open(*ptr, O_RDONLY);
+		str[u++] = line[i++];
+	str[u] = '\0';
+	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		return (err_mssg());
 	close(fd);
+	*texture = mlx_load_png(str);
+	if (!*texture)
+		return (gc_free(str), err_mssg());
+	gc_free(str);
 	return (0);
 }
 

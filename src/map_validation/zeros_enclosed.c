@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zeros_enclosed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:29:35 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:27:57 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 12:35:58 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	zeros_enclosed(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (data->map.tiles[y][x].tile_type == TILE_FLOOR
+			if (data->map.tiles[y][x].tile_type != TILE_WALL
+				&& data->map.tiles[y][x].tile_type != TILE_SPACE
 				&& check_surround_pos(x, y, data))
 				return (err_mssg());
 			x++;

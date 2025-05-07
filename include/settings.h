@@ -16,8 +16,8 @@
 # include <math.h>
 
 // Window
-# define WIDTH 2000
-# define HEIGHT 1200
+# define WIDTH 1600
+# define HEIGHT 900
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
@@ -38,6 +38,7 @@
 # define MINIMAP_PLAYER_SIZE 10
 
 // Defines the viewing angle and the number of rays
+// M_PI_2 = 90deg
 # define PLAYER_VIEW_ANGLE M_PI_2
 
 #endif
