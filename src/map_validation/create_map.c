@@ -3,16 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:22:07 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:11:16 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "garbage_collector.h"
 #include "settings.h"
+
+static void	set_player_map(t_data *data, char *line, size_t x, size_t y)
+{
+	data->map.tiles[y][x].tile_type = ft_atott('0');
+	data->player.pos.x = (double)x + 0.5 - PLAYER_SIZE / 2;
+	data->player.pos.y = (double)y + 0.5 - PLAYER_SIZE / 2;
+	if (line[x] == 'N')
+		data->player.dir = vec_new(0, -1);
+	if (line[x] == 'E')
+		data->player.dir = vec_new(1, 0);
+	if (line[x] == 'S')
+		data->player.dir = vec_new(0, 1);
+	if (line[x] == 'W')
+		data->player.dir = vec_new(-1, 0);
+}
 
 static void	fill_one_line(t_data *data, char *line, size_t x, size_t y)
 {
@@ -33,11 +48,7 @@ static void	fill_one_line(t_data *data, char *line, size_t x, size_t y)
 		else if (ft_isdigit(line[x]))
 			data->map.tiles[y][x].tile_type = ft_atott(line[x]);
 		else
-		{
-			data->map.tiles[y][x].tile_type = ft_atott('0');
-			data->player.pos.x = (double)x + 0.5 - PLAYER_SIZE / 2;
-            data->player.pos.y = (double)y + 0.5 - PLAYER_SIZE / 2;
-		}
+			set_player_map(data, line, x, y);
 		x++;
 	}
 	data->map.tiles[y][x].tile_type = '\0';
