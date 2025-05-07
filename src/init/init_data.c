@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 17:10:56 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:22:53 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_data(t_data *data)
 	data->map.height = 0;
 	data->map.width = 0;
 	data->map.tiles = NULL;
+	data->map.map_valid = 0;
 	init_player(&data->player);
 	init_inputs(&data->inputs);
 	data->ray = gc_malloc(g_mlx->width * sizeof(t_ray));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:26:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:21:33 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:23:06 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static int	check_texture(int i, char *text, char *line, t_data *data)
 		num_ret = put_color(i, line, &data->ceiling_color);
 	else
 		return (err_mssg());
-	return (g_map_value++, num_ret);
+	return (data->map.map_valid++, num_ret);
 }
 
 static void	fill_text(char text[3], char *line, int *i)
@@ -139,7 +139,7 @@ int	map_validation(char **argv, t_data *data)
 		i = 0;
 		i = white_space_skip(line, i);
 		fill_text(text, line, &i);
-		if (g_map_value == 6 && text[0] == '1')
+		if (data->map.map_valid == 6 && text[0] == '1')
 			return (create_map(file, line, data));
 		if (text[2] != '\0')
 			return (err_mssg());

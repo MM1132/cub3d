@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:23:00 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <unistd.h>
 
 extern mlx_t	*g_mlx;
-extern int		g_map_value;
 
 typedef struct s_help_ray
 {
@@ -71,6 +70,7 @@ typedef struct s_map
 	t_tile		**tiles;
 	size_t		width;
 	size_t		height;
+	int			map_valid;
 }	t_map;
 
 typedef struct s_inputs
