@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:57:21 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,11 @@ void	calculate_ray(t_data *data, int32_t	rn)
 	while (hit == 0)
 	{
 		ray_dis_calc(data, rn, &ray_next_tile);
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type != TILE_FLOOR)
+		if (!within_map_bounds(&data->map, ray_next_tile.x, ray_next_tile.y))
+			break ;
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_WALL)
+			hit = 1;
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR)
 			hit = 1;
 	}
 	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x
@@ -133,7 +137,6 @@ void	ray_cast(t_data *data)
 	{
 		data->ray[rn].angle = vec_rotate(data->player.dir, -PLAYER_VIEW_ANGLE/ 2 + rn* PLAYER_VIEW_ANGLE/ g_mlx->width);
 		calculate_ray(data, rn);
-		//draw_ray_mini_map(data, rn);
 		rn++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:57:02 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:58:16 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:41:29 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,23 @@
 void	cursor_hook(double xpos, double ypos, void *param)
 {
 	t_data	*data;
-	double	diff_x;
 
 	data = (t_data *)param;
-	if (xpos != data->inputs.mouse_pos.x)
+	if (data->inputs.mouse_locked)
 	{
-		diff_x = xpos - data->inputs.mouse_pos.x;
-		vec_rotate_to(&data->player.dir, diff_x * PLAYER_ROTATION_SPEED);
+		data->inputs.mouse_pos.y = g_mlx->height / 2;
+		data->inputs.diff_x = xpos - data->inputs.mouse_pos.x;
+		data->inputs.mouse_pos.x = g_mlx->width / 2;
+		vec_rotate_to(&data->player.dir, \
+			data->inputs.diff_x * PLAYER_ROTATION_SPEED);
+		mlx_set_mouse_pos(g_mlx, g_mlx->width / 2, g_mlx->height / 2);
 	}
-
-	data->inputs.mouse_pos.x = xpos;
-	data->inputs.mouse_pos.y = ypos;
+	else
+	{
+		data->inputs.diff_x = xpos - data->inputs.mouse_pos.x;
+		vec_rotate_to(&data->player.dir, \
+			data->inputs.diff_x * PLAYER_ROTATION_SPEED);
+		data->inputs.mouse_pos.x = xpos;
+		data->inputs.mouse_pos.y = ypos;
+	}
 }

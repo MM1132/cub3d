@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:20 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ typedef struct s_player
 	t_vec2	center;
 }	t_player;
 
-# define NUMBER_OF_TILES 3
+# define NUMBER_OF_TILES 4
 
 typedef enum s_tile_type
 {
 	TILE_FLOOR,
 	TILE_WALL,
 	TILE_SPACE,
-	//TILE_DOOR,
+	TILE_DOOR,
 }	t_tile_type;
 
 typedef struct s_tile
@@ -83,12 +83,18 @@ typedef struct s_inputs
 	bool	toggle_minimap_grid;
 	bool	toggle_minimap_rotation;
 	bool	toggle_minimap_rays;
+	bool	toggle_minimap_target_player;
+	bool	mouse_locked;
+	double	diff_x;
 }	t_inputs;
 
 typedef struct s_minimap
 {
 	mlx_image_t	*img;
 	t_vec2		camera_pos;
+	int32_t		scale;
+	int32_t		range;
+	int32_t		size;
 }	t_minimap;
 
 typedef struct s_data
@@ -111,6 +117,7 @@ typedef struct s_data
 void		init_inputs(t_inputs *down_keys);
 void		init_player(t_player *player);
 void		init_minimap(t_data *data);
+void		minimap_set_range(t_data *data, int32_t new_range);
 void		init_data(t_data *data);
 
 // MAP VALIDATAION
@@ -155,6 +162,11 @@ void		cursor_hook(double xpos, double ypos, void *param);
 void		scroll_hook(double xdelta, double ydelta, void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		resize_hook(int32_t width, int32_t height, void *param);
+void		mouse_hook(\
+	mouse_key_t button, \
+	action_t action, \
+	modifier_key_t mods, \
+	void *param);
 
 // UPDATING STUFF
 void		player_update(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zeros_enclosed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:29:35 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 17:50:29 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/06 18:27:57 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_function(size_t x, size_t y, t_data *data)
 	t_tile_type	type;
 
 	type = data->map.tiles[y][x].tile_type;
-	if (type == TILE_FLOOR || type == TILE_WALL)
+	if (type == TILE_FLOOR || type == TILE_WALL || type == TILE_DOOR)
 		return (0);
 	return (1);
 }

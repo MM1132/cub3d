@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:36:58 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:02:35 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include <math.h>
 #include "rect.h"
 #include "collision_detection.h"
+
+static uint32_t	get_tile_color(t_tile_type tile_type)
+{
+	if (tile_type == TILE_FLOOR)
+		return (0xdbdbdbFF);
+	else if (tile_type == TILE_WALL)
+		return (0x555555FF);
+	else if (tile_type == TILE_DOOR)
+		return (0xa15900FF);
+	return 0;
+}
 
 static void	render_tile_with_offset( \
 	t_data *data, \
@@ -28,14 +39,10 @@ static void	render_tile_with_offset( \
 
 	tile_rect = rect_from_point(\
 		vec_new(\
-			((double)x - (offset.x)) * MINIMAP_SCALE, \
-			((double)y - (offset.y)) * MINIMAP_SCALE), \
-		MINIMAP_SCALE, MINIMAP_SCALE);
-	color = 0;
-	if (data->map.tiles[y][x].tile_type == TILE_FLOOR)
-		color = 0xdbdbdbFF;
-	else if (data->map.tiles[y][x].tile_type == TILE_WALL)
-		color = 0x555555FF;
+			((double)x - (offset.x)) * data->minimap.scale, \
+			((double)y - (offset.y)) * data->minimap.scale), \
+		data->minimap.scale, data->minimap.scale);
+	color = get_tile_color(data->map.tiles[y][x].tile_type);
 	if (color == 0)
 		return ;
 	if (data->inputs.toggle_minimap_rotation)
@@ -55,10 +62,10 @@ void	render_minimap_tiles(t_data *data)
 	int	y;
 
 	y = (int)data->minimap.camera_pos.y - 1;
-	while (++y < data->minimap.camera_pos.y + MINIMAP_RANGE * 2)
+	while (++y < data->minimap.camera_pos.y + data->minimap.range * 2)
 	{
 		x = (int)data->minimap.camera_pos.x - 1;
-		while (++x < data->minimap.camera_pos.x + MINIMAP_RANGE * 2)
+		while (++x < data->minimap.camera_pos.x + data->minimap.range * 2)
 		{
 			if (within_map_bounds(&data->map, x, y))
 				render_tile_with_offset(data, x, y, data->minimap.camera_pos);
