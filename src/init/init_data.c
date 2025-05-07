@@ -16,6 +16,7 @@
 
 void	init_data(t_data *data)
 {
+	// mlx_set_setting(MLX_FULLSCREEN, true);
 	g_mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	data->texture.north = NULL;
@@ -33,6 +34,7 @@ void	init_data(t_data *data)
 	data->map.height = 0;
 	data->map.width = 0;
 	data->map.tiles = NULL;
+	data->map.map_valid = 0;
 	init_player(&data->player);
 	init_inputs(&data->inputs);
 	data->ray = gc_malloc(g_mlx->width * sizeof(t_ray));

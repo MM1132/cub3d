@@ -110,7 +110,7 @@ static int	check_texture(int i, char *text, char *line, t_data *data)
 		num_ret = put_color(i, line, &data->ceiling_color);
 	else
 		return (err_mssg());
-	return (g_map_value++, num_ret);
+	return (data->map.map_valid++, num_ret);
 }
 
 static void	fill_text(char text[3], char *line, int *i)
@@ -139,7 +139,7 @@ int	map_validation(char **argv, t_data *data)
 		i = 0;
 		i = white_space_skip(line, i);
 		fill_text(text, line, &i);
-		if (g_map_value == 6 && text[0] == '1')
+		if (data->map.map_valid == 6 && text[0] == '1')
 			return (create_map(file, line, data));
 		if (text[2] != '\0')
 			return (err_mssg());

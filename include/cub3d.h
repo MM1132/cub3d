@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 16:00:00 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <unistd.h>
 
 extern mlx_t	*g_mlx;
-extern int		g_map_value;
 
 typedef struct s_help_ray
 {
@@ -46,10 +45,13 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	t_vec2	speed;
-	t_vec2	dir;
-	t_vec2	center;
+	t_vec2		pos;
+	t_vec2		speed;
+	t_vec2		dir;
+	t_vec2		center;
+	mlx_image_t	*hand;
+	t_vec2		hand_original_pos;
+	t_vec2		hand_offset;
 }	t_player;
 
 # define NUMBER_OF_TILES 4
@@ -73,6 +75,7 @@ typedef struct s_map
 	t_tile		**tiles;
 	size_t		width;
 	size_t		height;
+	int			map_valid;
 }	t_map;
 
 typedef struct s_inputs
@@ -113,7 +116,7 @@ typedef struct s_texture
 typedef struct s_data
 {
 	mlx_image_t		*img;
-	
+
 	int				txt_hei_pos;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
