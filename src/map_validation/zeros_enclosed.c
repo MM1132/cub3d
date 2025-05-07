@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:29:35 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/28 17:50:29 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/07 12:24:00 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	zeros_enclosed(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (data->map.tiles[y][x].tile_type == TILE_FLOOR
+			if (data->map.tiles[y][x].tile_type != TILE_WALL &&  data->map.tiles[y][x].tile_type != TILE_SPACE
 				&& check_surround_pos(x, y, data))
 				return (err_mssg());
 			x++;
