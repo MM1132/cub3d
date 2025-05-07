@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 17:22:41 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:09:02 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 # include <math.h>
 
 // Window
-# define WIDTH 1600
-# define HEIGHT 900
+# define WIDTH 1000
+# define HEIGHT 600
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
 // # define MINIMAP_SCALE 5 // This can now be calculated: size / range
 # define MINIMAP_MARGIN 15
 // # define MINIMAP_RANGE 40
-# define MAX_MINIMAP_SIZE 500 // The width and height in pixels
+# define MAX_MINIMAP_SIZE 300 // The width and height in pixels
 # define MINIMAP_CAMERA_FOLLOW_SPEED 5
 
 // Player

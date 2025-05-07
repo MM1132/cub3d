@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 17:10:56 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:11:40 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	init_data(t_data *data)
 {
+	mlx_set_setting(MLX_FULLSCREEN, true);
 	g_mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	data->no_texture = NULL;

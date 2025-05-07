@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:47:31 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	t_vec2	speed;
-	t_vec2	dir;
-	t_vec2	center;
+	t_vec2		pos;
+	t_vec2		speed;
+	t_vec2		dir;
+	t_vec2		center;
+	mlx_image_t	*hand;
+	t_vec2		hand_original_pos;
+	t_vec2		hand_offset;
 }	t_player;
 
 # define NUMBER_OF_TILES 4
