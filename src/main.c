@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:15 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:14:44 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	gc_free_map(t_data *data)
 static void	free_data(t_data *data)
 {
 	gc_free_map(data);
-	gc_free(data->no_texture);
-	gc_free(data->we_texture);
-	gc_free(data->so_texture);
-	gc_free(data->ea_texture);
+	mlx_delete_texture(data->no_texture);
+	mlx_delete_texture(data->ea_texture);
+	mlx_delete_texture(data->so_texture);
+	mlx_delete_texture(data->we_texture);
 	gc_free(data->ray);
 }
 

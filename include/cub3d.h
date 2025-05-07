@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:20 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:44:32 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_ray
 {
 	t_vec2	angle;
 	t_vec2	dis_pos;
+	t_vec2	dis_pos_door;
 	char	tile_touched;
+	char	tile_touched_door;
 	double	length;
 }	t_ray;
 
@@ -93,18 +95,19 @@ typedef struct s_minimap
 
 typedef struct s_data
 {
-	mlx_image_t	*img;
-	char		*no_texture;
-	char		*so_texture;
-	char		*we_texture;
-	char		*ea_texture;
-	uint32_t	floor_color;
-	uint32_t	ceiling_color;
-	t_map		map;
-	t_ray		*ray;
-	t_player	player;
-	t_inputs	inputs;
-	t_minimap	minimap;
+	mlx_image_t		*img;
+	mlx_texture_t	*no_texture;
+	mlx_texture_t	*so_texture;
+	mlx_texture_t	*we_texture;
+	mlx_texture_t	*ea_texture;
+	int				txt_hei_pos;
+	uint32_t		floor_color;
+	uint32_t		ceiling_color;
+	t_map			map;
+	t_ray			*ray;
+	t_player		player;
+	t_inputs		inputs;
+	t_minimap		minimap;
 }			t_data;
 
 // INITIALIZATION
