@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:36:49 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:46:41 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:25:05 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "settings.h"
 #include <math.h>
 
-t_vec2	pos_to_minimap(t_vec2 pos)
-{
-	pos.x = pos.x * MINIMAP_SCALE + MINIMAP_MARGIN;
-	pos.y = pos.y * MINIMAP_SCALE + MINIMAP_MARGIN;
-	return (pos);
-}
+// t_vec2	pos_to_minimap(t_vec2 pos)
+// {
+// 	pos.x = pos.x * data->minimap.scale + MINIMAP_MARGIN;
+// 	pos.y = pos.y * data->minimap.scale + MINIMAP_MARGIN;
+// 	return (pos);
+// }
 
 void	render_minimap_player(t_data *data)
 {
@@ -29,14 +29,14 @@ void	render_minimap_player(t_data *data)
 
 	player_center = vec_subtract(data->player.pos, data->minimap.camera_pos);
 	vec_add_n_to(&player_center, PLAYER_SIZE / 2);
-	vec_multiply_n_to(&player_center, MINIMAP_SCALE);
+	vec_multiply_n_to(&player_center, data->minimap.scale);
 	if (data->inputs.toggle_minimap_rotation)
 		transform_vec_to_rotation(data, &player_center);
 	put_circle(data->minimap.img, player_center, \
-		MINIMAP_PLAYER_SIZE * MINIMAP_SCALE / 2, 0xfffb00FF);
+		MINIMAP_PLAYER_SIZE, 0xfffb00FF);
 	player_line.start = player_center;
 	player_line.end = vec_multiply_n(data->player.dir, \
-		MINIMAP_SCALE * MINIMAP_PLAYER_SIZE);
+		MINIMAP_PLAYER_SIZE * 2);
 	vec_add_to(&player_line.end, &player_center);
 	if (data->inputs.toggle_minimap_rotation)
 	{

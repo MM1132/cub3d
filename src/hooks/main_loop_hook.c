@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:35:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 21:10:09 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:53:19 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 static void	get_keyboard_input(t_data *data)
 {
-	if (mlx_is_key_down(g_mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(g_mlx);
 	data->inputs.key_w = mlx_is_key_down(g_mlx, MLX_KEY_W);
 	data->inputs.key_a = mlx_is_key_down(g_mlx, MLX_KEY_A);
 	data->inputs.key_s = mlx_is_key_down(g_mlx, MLX_KEY_S);
@@ -41,6 +39,7 @@ static void	render(t_data *data)
 	put_fill(data->img, 0x000000FF);
 	ray_cast(data);
 	render_world(data);
+	render_crosshair(data);
 	minimap_render(data);
 }
 

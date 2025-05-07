@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_border.c                                   :+:      :+:    :+:   */
+/*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 14:54:05 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 16:28:09 by rreimann         ###   ########.fr       */
+/*   Created: 2025/05/06 12:57:48 by rreimann          #+#    #+#             */
+/*   Updated: 2025/05/06 14:27:45 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "shape_types.h"
-#include "settings.h"
-#include "render.h"
 
-void	render_minimap_border(t_data *data)
+void	mouse_hook(\
+	mouse_key_t button, \
+	action_t action, \
+	modifier_key_t mods, \
+	void *param)
 {
-	t_rect	border_rect;
+	t_data	*data;
 
-	border_rect = rect_from_point(\
-		vec_new(0, 0), \
-		2 * data->minimap.range * data->minimap.scale - 1, \
-		2 * data->minimap.range * data->minimap.scale - 1);
-	put_rect(data->minimap.img, &border_rect, 0xFFFFFFFF);
+	data = (t_data *)param;
+	(void)mods;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	{
+		data->inputs.mouse_locked = true;
+		mlx_set_cursor_mode(g_mlx, MLX_MOUSE_HIDDEN);
+	}
 }

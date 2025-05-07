@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:32:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 11:43:08 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/06 17:22:41 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 
 // Minimap
 // The width and height in pixels of a single tile shown in the Minimap
-# define MINIMAP_SCALE 15
-# define MINIMAP_MARGIN 10
-# define MINIMAP_RANGE 10
+// # define MINIMAP_SCALE 5 // This can now be calculated: size / range
+# define MINIMAP_MARGIN 15
+// # define MINIMAP_RANGE 40
+# define MAX_MINIMAP_SIZE 500 // The width and height in pixels
 # define MINIMAP_CAMERA_FOLLOW_SPEED 5
 
 // Player
@@ -34,7 +35,7 @@
 # define PLAYER_SPEED_DECREASE_MULTIPLIER 0.82
 # define PLAYER_ROTATION_SPEED 0.005
 # define PLAYER_SIZE 0.5
-# define MINIMAP_PLAYER_SIZE 1
+# define MINIMAP_PLAYER_SIZE 10
 
 // Defines the viewing angle and the number of rays
 // M_PI_2 = 90deg

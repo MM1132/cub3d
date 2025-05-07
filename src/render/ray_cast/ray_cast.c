@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 11:35:17 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/07 12:36:46 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ void	calculate_ray(t_data *data, int32_t rn)
 	while (hit == 0)
 	{
 		ray_dis_calc(data, rn, &ray_next_tile);
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type != TILE_FLOOR)
+		if (!within_map_bounds(&data->map, ray_next_tile.x, ray_next_tile.y))
+			break ;
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_WALL)
+			hit = 1;
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR)
 			hit = 1;
 	}
 	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x
@@ -114,7 +118,7 @@ void	angle_calculation(t_data *data, int32_t rn)
 	norm = vec_normalize(data->player.dir);
 	plane_vec_calc = vec_add(data->player.center, norm);
 	norm = vec_rotate(norm, -M_PI_2);
-	step_vec = vec_multiply_n(norm, ((g_mlx->width/2)-rn)*step_width);
+	step_vec = vec_multiply_n(norm, ((g_mlx->width / 2) - rn) * step_width);
 	plane_vec_calc = vec_add(plane_vec_calc, step_vec);
 	data->ray[rn].angle = vec_subtract(plane_vec_calc, data->player.center);
 }

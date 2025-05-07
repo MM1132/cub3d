@@ -2,7 +2,7 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Wshadow
+CFLAGS := -Wall -Wextra -Werror -Wshadow -g
 #-fsanitize=address -g
 
 # Libft
@@ -50,6 +50,8 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \
 	$(SRC_DIR)/render/world/world.c \
+	$(SRC_DIR)/render/overlay/crosshair.c \
+	$(SRC_DIR)/render/overlay/help.c \
 	$(SRC_DIR)/vector/vec_swap_xy.c \
 	$(SRC_DIR)/vector/vec_product.c \
 	$(SRC_DIR)/vector/vec_add.c \
@@ -62,6 +64,7 @@ SRC_FILES := \
 	$(SRC_DIR)/vector/vec_subtract_to.c \
 	$(SRC_DIR)/hooks/main_loop_hook.c \
 	$(SRC_DIR)/hooks/scroll_hook.c \
+	$(SRC_DIR)/hooks/mouse_hook.c \
 	$(SRC_DIR)/hooks/cursor_hook.c \
 	$(SRC_DIR)/hooks/resize_hook.c \
 	$(SRC_DIR)/hooks/key_hook.c \
@@ -98,7 +101,7 @@ $(MLX42_A):
 	while IFS= read -r line; do \
 		percentage=$$(echo "$$line" | perl -ne 'if (m/(?<=\[)\s*(\d+)(?!.*Linking C static)/) {print "$$1"}'); \
 		if [ -n "$$percentage" ]; then \
-			bash ./lib/libft/loading_bar.sh "MLX42 " 100 $$percentage; \
+			bash ./lib/libft/loading_bar.sh "MLX42 " 100 $$percentage "\033[37m"; \
 		fi \
 	done
 
@@ -109,11 +112,11 @@ $(NAME): $(OBJ_FILES) finish_loading $(LIBFT_A) $(MLX42_A)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT)
+	@bash ./lib/libft/loading_bar.sh "Cub3D " $(TOTAL_SRC_FILES) $(COMPILED_FILES_COUNT) "\033[36m"
 	@$(eval COMPILED_FILES_COUNT := $(shell echo $$(($(COMPILED_FILES_COUNT)+1))))
 
 finish_loading:
-	@bash ./lib/libft/loading_bar.sh "Cub3D " 100 100
+	@bash ./lib/libft/loading_bar.sh "Cub3D " 100 100 "\033[36m"
 
 # Other rules
 clean:

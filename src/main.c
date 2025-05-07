@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
 /*   Updated: 2025/05/06 16:14:44 by joklein          ###   ########.fr       */
@@ -57,12 +57,14 @@ int	main(int argc, char **argv)
 	init_minimap(&data);
 	mlx_image_to_window(g_mlx, data.img, 0, 0);
 	mlx_image_to_window(g_mlx, data.minimap.img, MINIMAP_MARGIN, MINIMAP_MARGIN);
+	put_help();
 
 	// Hooks
 	mlx_cursor_hook(g_mlx, cursor_hook, &data);
 	mlx_scroll_hook(g_mlx, scroll_hook, &data);
 	mlx_key_hook(g_mlx, key_hook, &data);
 	mlx_resize_hook(g_mlx, resize_hook, &data);
+	mlx_mouse_hook(g_mlx, mouse_hook, &data);
 	mlx_loop_hook(g_mlx, main_loop_hook, &data);
 	mlx_loop(g_mlx);
 
