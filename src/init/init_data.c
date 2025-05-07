@@ -16,6 +16,7 @@
 
 void	init_data(t_data *data)
 {
+	// mlx_set_setting(MLX_FULLSCREEN, true);
 	g_mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	data->no_texture = NULL;

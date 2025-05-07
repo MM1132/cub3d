@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 16:14:44 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/07 14:28:49 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	free_data(t_data *data)
 	mlx_delete_texture(data->ea_texture);
 	mlx_delete_texture(data->so_texture);
 	mlx_delete_texture(data->we_texture);
+	mlx_delete_image(g_mlx, data->minimap.img);
+	mlx_delete_image(g_mlx, data->player.hand);
 	gc_free(data->ray);
 }
 
@@ -57,6 +59,8 @@ int	main(int argc, char **argv)
 	init_minimap(&data);
 	mlx_image_to_window(g_mlx, data.img, 0, 0);
 	mlx_image_to_window(g_mlx, data.minimap.img, MINIMAP_MARGIN, MINIMAP_MARGIN);
+	mlx_image_to_window(g_mlx, data.player.hand, \
+		(int32_t)data.player.hand_original_pos.x, (int32_t)data.player.hand_original_pos.y);
 	put_help();
 
 	// Hooks

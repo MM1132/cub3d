@@ -43,10 +43,13 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	t_vec2	speed;
-	t_vec2	dir;
-	t_vec2	center;
+	t_vec2		pos;
+	t_vec2		speed;
+	t_vec2		dir;
+	t_vec2		center;
+	mlx_image_t	*hand;
+	t_vec2		hand_original_pos;
+	t_vec2		hand_offset;
 }	t_player;
 
 # define NUMBER_OF_TILES 4
