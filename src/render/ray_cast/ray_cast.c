@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 12:36:46 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/07 15:48:37 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,18 @@ void	calculate_ray(t_data *data, int32_t rn)
 		ray_dis_calc(data, rn, &ray_next_tile);
 		if (!within_map_bounds(&data->map, ray_next_tile.x, ray_next_tile.y))
 			break ;
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR && data->ray[rn].dis_pos_door.x == 0)
+		{
+			data->ray[rn].dis_pos_door = data->ray[rn].dis_pos;
+			data->ray[rn].tile_touched_door = 'H';
+			if (data->ray[rn].tile_touched == 'W'
+				|| data->ray[rn].tile_touched == 'E')
+				data->ray[rn].tile_touched_door = 'V';
+			data->ray[rn].length_door = sqrt(pow(data->ray[rn].dis_pos.x
+						- data->player.center.x, 2)
+					+ pow(data->ray[rn].dis_pos.y - data->player.center.y, 2));
+		}
 		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_WALL)
-			hit = 1;
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR)
 			hit = 1;
 	}
 	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x
@@ -131,6 +140,7 @@ void	ray_cast(t_data *data)
 	data->player.center = vec_add_n(data->player.pos, PLAYER_SIZE / 2);
 	while (rn < g_mlx->width)
 	{
+		data->ray[rn].dis_pos_door.x = 0;
 		angle_calculation(data, rn);
 		calculate_ray(data, rn);
 		rn++;

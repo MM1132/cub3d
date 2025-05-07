@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:00:00 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_help_ray
 	double	dis_pos;
 	int		ray_next_tile;
 	char	tile_dir[2];
+	double	height;
 }	t_help_ray;
 
 typedef struct s_ray
@@ -40,6 +41,7 @@ typedef struct s_ray
 	char	tile_touched;
 	char	tile_touched_door;
 	double	length;
+	double	length_door;
 }	t_ray;
 
 typedef struct s_player
@@ -99,13 +101,19 @@ typedef struct s_minimap
 	int32_t		size;
 }	t_minimap;
 
+typedef struct s_texture
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+	mlx_texture_t	*door;
+}	t_texture;
+
 typedef struct s_data
 {
 	mlx_image_t		*img;
-	mlx_texture_t	*no_texture;
-	mlx_texture_t	*so_texture;
-	mlx_texture_t	*we_texture;
-	mlx_texture_t	*ea_texture;
+	
 	int				txt_hei_pos;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
@@ -114,6 +122,7 @@ typedef struct s_data
 	t_player		player;
 	t_inputs		inputs;
 	t_minimap		minimap;
+	t_texture		texture;
 }			t_data;
 
 // INITIALIZATION
