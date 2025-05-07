@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:37 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 14:55:56 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:06:02 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,28 @@ static t_vec2	collide_player(t_data *data)
 	return (new_position);
 }
 
+static void	move_player_hand(t_data *data)
+{
+	t_vec2	rotated_speed;
+
+	rotated_speed.x = -data->player.speed.x * data->player.dir.y + \
+		data->player.speed.y * data->player.dir.x;
+	rotated_speed.y = data->player.speed.x * data->player.dir.x + \
+		data->player.speed.y * data->player.dir.y;
+	data->player.hand_offset.x -= \
+		(data->inputs.diff_x * 1.5) + rotated_speed.x * 400;
+	data->player.hand_offset.y += rotated_speed.y * 400;
+	data->player.hand_offset.x *= 0.60;
+	data->player.hand_offset.y *= 0.60;
+	data->player.hand->instances->x = \
+		data->player.hand_original_pos.x + data->player.hand_offset.x;
+	data->player.hand->instances->y = \
+		data->player.hand_original_pos.y + data->player.hand_offset.y;
+}
+
 void	player_update(t_data *data)
 {
 	t_vec2	speed;
-	// t_vec2	speed_from_player_perspective;
 
 	speed = vec_multiply_n(data->player.dir, \
 		PLAYER_ACCELERATION * g_mlx->delta_time);
@@ -79,15 +97,5 @@ void	player_update(t_data *data)
 		vec_rotate_to(&data->player.dir, PLAYER_ROTATION_SPEED * -10);
 	else if (data->inputs.key_right)
 		vec_rotate_to(&data->player.dir, PLAYER_ROTATION_SPEED * 10);
-
-	double rotatedSpeedX = -data->player.speed.x * data->player.dir.y + data->player.speed.y * data->player.dir.x;
-	double rotatedSpeedY = data->player.speed.x * data->player.dir.x + data->player.speed.y * data->player.dir.y;
-	
-	data->player.hand_offset.x -= (data->inputs.diff_x * 1.5) + rotatedSpeedX * 400;
-	data->player.hand_offset.y += rotatedSpeedY * 400;
-	data->player.hand_offset.x *= 0.60;
-	data->player.hand_offset.y *= 0.60;
-
-	data->player.hand->instances->x = data->player.hand_original_pos.x + data->player.hand_offset.x;
-	data->player.hand->instances->y = data->player.hand_original_pos.y + data->player.hand_offset.y;
+	move_player_hand(data);
 }

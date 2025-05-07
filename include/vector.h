@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/02 00:55:36 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:38:03 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	vec_add_n_to(t_vec2 *vec, double n);
 t_vec2	vec_subtract(t_vec2 first, t_vec2 second);
 t_vec2	vec_subtract_n(t_vec2 first, double n);
 void	vec_subtract_to(t_vec2 *first, t_vec2 *second);
+void	vec_subtract_n_to(t_vec2 *vec, double n);
 
 // Normalize a vector, so that the distance from the center is 1
 t_vec2	vec_normalize(t_vec2 vec);

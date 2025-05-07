@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:57:02 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 15:00:14 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:07:05 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	{
 		data->inputs.diff_x = xpos - data->inputs.mouse_pos.x;
 		vec_rotate_to(&data->player.dir, \
-			data->inputs.diff_x * PLAYER_ROTATION_SPEED / 10);
+			data->inputs.diff_x * PLAYER_ROTATION_SPEED);
 		data->inputs.mouse_pos.x = xpos;
 		data->inputs.mouse_pos.y = ypos;
 	}
