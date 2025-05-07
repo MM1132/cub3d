@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 19:56:13 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:02:35 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	render_tile_with_offset( \
 			((double)y - (offset.y)) * data->minimap.scale), \
 		data->minimap.scale, data->minimap.scale);
 	color = get_tile_color(data->map.tiles[y][x].tile_type);
+	if (color == 0)
+		return ;
 	if (data->inputs.toggle_minimap_rotation)
 		put_fill_rect_transform(\
 			data->minimap.img, \
