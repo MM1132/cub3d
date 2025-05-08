@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:02:20 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 11:10:30 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:53:45 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	put_help()
 {
-	static char	*texts[9] = {
+	static char	*texts[10] = {
 		"Controls:",
 		"move with WASD and MOUSE",
 		"left_arrow : look left",
@@ -26,12 +26,13 @@ void	put_help()
 		"g : toggle minimap grid",
 		"r : toggle minimap rotation",
 		"c : toggle minimap rays",
-		"t : toggle minimap target"
+		"t : toggle minimap target",
+		"e : open/close doors"
 	};
 	int			index;
 
 	index = 0;
-	while (index < 9)
+	while (index < 10)
 	{
 		mlx_put_string(g_mlx, texts[index], 20, MAX_MINIMAP_SIZE + 2 * MINIMAP_MARGIN + index * 20);
 		index++;
