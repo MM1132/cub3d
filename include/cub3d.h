@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/06 18:15:24 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:10:33 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,22 @@ typedef struct s_ray
 	double	length_door;
 }	t_ray;
 
+typedef struct s_facing_tile
+{
+	t_vec2_int	pos;
+	double		distance;
+}	t_facing_tile;
+
 typedef struct s_player
 {
-	t_vec2		pos;
-	t_vec2		speed;
-	t_vec2		dir;
-	t_vec2		center;
-	mlx_image_t	*hand;
-	t_vec2		hand_original_pos;
-	t_vec2		hand_offset;
+	t_vec2			pos;
+	t_vec2			speed;
+	t_vec2			dir;
+	t_facing_tile	facing_tile;
+	t_vec2			center;
+	mlx_image_t		*hand;
+	t_vec2			hand_original_pos;
+	t_vec2			hand_offset;
 }	t_player;
 
 # define NUMBER_OF_TILES 4
@@ -67,7 +74,7 @@ typedef enum s_tile_type
 typedef struct s_tile
 {
 	t_tile_type	tile_type;
-	float		state; // For example, determining how much open a door is
+	bool		state;
 }	t_tile;
 
 typedef struct s_map
@@ -110,13 +117,13 @@ typedef struct s_texture
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	mlx_texture_t	*door;
+	mlx_texture_t	*door_c;
+	mlx_texture_t	*door_o;
 }	t_texture;
 
 typedef struct s_data
 {
 	mlx_image_t		*img;
-
 	int				txt_hei_pos;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
@@ -165,8 +172,10 @@ int			find_map_start(char *file);
 t_tile_type	ft_atott(char c);
 //checks if the zeros in the map are enclosed by ones
 int			zeros_enclosed(t_data *data);
-void		first_dis_calc(t_data *data, int32_t	rn);
 void		render_world(t_data *data);
+void		found_door(t_data *data, int32_t i);
+double		calc_distance(int32_t i, t_data *data, t_help_ray help_ray);
+void		put_wall_pixel(t_data *data, int32_t i, int32_t u, t_help_ray help_ray);
 
 t_vec2		pos_to_minimap(t_vec2 pos);
 void		transform_vec_to_rotation(t_data *data, t_vec2 *vec);

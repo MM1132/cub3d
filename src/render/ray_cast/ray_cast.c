@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 15:48:37 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/08 12:33:49 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	calculate_ray(t_data *data, int32_t rn)
 		ray_dis_calc(data, rn, &ray_next_tile);
 		if (!within_map_bounds(&data->map, ray_next_tile.x, ray_next_tile.y))
 			break ;
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR && data->ray[rn].dis_pos_door.x == 0)
+		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR
+			&& data->ray[rn].dis_pos_door.x == 0)
 		{
 			data->ray[rn].dis_pos_door = data->ray[rn].dis_pos;
 			data->ray[rn].tile_touched_door = 'H';
@@ -107,6 +108,8 @@ void	calculate_ray(t_data *data, int32_t rn)
 			data->ray[rn].length_door = sqrt(pow(data->ray[rn].dis_pos.x
 						- data->player.center.x, 2)
 					+ pow(data->ray[rn].dis_pos.y - data->player.center.y, 2));
+			if(data->map.tiles[ray_next_tile.y][ray_next_tile.x].state == 1)
+				hit = 1;
 		}
 		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_WALL)
 			hit = 1;
@@ -143,6 +146,16 @@ void	ray_cast(t_data *data)
 		data->ray[rn].dis_pos_door.x = 0;
 		angle_calculation(data, rn);
 		calculate_ray(data, rn);
+		if (rn == g_mlx->width / 2)
+		{
+			data->player.facing_tile.pos.x = (int)data->ray[rn].dis_pos.x;
+			if (data->ray[rn].tile_touched == 'W')
+				data->player.facing_tile.pos.x -= 1;
+			data->player.facing_tile.pos.y = (int)data->ray[rn].dis_pos.y;
+			if (data->ray[rn].tile_touched == 'N')
+				data->player.facing_tile.pos.y -= 1;
+			data->player.facing_tile.distance = data->ray[rn].length;
+		}
 		rn++;
 	}
 }

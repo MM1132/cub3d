@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 15:52:15 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/08 12:12:18 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,23 @@
 
 void	init_data(t_data *data)
 {
-	// mlx_set_setting(MLX_FULLSCREEN, true);
+	mlx_set_setting(MLX_FULLSCREEN, true);
 	g_mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	data->texture.north = NULL;
 	data->texture.east = NULL;
 	data->texture.south = NULL;
 	data->texture.west = NULL;
-	data->texture.door = mlx_load_png("./assets/texture/door_closed.png");
-	if (!data->texture.door)
+	data->texture.door_c = mlx_load_png("./assets/texture/door_closed.png");
+	if (!data->texture.door_c)
 	{
+		write(2, "door_file not found\n", 20);
+		exit(1);
+	}
+	data->texture.door_o = mlx_load_png("./assets/texture/door_open.png");
+	if (!data->texture.door_o)
+	{
+		mlx_delete_texture(data->texture.door_c);
 		write(2, "door_file not found\n", 20);
 		exit(1);
 	}
