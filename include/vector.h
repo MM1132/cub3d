@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:15:21 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 15:38:03 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:08:59 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_vec2
 }	t_vec2;
 
 // Create a new vector with given x and y
-t_vec2	vec_new(double x, double y);
+t_vec2		vec_new(double x, double y);
+t_vec2_int	vec_new_int(int x, int y);
 
 // Add two vectors together
 t_vec2	vec_add(t_vec2 first, t_vec2 second);

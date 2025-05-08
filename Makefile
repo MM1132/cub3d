@@ -50,6 +50,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \
 	$(SRC_DIR)/render/world/world.c \
+	$(SRC_DIR)/render/world/door.c \
 	$(SRC_DIR)/render/overlay/crosshair.c \
 	$(SRC_DIR)/render/overlay/help.c \
 	$(SRC_DIR)/vector/vec_swap_xy.c \

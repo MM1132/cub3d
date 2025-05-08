@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 14:28:49 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:09:56 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ void	gc_free_map(t_data *data)
 static void	free_data(t_data *data)
 {
 	gc_free_map(data);
-	mlx_delete_texture(data->no_texture);
-	mlx_delete_texture(data->ea_texture);
-	mlx_delete_texture(data->so_texture);
-	mlx_delete_texture(data->we_texture);
+	mlx_delete_texture(data->texture.north);
+	mlx_delete_texture(data->texture.east);
+	mlx_delete_texture(data->texture.south);
+	mlx_delete_texture(data->texture.west);
+	mlx_delete_texture(data->texture.door_c);
+	mlx_delete_texture(data->texture.door_o);
 	mlx_delete_image(g_mlx, data->minimap.img);
-	mlx_delete_image(g_mlx, data->player.hand);
+    mlx_delete_image(g_mlx, data->player.hand);
 	gc_free(data->ray);
 }
 

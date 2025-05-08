@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:26:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 14:23:06 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/07 14:39:29 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ static int	check_texture(int i, char *text, char *line, t_data *data)
 
 	num_ret = 0;
 	if (!strncmp(text, "NO", 3))
-		num_ret = put_texture(i, line, &data->no_texture);
+		num_ret = put_texture(i, line, &data->texture.north);
 	else if (!strncmp(text, "SO", 3))
-		num_ret = put_texture(i, line, &data->so_texture);
+		num_ret = put_texture(i, line, &data->texture.south);
 	else if (!strncmp(text, "WE", 3))
-		num_ret = put_texture(i, line, &data->we_texture);
+		num_ret = put_texture(i, line, &data->texture.west);
 	else if (!strncmp(text, "EA", 3))
-		num_ret = put_texture(i, line, &data->ea_texture);
+		num_ret = put_texture(i, line, &data->texture.east);
 	else if (!strncmp(text, "F", 2))
 		num_ret = put_color(i, line, &data->floor_color);
 	else if (!strncmp(text, "C", 2))
