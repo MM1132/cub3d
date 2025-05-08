@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 11:02:35 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:50:37 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@
 #include "rect.h"
 #include "collision_detection.h"
 
-static uint32_t	get_tile_color(t_tile_type tile_type)
+static uint32_t	get_tile_color(t_tile tile)
 {
-	if (tile_type == TILE_FLOOR)
+	if (tile.tile_type == TILE_FLOOR)
 		return (0xdbdbdbFF);
-	else if (tile_type == TILE_WALL)
+	else if (tile.tile_type == TILE_WALL)
 		return (0x555555FF);
-	else if (tile_type == TILE_DOOR)
-		return (0xa15900FF);
+	else if (tile.tile_type == TILE_DOOR)
+	{
+		if (tile.state == true)
+			return (0xa15900FF);
+		return (0xfabe73FF);
+	}
 	return 0;
 }
 
@@ -42,7 +46,7 @@ static void	render_tile_with_offset( \
 			((double)x - (offset.x)) * data->minimap.scale, \
 			((double)y - (offset.y)) * data->minimap.scale), \
 		data->minimap.scale, data->minimap.scale);
-	color = get_tile_color(data->map.tiles[y][x].tile_type);
+	color = get_tile_color(data->map.tiles[y][x]);
 	if (color == 0)
 		return ;
 	if (data->inputs.toggle_minimap_rotation)

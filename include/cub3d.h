@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 14:23:00 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/07 16:48:48 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef enum s_tile_type
 typedef struct s_tile
 {
 	t_tile_type	tile_type;
-	float		state; // For example, determining how much open a door is
+	bool		state;
 }	t_tile;
 
 typedef struct s_map
