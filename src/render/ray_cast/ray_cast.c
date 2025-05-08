@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/08 12:33:49 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/08 12:46:45 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,19 @@ void	ray_cast(t_data *data)
 		if (rn == g_mlx->width / 2)
 		{
 			data->player.facing_tile.pos.x = (int)data->ray[rn].dis_pos.x;
+			data->player.facing_tile.pos.y = (int)data->ray[rn].dis_pos.y;
+			data->player.facing_tile.distance = data->ray[rn].length;
+			if(data->ray[rn].dis_pos_door.x != 0)
+			{
+				data->player.facing_tile.pos.x = (int)data->ray[rn].dis_pos_door.x;
+				data->player.facing_tile.pos.y = (int)data->ray[rn].dis_pos_door.y;
+				data->player.facing_tile.distance = data->ray[rn].length_door;
+			}
 			if (data->ray[rn].tile_touched == 'W')
 				data->player.facing_tile.pos.x -= 1;
-			data->player.facing_tile.pos.y = (int)data->ray[rn].dis_pos.y;
 			if (data->ray[rn].tile_touched == 'N')
 				data->player.facing_tile.pos.y -= 1;
-			data->player.facing_tile.distance = data->ray[rn].length;
+			
 		}
 		rn++;
 	}
