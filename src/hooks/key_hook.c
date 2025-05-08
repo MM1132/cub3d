@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:47:47 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 17:09:25 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:43:01 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		tile_pos = data->player.facing_tile.pos;
 		facing_tile = &data->map.tiles[tile_pos.y][tile_pos.x];
 		if (facing_tile->tile_type == TILE_DOOR)
-			facing_tile->state = !facing_tile->state;
+		{
+			if (facing_tile->state == false)
+				facing_tile->state = true;
+			else
+				facing_tile->state = false;
+		}
 	}
 }
