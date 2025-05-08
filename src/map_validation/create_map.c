@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 14:11:16 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/08 12:33:35 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	fill_one_line(t_data *data, char *line, size_t x, size_t y)
 			data->map.tiles[y][x].tile_type = ft_atott(line[x]);
 		else
 			set_player_map(data, line, x, y);
+		data->map.tiles[y][x].state = 1;
 		x++;
 	}
 	data->map.tiles[y][x].tile_type = '\0';

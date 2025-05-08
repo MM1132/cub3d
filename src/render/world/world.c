@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 11:42:12 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/08 12:28:09 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 	uint8_t		*pixels;
 	int			bytes_per_pixel;
 	int			tex_index;
-	double wall_hit;
+	double		wall_hit;
 
 	wall_hit = data->ray[i].dis_pos.x;
 	if (data->ray[i].tile_touched == 'E' || data->ray[i].tile_touched == 'W')
@@ -35,90 +35,80 @@ void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 	pixels = texture->pixels;
 	bytes_per_pixel = 4;
 	tex_index = (tex_y * texture->width + tex_x) * bytes_per_pixel;
-	color = (pixels[tex_index] << 24)
-	      | (pixels[tex_index + 1] << 16)
-	      | (pixels[tex_index + 2] << 8)
-	      | (pixels[tex_index + 3]);
+	color = (pixels[tex_index] << 24) | (pixels[tex_index
+			+ 1] << 16) | (pixels[tex_index + 2] << 8) | (pixels[tex_index
+			+ 3]);
 	mlx_put_pixel(data->img, i, u, color);
 }
 
-void	put_wall_pixel(t_data *data, int32_t i, int32_t u, double height)
+void	put_wall_pixel(t_data *data, int32_t i, int32_t u, t_help_ray help_ray)
 {
 	int	wall_start;
 
-	wall_start = (g_mlx->height / 2) - ((int)height / 2);
+	wall_start = (g_mlx->height / 2) - ((int)help_ray.height / 2);
 	if (data->ray[i].tile_touched == 'N')
 	{
-		data->txt_hei_pos = ((double)(u - wall_start) / height)
-			* data->no_texture->height;
-		put_texture_pixel(data, i, u, data->no_texture);
+		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
+			* data->texture.north->height;
+		put_texture_pixel(data, i, u, data->texture.north);
 	}
 	if (data->ray[i].tile_touched == 'E')
 	{
-		data->txt_hei_pos = ((double)(u - wall_start) / height)
-			* data->ea_texture->height;
-		put_texture_pixel(data, i, u, data->ea_texture);
+		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
+			* data->texture.east->height;
+		put_texture_pixel(data, i, u, data->texture.east);
 	}
 	if (data->ray[i].tile_touched == 'S')
 	{
-		data->txt_hei_pos = ((double)(u - wall_start) / height)
-			* data->so_texture->height;
-		put_texture_pixel(data, i, u, data->so_texture);
+		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
+			* data->texture.south->height;
+		put_texture_pixel(data, i, u, data->texture.south);
 	}
 	if (data->ray[i].tile_touched == 'W')
 	{
-		data->txt_hei_pos = ((double)(u - wall_start) / height)
-			* data->we_texture->height;
-		put_texture_pixel(data, i, u, data->we_texture);
+		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
+			* data->texture.west->height;
+		put_texture_pixel(data, i, u, data->texture.west);
 	}
 }
 
-double	normalize_angle(double angle)
-{
-	if (angle < -M_PI)
-		angle += 2 * M_PI;
-	else if (angle > M_PI)
-		angle -= 2 * M_PI;
-	return (angle);
-}
-
-double	calc_distance(int32_t i, t_data *data, double player_angle)
+double	calc_distance(int32_t i, t_data *data, t_help_ray help_ray)
 {
 	double	angle;
 	double	distance;
 
 	angle = atan2(data->ray[i].angle.y, data->ray[i].angle.x);
-	angle = normalize_angle(angle - player_angle);
-	distance = data->ray[i].length * cos(angle) ;
+	angle = angle - help_ray.angle;
+	distance = data->ray[i].length * cos(angle);
 	if (distance < 0.00001)
 		distance = 0.00001;
 	return (distance);
 }
 
-
 void	render_world(t_data *data)
 {
-	int32_t	i;
-	int32_t	u;
-	double	height;
-	double	player_angle;
+	int32_t		i;
+	int32_t		u;
+	t_help_ray	help_ray;
 
 	i = 0;
-	player_angle = atan2(data->player.dir.y, data->player.dir.x);
+	help_ray.angle = atan2(data->player.dir.y, data->player.dir.x);
 	while (i < g_mlx->width)
 	{
 		u = 0;
-		height = g_mlx->height / calc_distance(i, data, player_angle);
+		help_ray.height = g_mlx->height / calc_distance(i, data, help_ray);
 		while (u < g_mlx->height)
 		{
-			if (u < ((g_mlx->height / 2) - ((int)height / 2)))
+			if (u < ((g_mlx->height / 2) - ((int)help_ray.height / 2)))
 				mlx_put_pixel(data->img, i, u, data->ceiling_color);
-			else if (u > ((g_mlx->height / 2) + ((int)height / 2)))
+			else if (u > ((g_mlx->height / 2) + ((int)help_ray.height / 2)))
 				mlx_put_pixel(data->img, i, u, data->floor_color);
 			else
-				put_wall_pixel(data, i, u, height);
+				put_wall_pixel(data, i, u, help_ray);
 			u++;
 		}
+		if (data->ray[i].dis_pos_door.x != 0)
+				found_door(data, i);
 		i++;
 	}
 }
