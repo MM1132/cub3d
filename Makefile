@@ -2,8 +2,8 @@ LIB_DIR := lib
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Wshadow -g
-#-fsanitize=address -g
+CFLAGS := -Wall -Wextra -Werror -O1
+# -g -fsanitize=address
 
 # Libft
 LIBFT_DIR := $(LIB_DIR)/libft
@@ -22,6 +22,7 @@ SRC_FILES := \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/collision_detection/rect_to_rect.c \
 	$(SRC_DIR)/collision_detection/circle_to_rect.c \
+	$(SRC_DIR)/free_data/free_data.c \
 	$(SRC_DIR)/rect/rect_new.c \
 	$(SRC_DIR)/rect/rect_rotate.c \
 	$(SRC_DIR)/rect/rect_get_bounds.c \
@@ -49,6 +50,7 @@ SRC_FILES := \
 	$(SRC_DIR)/render/utils/put_rect.c \
 	$(SRC_DIR)/render/utils/put_rect_rotation.c \
 	$(SRC_DIR)/render/ray_cast/ray_cast.c \
+	$(SRC_DIR)/render/ray_cast/ray_cast_utils.c \
 	$(SRC_DIR)/render/world/world.c \
 	$(SRC_DIR)/render/world/door.c \
 	$(SRC_DIR)/render/overlay/crosshair.c \

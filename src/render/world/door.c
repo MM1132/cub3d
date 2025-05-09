@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:39:45 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/08 12:22:34 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/09 12:22:46 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	put_texture_pixel_door(t_data *data, int32_t i, int32_t u,
 	wall_hit = data->ray[i].dis_pos.x;
 	if (data->ray[i].tile_touched == 'E' || data->ray[i].tile_touched == 'W')
 		wall_hit = data->ray[i].dis_pos.y;
-	if (data->ray[i].dis_pos_door.x != 0)
+	if (data->ray[i].length_door != -1)
 		wall_hit = data->ray[i].dis_pos_door.x;
-	if (data->ray[i].dis_pos_door.x != 0
-		&& data->ray[i].tile_touched_door == 'V')
+	if (data->ray[i].length_door != -1
+		&& (data->ray[i].tile_touched_door == 'E' || data->ray[i].tile_touched_door == 'W'))
 		wall_hit = data->ray[i].dis_pos_door.y;
 	wall_hit = wall_hit - (int)wall_hit;
 	tex_x = (int)(wall_hit * texture->width);
