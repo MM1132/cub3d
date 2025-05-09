@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:53:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/08 12:33:35 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/09 12:34:52 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,8 @@ static void	add_one_line(char *line, t_data *data)
 	}
 	gc_free(data->map.tiles);
 	data->map.tiles = temp_map;
-	data->map.tiles[y] = gc_malloc(sizeof(t_tile) * data->map.width + 1);
+	data->map.tiles[y] = gc_malloc(sizeof(t_tile) * (data->map.width + 1));
 	fill_one_line(data, line, x, y);
-}
-
-static int	valid_map_char(char cha, bool check)
-{
-	int			i;
-	int			cha_int;
-	static int	start_pos = 0;
-
-	if (check == true)
-		return (start_pos);
-	if ((cha == 'N' || cha == 'E' || cha == 'S' || cha == 'W')
-		&& start_pos == 0)
-		return (start_pos++, 1);
-	if (cha == ' ' || cha == '\n')
-		return (1);
-	i = 0;
-	if (ft_isdigit(cha))
-	{
-		cha_int = ft_atoi(&cha);
-		while (i < NUMBER_OF_TILES)
-			if (i++ == cha_int)
-				return (1);
-	}
-	return (0);
 }
 
 static bool	check_map_char(char *file, int i)

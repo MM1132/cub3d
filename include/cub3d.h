@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:27:55 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 16:48:48 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:05:25 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,6 @@ int			within_map_bounds(t_map *map, size_t x, size_t y);
 void		free_split(char **split);
 // write error massage, return 1
 int			err_mssg(void);
-// frees the map
-void		gc_free_map(t_data *data);
 // read the map and create a file
 char		*read_file(char **argv);
 // get_next_line from file with gc
@@ -175,7 +173,14 @@ int			zeros_enclosed(t_data *data);
 void		render_world(t_data *data);
 void		found_door(t_data *data, int32_t i);
 double		calc_distance(int32_t i, t_data *data, t_help_ray help_ray);
-void		put_wall_pixel(t_data *data, int32_t i, int32_t u, t_help_ray help_ray);
+void		free_data(t_data *data);
+int			valid_map_char(char cha, bool check);
+void		player_facing_tile(t_data *data, int32_t rn);
+void		safe_door_value(t_data *data, int32_t rn);
+int	calc_next_dis_y(t_data *data, int32_t rn, double *next_dis,
+    t_vec2_int *ray_next_tile);
+int	calc_next_dis_x(t_data *data, int32_t rn, double *next_dis,
+		t_vec2_int *ray_next_tile);
 
 t_vec2		pos_to_minimap(t_vec2 pos);
 void		transform_vec_to_rotation(t_data *data, t_vec2 *vec);
