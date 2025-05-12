@@ -6,12 +6,13 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/12 15:26:42 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 16:02:31 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
+#include "render.h"
 
 void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 		mlx_texture_t *texture)
@@ -37,7 +38,7 @@ void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 			+ 2] << 8) | (texture->pixels[tex_index + 3]);
 	tex_x = color & 0xFF;
 	if (tex_x != 0)
-		mlx_put_pixel(data->img, i, u, color);
+		put_pixel(data->img, i, u, color);
 }
 
 void	put_wall_pixel(t_data *data, int32_t i, int32_t *u, t_help_ray help_ray)
@@ -108,9 +109,9 @@ void	render_world(t_data *data)
 		while (u < g_mlx->height)
 		{
 			if (u < wall_top_bottom.x)
-				mlx_put_pixel(data->img, i, u, data->ceiling_color);
+				put_pixel(data->img, i, u, data->ceiling_color);
 			else if (u > wall_top_bottom.y)
-				mlx_put_pixel(data->img, i, u, data->floor_color);
+				put_pixel(data->img, i, u, data->floor_color);
 			else
 				put_wall_pixel(data, i, &u, help_ray);
 			u++;
