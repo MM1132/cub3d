@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:43:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/29 18:08:26 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:21:34 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	set_width_height(char *file, t_data *data, int i)
 
 	width = 0;
 	height = 0;
-	data->map.width = 0;
-	data->map.height = 0;
 	while (file[i])
 	{
 		if (file[i] == '\n')
@@ -97,4 +95,28 @@ void	set_width_height(char *file, t_data *data, int i)
 	if ((size_t)width > data->map.width)
 		data->map.width = width;
 	data->map.height = height;
+}
+
+int	valid_map_char(char cha, bool check)
+{
+	int			i;
+	int			cha_int;
+	static int	start_pos = 0;
+
+	if (check == true)
+		return (start_pos);
+	if ((cha == 'N' || cha == 'E' || cha == 'S' || cha == 'W')
+		&& start_pos == 0)
+		return (start_pos++, 1);
+	if (cha == ' ' || cha == '\n')
+		return (1);
+	i = 0;
+	if (ft_isdigit(cha))
+	{
+		cha_int = ft_atoi(&cha);
+		while (i < NUMBER_OF_TILES)
+			if (i++ == cha_int)
+				return (1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:04:01 by joklein           #+#    #+#             */
-/*   Updated: 2025/04/25 16:27:42 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/09 10:23:24 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ char	*safe_gnl(char *file)
 		num++;
 	}
 	line[num] = '\0';
-	line_num++;
-	return (line);
+	return (line_num++, line);
 }
 
 static char	*fill_temp_file(int len, char *file, char read_buffer[1])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:38:50 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 17:18:53 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:42:14 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	minimap_set_range(t_data *data, int32_t new_range)
 
 void	init_minimap(t_data *data)
 {
+	data->minimap.img = NULL;
 	minimap_set_range(data, fmax(data->map.width, data->map.height) / 2 * 1.1);
 }

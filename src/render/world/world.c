@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/08 12:28:09 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/09 15:00:17 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 		mlx_texture_t *texture)
 {
 	int			tex_x;
-	int			tex_y;
 	uint32_t	color;
-	uint8_t		*pixels;
-	int			bytes_per_pixel;
 	int			tex_index;
 	double		wall_hit;
 
@@ -31,44 +28,39 @@ void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 		wall_hit = data->ray[i].dis_pos.y;
 	wall_hit = wall_hit - (int)wall_hit;
 	tex_x = (int)(wall_hit * texture->width);
-	tex_y = (int)(data->txt_hei_pos);
-	pixels = texture->pixels;
-	bytes_per_pixel = 4;
-	tex_index = (tex_y * texture->width + tex_x) * bytes_per_pixel;
-	color = (pixels[tex_index] << 24) | (pixels[tex_index
-			+ 1] << 16) | (pixels[tex_index + 2] << 8) | (pixels[tex_index
-			+ 3]);
+	tex_index = (data->txt_hei_pos * texture->height + tex_x) * 4;
+	color = (texture->pixels[tex_index] << 24) | (texture->pixels[tex_index
+			+ 1] << 16) | (texture->pixels[tex_index
+			+ 2] << 8) | (texture->pixels[tex_index + 3]);
 	mlx_put_pixel(data->img, i, u, color);
 }
 
-void	put_wall_pixel(t_data *data, int32_t i, int32_t u, t_help_ray help_ray)
+void	put_wall_pixel(t_data *data, int32_t i, int32_t *u, t_help_ray help_ray)
 {
-	int	wall_start;
+	int				wall_start;
+	mlx_texture_t	*texture;
+	int				wall_bottom;
+	double			txt_step;
+	double			txt_pos;
 
+	wall_bottom = (g_mlx->height / 2) + ((int)help_ray.height / 2);
 	wall_start = (g_mlx->height / 2) - ((int)help_ray.height / 2);
 	if (data->ray[i].tile_touched == 'N')
-	{
-		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
-			* data->texture.north->height;
-		put_texture_pixel(data, i, u, data->texture.north);
-	}
+		texture = data->texture.north;
 	if (data->ray[i].tile_touched == 'E')
-	{
-		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
-			* data->texture.east->height;
-		put_texture_pixel(data, i, u, data->texture.east);
-	}
+		texture = data->texture.east;
 	if (data->ray[i].tile_touched == 'S')
-	{
-		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
-			* data->texture.south->height;
-		put_texture_pixel(data, i, u, data->texture.south);
-	}
+		texture = data->texture.south;
 	if (data->ray[i].tile_touched == 'W')
+		texture = data->texture.west;
+	txt_step = (double)texture->height / help_ray.height;
+	txt_pos = (*u - wall_start) * txt_step;
+	while (*u < g_mlx->height && *u < wall_bottom)
 	{
-		data->txt_hei_pos = ((double)(u - wall_start) / help_ray.height)
-			* data->texture.west->height;
-		put_texture_pixel(data, i, u, data->texture.west);
+		data->txt_hei_pos = (int)txt_pos;
+		put_texture_pixel(data, i, *u, texture);
+		txt_pos += txt_step;
+		(*u)++;
 	}
 }
 
@@ -90,6 +82,7 @@ void	render_world(t_data *data)
 	int32_t		i;
 	int32_t		u;
 	t_help_ray	help_ray;
+	t_vec2_int	wall_top_bottom;
 
 	i = 0;
 	help_ray.angle = atan2(data->player.dir.y, data->player.dir.x);
@@ -97,18 +90,20 @@ void	render_world(t_data *data)
 	{
 		u = 0;
 		help_ray.height = g_mlx->height / calc_distance(i, data, help_ray);
+		wall_top_bottom.x = (g_mlx->height / 2) - ((int)help_ray.height / 2);
+		wall_top_bottom.y = (g_mlx->height / 2) + ((int)help_ray.height / 2);
 		while (u < g_mlx->height)
 		{
-			if (u < ((g_mlx->height / 2) - ((int)help_ray.height / 2)))
+			if (u < wall_top_bottom.x)
 				mlx_put_pixel(data->img, i, u, data->ceiling_color);
-			else if (u > ((g_mlx->height / 2) + ((int)help_ray.height / 2)))
+			else if (u > wall_top_bottom.y)
 				mlx_put_pixel(data->img, i, u, data->floor_color);
 			else
-				put_wall_pixel(data, i, u, help_ray);
+				put_wall_pixel(data, i, &u, help_ray);
 			u++;
 		}
-		if (data->ray[i].dis_pos_door.x != 0)
-				found_door(data, i);
+		if (data->ray[i].length_door != -1)
+			found_door(data, i);
 		i++;
 	}
 }
