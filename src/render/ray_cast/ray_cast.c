@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:00:43 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/09 11:41:57 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 12:29:48 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "settings.h"
 #include <math.h>
 
-void	calc_next_end_pos(t_data *data, int32_t rn, double next_dis,
+static void	calc_next_end_pos(t_data *data, int32_t rn, double next_dis,
 		double angle)
 {
 	t_vec2	num;
@@ -30,8 +30,7 @@ void	calc_next_end_pos(t_data *data, int32_t rn, double next_dis,
 	data->ray[rn].dis_pos.y = data->ray[rn].dis_pos.y + num.y;
 }
 
-
-void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
+static void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
 {
 	t_vec2_int	next_tile;
 	t_vec2		next_dis;
@@ -56,28 +55,28 @@ void	ray_dis_calc(t_data *data, int32_t rn, t_vec2_int *ray_next_tile)
 	}
 }
 
-void	calculate_ray(t_data *data, int32_t rn)
+static void	calculate_ray(t_data *data, int32_t rn)
 {
 	int			hit;
-	t_vec2_int	ray_next_tile;
+	t_vec2_int	ray_nt;
 
 	hit = 0;
-	ray_next_tile.x = (int)data->player.center.x;
-	ray_next_tile.y = (int)data->player.center.y;
+	ray_nt.x = (int)data->player.center.x;
+	ray_nt.y = (int)data->player.center.y;
 	data->ray[rn].dis_pos = data->player.center;
 	while (hit == 0)
 	{
-		ray_dis_calc(data, rn, &ray_next_tile);
-		if (!within_map_bounds(&data->map, ray_next_tile.x, ray_next_tile.y))
+		ray_dis_calc(data, rn, &ray_nt);
+		if (!within_map_bounds(&data->map, ray_nt.x, ray_nt.y))
 			break ;
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_DOOR
+		if (data->map.tiles[ray_nt.y][ray_nt.x].tile_type == TILE_DOOR
 			&& data->ray[rn].length_door == -1)
 		{
 			safe_door_value(data, rn);
-			if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].state == 1)
+			if (data->map.tiles[ray_nt.y][ray_nt.x].state == 1)
 				hit = 1;
 		}
-		if (data->map.tiles[ray_next_tile.y][ray_next_tile.x].tile_type == TILE_WALL)
+		if (data->map.tiles[ray_nt.y][ray_nt.x].tile_type == TILE_WALL)
 			hit = 1;
 	}
 	data->ray[rn].length = sqrt(pow(data->ray[rn].dis_pos.x
@@ -85,7 +84,7 @@ void	calculate_ray(t_data *data, int32_t rn)
 				- data->player.center.y, 2));
 }
 
-void	angle_calculation(t_data *data, int32_t rn)
+static void	angle_calculation(t_data *data, int32_t rn)
 {
 	t_vec2	plane_vec_calc;
 	double	step_width;
