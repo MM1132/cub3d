@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:29:24 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/09 12:37:44 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 17:48:27 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int argc, char **argv)
 		(int32_t)data.player.hand_original_pos.y);
 	put_help();
 	start_hooks(&data);
-	mlx_terminate(g_mlx);
 	free_data(&data);
+	mlx_terminate(g_mlx);
 	gc_free_all();
 	return (0);
 }
