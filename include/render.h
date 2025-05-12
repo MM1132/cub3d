@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:20:26 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/06 17:16:34 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:19:59 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // Overlay rendering
 void	render_crosshair(t_data *data);
-void	put_help();
+void	put_help(void);
 
 // Minimap rendering
 void	minimap_render(t_data *data);
