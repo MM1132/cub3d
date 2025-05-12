@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 01:19:13 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/12 12:53:43 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:33:59 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,22 @@ static t_collision	circle_collision(t_circle *circle, t_rect *rect)
 	double	rect_projections[4];
 	double	circle_projection[2];
 	t_vec2	normal;
-	double	amount;
 	t_vec2	circle_point;
 
 	normal = vec_normalize(\
 		vec_subtract(closest_vertex(circle->pos, rect->vertices), circle->pos));
-	index = 0;
-	while (index < 4)
-	{
+	index = -1;
+	while (++index < 4)
 		rect_projections[index] = vec_dot_product(&normal, \
 			&rect->vertices[index]);
-		index++;
-	}
 	circle_point = vec_add(circle->pos, vec_multiply_n(normal, circle->radius));
 	circle_projection[0] = vec_dot_product(&normal, &circle_point);
 	circle_point = vec_subtract(circle->pos, vec_multiply_n(normal, \
 		circle->radius));
 	circle_projection[1] = vec_dot_product(&normal, &circle_point);
-	amount = get_overlap_amount(rect_projections, circle_projection);
-	return ((t_collision){amount > 0, vec_multiply_n(normal, -1), amount});
+	return ((t_collision){get_overlap_amount(rect_projections, \
+		circle_projection) > 0, vec_multiply_n(normal, -1), \
+		get_overlap_amount(rect_projections, circle_projection)});
 }
 
 static t_collision	rect_collision(int side_index, \
@@ -75,45 +72,34 @@ static t_collision	rect_collision(int side_index, \
 // Get the ones with the lowest amount
 // If there are two collisions both with the lowest amount,
 // ...return the one that has the highest dot product to the closest vertex
-t_collision	filter_collisions(t_collision collisions[5], t_circle *circle, t_rect *rect)
+t_collision	filter_collisions(\
+	t_collision collisions[5], \
+	t_circle *circle, \
+	t_rect *rect)
 {
-	t_vec2		direction_vec;
+	t_vec2		dir;
 	int			index;
-	t_collision	lowest_collision;
+	t_collision	low_coll;
 	double		highest_dot_product;
-	double		new_dot_product;
+	double		new_dot;
 
-	direction_vec = vec_subtract(circle->pos, closest_vertex(circle->pos, rect->vertices));
-	lowest_collision.colliding = false;
+	dir = vec_subtract(circle->pos, \
+		closest_vertex(circle->pos, rect->vertices));
+	low_coll.colliding = false;
 	index = -1;
 	while (++index < 5)
 	{
 		if (!collisions[index].colliding)
-			return (lowest_collision.colliding = false, lowest_collision);
-		if (lowest_collision.colliding == false)
-		{
-			lowest_collision = collisions[index];
-			highest_dot_product = vec_dot_product(&collisions[index].dir, &direction_vec);
-		}
-		else
-		{
-			if (collisions[index].amount < lowest_collision.amount)
-			{
-				lowest_collision = collisions[index];
-				highest_dot_product = vec_dot_product(&collisions[index].dir, &direction_vec);
-			}
-			else if (collisions[index].amount == lowest_collision.amount)
-			{
-				new_dot_product = vec_dot_product(&collisions[index].dir, &direction_vec);
-				if (new_dot_product > highest_dot_product)
-				{
-					lowest_collision = collisions[index];
-					highest_dot_product = new_dot_product;
-				}
-			}
-		}
+			return (low_coll.colliding = false, low_coll);
+		new_dot = vec_dot_product(&collisions[index].dir, &dir);
+		if (!(!low_coll.colliding || collisions[index].amount < low_coll.amount
+				|| (collisions[index].amount == low_coll.amount && \
+			new_dot > highest_dot_product)))
+			continue ;
+		low_coll = collisions[index];
+		highest_dot_product = new_dot;
 	}
-	return (lowest_collision);
+	return (low_coll);
 }
 
 t_collision	circle_collides_rect(t_circle *circle, t_rect *rect)
