@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/09 10:16:28 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 12:25:29 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "garbage_collector.h"
 #include "settings.h"
 
-void init_texture(t_data *data)
+void	init_texture(t_data *data)
 {
 	data->texture.door_c = mlx_load_png("./assets/texture/door_closed.png");
 	if (!data->texture.door_c)

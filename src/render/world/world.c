@@ -6,13 +6,11 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/09 15:00:17 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 15:26:42 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "render.h"
-#include "settings.h"
 #include <math.h>
 
 void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
@@ -26,25 +24,30 @@ void	put_texture_pixel(t_data *data, int32_t i, int32_t u,
 	wall_hit = data->ray[i].dis_pos.x;
 	if (data->ray[i].tile_touched == 'E' || data->ray[i].tile_touched == 'W')
 		wall_hit = data->ray[i].dis_pos.y;
+	if (data->ray[i].length_door == -2)
+		wall_hit = data->ray[i].dis_pos_door.x;
+	if (data->ray[i].length_door == -2 && (data->ray[i].tile_touched_door == 'E'
+			|| data->ray[i].tile_touched_door == 'W'))
+		wall_hit = data->ray[i].dis_pos_door.y;
 	wall_hit = wall_hit - (int)wall_hit;
 	tex_x = (int)(wall_hit * texture->width);
 	tex_index = (data->txt_hei_pos * texture->height + tex_x) * 4;
 	color = (texture->pixels[tex_index] << 24) | (texture->pixels[tex_index
 			+ 1] << 16) | (texture->pixels[tex_index
 			+ 2] << 8) | (texture->pixels[tex_index + 3]);
-	mlx_put_pixel(data->img, i, u, color);
+	tex_x = color & 0xFF;
+	if (tex_x != 0)
+		mlx_put_pixel(data->img, i, u, color);
 }
 
 void	put_wall_pixel(t_data *data, int32_t i, int32_t *u, t_help_ray help_ray)
 {
-	int				wall_start;
 	mlx_texture_t	*texture;
 	int				wall_bottom;
 	double			txt_step;
 	double			txt_pos;
 
 	wall_bottom = (g_mlx->height / 2) + ((int)help_ray.height / 2);
-	wall_start = (g_mlx->height / 2) - ((int)help_ray.height / 2);
 	if (data->ray[i].tile_touched == 'N')
 		texture = data->texture.north;
 	if (data->ray[i].tile_touched == 'E')
@@ -54,7 +57,8 @@ void	put_wall_pixel(t_data *data, int32_t i, int32_t *u, t_help_ray help_ray)
 	if (data->ray[i].tile_touched == 'W')
 		texture = data->texture.west;
 	txt_step = (double)texture->height / help_ray.height;
-	txt_pos = (*u - wall_start) * txt_step;
+	txt_pos = (*u - ((int)((g_mlx->height / 2) - ((int)help_ray.height / 2))))
+		* txt_step;
 	while (*u < g_mlx->height && *u < wall_bottom)
 	{
 		data->txt_hei_pos = (int)txt_pos;
@@ -62,19 +66,30 @@ void	put_wall_pixel(t_data *data, int32_t i, int32_t *u, t_help_ray help_ray)
 		txt_pos += txt_step;
 		(*u)++;
 	}
+	put_texture_pixel(data, i, *u, texture);
 }
 
-double	calc_distance(int32_t i, t_data *data, t_help_ray help_ray)
+double	calc_distance(int32_t i, t_data *data, t_help_ray help_ray,
+		double length)
 {
 	double	angle;
 	double	distance;
 
 	angle = atan2(data->ray[i].angle.y, data->ray[i].angle.x);
 	angle = angle - help_ray.angle;
-	distance = data->ray[i].length * cos(angle);
+	distance = length * cos(angle);
 	if (distance < 0.00001)
 		distance = 0.00001;
 	return (distance);
+}
+
+void	calc_wall_position(t_data *data, int32_t i, t_help_ray *help_ray,
+		t_vec2_int *wall_top_bottom)
+{
+	(*help_ray).height = g_mlx->height / calc_distance(i, data, *help_ray,
+			data->ray[i].length);
+	(*wall_top_bottom).x = (g_mlx->height / 2) - ((int)(*help_ray).height / 2);
+	(*wall_top_bottom).y = (g_mlx->height / 2) + ((int)(*help_ray).height / 2);
 }
 
 void	render_world(t_data *data)
@@ -89,9 +104,7 @@ void	render_world(t_data *data)
 	while (i < g_mlx->width)
 	{
 		u = 0;
-		help_ray.height = g_mlx->height / calc_distance(i, data, help_ray);
-		wall_top_bottom.x = (g_mlx->height / 2) - ((int)help_ray.height / 2);
-		wall_top_bottom.y = (g_mlx->height / 2) + ((int)help_ray.height / 2);
+		calc_wall_position(data, i, &help_ray, &wall_top_bottom);
 		while (u < g_mlx->height)
 		{
 			if (u < wall_top_bottom.x)

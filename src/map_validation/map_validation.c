@@ -6,7 +6,7 @@
 /*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:26:49 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/07 14:39:29 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 12:26:41 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,6 @@ static int	check_texture(int i, char *text, char *line, t_data *data)
 	else
 		return (err_mssg());
 	return (data->map.map_valid++, num_ret);
-}
-
-static void	fill_text(char text[3], char *line, int *i)
-{
-	int	u;
-
-	u = 0;
-	while (line[(*i)] && !white_space(line, (*i)) && u < 3)
-		text[u++] = line[(*i)++];
 }
 
 int	map_validation(char **argv, t_data *data)
