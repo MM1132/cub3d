@@ -20,7 +20,7 @@ IFLAGS := -Iinclude -I$(LIBFT_DIR)/include -I$(MLX42_DIR)/include/MLX42
 NAME := cub3D
 SRC_FILES := \
 	$(SRC_DIR)/main.c \
-	$(SRC_DIR)/collision_detection/rect_to_rect.c \
+	$(SRC_DIR)/collision_detection/collision_detection_utils.c \
 	$(SRC_DIR)/collision_detection/circle_to_rect.c \
 	$(SRC_DIR)/free_data/free_data.c \
 	$(SRC_DIR)/rect/rect_new.c \

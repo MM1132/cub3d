@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:30:36 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/07 16:50:37 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:19:39 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static uint32_t	get_tile_color(t_tile tile)
 			return (0xa15900FF);
 		return (0xfabe73FF);
 	}
-	return 0;
+	return (0);
 }
 
 static void	render_tile_with_offset( \
