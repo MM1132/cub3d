@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scroll_hook.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:53:27 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/05 20:56:13 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:22:56 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	(void)xdelta;
 	(void)ydelta;
 	data = (t_data *)param;
+	(void)data;
 }

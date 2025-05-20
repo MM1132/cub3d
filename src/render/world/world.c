@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:32:26 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/12 16:02:31 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/20 16:22:23 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void	put_wall_pixel(t_data *data, int32_t i, int32_t *u, t_help_ray help_ray)
 	double			txt_pos;
 
 	wall_bottom = (g_mlx->height / 2) + ((int)help_ray.height / 2);
-	if (data->ray[i].tile_touched == 'N')
-		texture = data->texture.north;
+	texture = data->texture.north;
 	if (data->ray[i].tile_touched == 'E')
 		texture = data->texture.east;
 	if (data->ray[i].tile_touched == 'S')

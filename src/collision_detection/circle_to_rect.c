@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   circle_to_rect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 01:19:13 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/12 15:33:59 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:21:37 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_collision	filter_collisions(\
 		closest_vertex(circle->pos, rect->vertices));
 	low_coll.colliding = false;
 	index = -1;
+	highest_dot_product = 0;
 	while (++index < 5)
 	{
 		if (!collisions[index].colliding)
