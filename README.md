@@ -5,17 +5,9 @@ It renders a first-person view using raycasting, like old-school games (e.g. Wol
 You learn about graphics, raycasting, 2D-to-3D projection, and event handling.<br/>
 
 **Team:**<br/>
-This was a group project done together with **[MM1132](https://github.com/MM1132)**.<br/>
+This was a group project done together with **[JoKleiner](https://github.com/JoKleiner)**.<br/>
 
 **My Part:**
-- Map parsing
-- Raycasting (3D rendering logic)
-- 3D model of the map
-- Adding wall textures
-- Open/close door logic
-- Map and texture validation
-
-**MM1132’s Part:**
 - Minimap:
   - Rotation
   - Fixed on player
@@ -27,6 +19,14 @@ This was a group project done together with **[MM1132](https://github.com/MM1132
 - Hand rendering and animation
 - Mouse movement
 - Wall collision detection
+
+**JoKleiner's Part:**
+- Map parsing
+- Raycasting (3D rendering logic)
+- 3D model of the map
+- Adding wall textures
+- Open/close door logic
+- Map and texture validation
 
 **Gameplay:**<br/>
 Move with W, A, S, D<br/>
@@ -46,7 +46,9 @@ Basic floor/ceiling coloring or texturing
 
 **Compile:**<br/>
 
-    make
+```
+make
+```
 
 Requires MiniLibX
 
