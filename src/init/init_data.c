@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: joklein <joklein@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:28:18 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/12 12:16:46 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:24:50 by joklein          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	init_data(t_data *data)
 	init_texture(data);
 	mlx_set_setting(MLX_FULLSCREEN, true);
 	g_mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	if(!g_mlx)
+	{
+		printf("ERROR\n");
+		exit(1);
+	}
 	data->img = mlx_new_image(g_mlx, WIDTH, HEIGHT);
 	data->texture.north = NULL;
 	data->texture.east = NULL;
