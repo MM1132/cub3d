@@ -34,7 +34,7 @@ Turn with left/right arrow keys<br/>
 Explore the map<br/>
 
 **Game Screenshot:**<br/>
-![Game Screenshot](images/Screenshot.png)
+![Game Screenshot](assets/images/Screenshot.png)
 
 **Features:**<br/>
 Raycasting engine (2D map → 3D view)
