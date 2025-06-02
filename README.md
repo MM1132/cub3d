@@ -48,7 +48,7 @@ Basic floor/ceiling coloring or texturing
 
     make
 
-Requires MiniLibX and a Unix-like system
+Requires MiniLibX
 
 **Run:**<br/>
 
