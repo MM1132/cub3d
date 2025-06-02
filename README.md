@@ -30,7 +30,7 @@ This was a group project done together with **[MM1132](https://github.com/MM1132
 
 **Gameplay:**<br/>
 Move with W, A, S, D<br/>
-Turn with left/right arrow keys<br/>
+Turn with mouse or left/right arrow keys<br/>
 Explore the map<br/>
 
 **Game Screenshot:**<br/>
