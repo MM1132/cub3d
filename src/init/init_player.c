@@ -6,7 +6,7 @@
 /*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:26:39 by rreimann          #+#    #+#             */
-/*   Updated: 2025/05/12 12:18:44 by rreimann         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:54:58 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_player(t_player *player)
 	player->center = vec_new(0, 0);
 	hand_texture = mlx_load_png("./assets/texture/hand.png");
 	player->hand = mlx_texture_to_image(g_mlx, hand_texture);
+	mlx_delete_texture(hand_texture);
 	amount = (g_mlx->height * 0.5) / player->hand->height;
 	mlx_resize_image(player->hand, player->hand->width * \
 		amount, player->hand->height * amount);

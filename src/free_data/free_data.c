@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joklein <joklein@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rreimann <rreimann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 10:05:40 by joklein           #+#    #+#             */
-/*   Updated: 2025/05/09 10:08:40 by joklein          ###   ########.fr       */
+/*   Updated: 2025/05/12 17:49:29 by rreimann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	free_data(t_data *data)
 	mlx_delete_texture(data->texture.door_o);
 	mlx_delete_image(g_mlx, data->minimap.img);
 	mlx_delete_image(g_mlx, data->player.hand);
+	mlx_delete_image(g_mlx, data->img);
 	gc_free(data->ray);
 }
